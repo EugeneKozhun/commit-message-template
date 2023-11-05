@@ -27,6 +27,10 @@ class CommitMessageTemplateSettings(
         page?.saveSettings()
     }
 
+    override fun reset() {
+        page?.setFieldValuesFromStorage(project)
+    }
+
     override fun disposeUIResources() {
         // TODO: is needed here?
         page = null
