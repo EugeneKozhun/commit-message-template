@@ -1,11 +1,11 @@
 package com.kozhun.commitmessagetemplate.service.impl
 
 import com.intellij.openapi.components.Service
-import com.kozhun.commitmessagetemplate.service.MessageTemplateFormatter
+import com.kozhun.commitmessagetemplate.service.CommitMessageFormatter
 import kotlin.random.Random
 
 @Service(Service.Level.PROJECT)
-class MessageTemplatePatternFormatter : MessageTemplateFormatter {
+class CommitMessagePatternFormatter : CommitMessageFormatter {
     override fun getCommitMessageTemplate(): String {
         return "Hello + ${random.nextInt()}"
     }

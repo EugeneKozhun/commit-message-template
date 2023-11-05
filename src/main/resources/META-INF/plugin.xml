@@ -29,8 +29,8 @@ s
     </extensions>
 
     <actions>
-        <action id="com.kozhun.commitmessagetemplate.action.CommitMessageFormatAction"
-                class="com.kozhun.commitmessagetemplate.action.CommitMessageFormatAction"
+        <action id="com.kozhun.commitmessagetemplate.action.GenerateCommitMessageAction"
+                class="com.kozhun.commitmessagetemplate.action.GenerateCommitMessageAction"
                 text="Format" description="Format the message according to the template"
                 icon="/icons/format-button.svg">
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="last"/>

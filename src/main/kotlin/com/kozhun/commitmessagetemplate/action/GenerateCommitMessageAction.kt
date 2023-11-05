@@ -6,11 +6,11 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.vcs.CommitMessageI
 import com.intellij.openapi.vcs.VcsDataKeys
 import com.intellij.openapi.vcs.ui.Refreshable
-import com.kozhun.commitmessagetemplate.service.impl.MessageTemplatePatternFormatter
+import com.kozhun.commitmessagetemplate.service.impl.CommitMessagePatternFormatter
 
-class CommitMessageFormatAction : AnAction() {
+class GenerateCommitMessageAction : AnAction() {
     override fun actionPerformed(anActionEvent: AnActionEvent) {
-        val formatter = anActionEvent.project?.service<MessageTemplatePatternFormatter>() ?: return
+        val formatter = anActionEvent.project?.service<CommitMessagePatternFormatter>() ?: return
         getCommitMessageInput(anActionEvent)
             ?.setCommitMessage(formatter.getCommitMessageTemplate())
     }

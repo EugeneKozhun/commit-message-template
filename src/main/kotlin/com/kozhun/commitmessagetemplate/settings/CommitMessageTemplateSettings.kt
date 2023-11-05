@@ -1,30 +1,34 @@
 package com.kozhun.commitmessagetemplate.settings
 
 import com.intellij.openapi.options.ConfigurableWithId
+import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.settings.ui.CommitMessageTemplateSettingsPage
 import javax.swing.JComponent
 
-class CommitMessageTemplateSettings : ConfigurableWithId {
+class CommitMessageTemplateSettings(
+    private val project: Project
+) : ConfigurableWithId {
 
     private var page: CommitMessageTemplateSettingsPage? = null
 
     override fun createComponent(): JComponent? {
         page = CommitMessageTemplateSettingsPage()
-        page?.run {
-            initUI()
+        page?.also {
+            it.initialize(project)
         }
         return page?.getRootPanel()
     }
 
     override fun isModified(): Boolean {
-        return true
+        return page?.isModified() ?: false
     }
 
     override fun apply() {
-        TODO("Not yet implemented")
+        page?.saveSettings()
     }
 
     override fun disposeUIResources() {
+        // TODO: is needed here?
         page = null
     }
 
