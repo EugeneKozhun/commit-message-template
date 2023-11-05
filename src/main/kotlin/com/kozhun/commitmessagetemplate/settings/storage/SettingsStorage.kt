@@ -9,7 +9,6 @@ import com.intellij.openapi.components.State
 class SettingsStorage : SimplePersistentStateComponent<SettingsState>(getDefaultState()) {
 
     fun setPattern(pattern: String) {
-        println("Set pattern: $pattern")
         state.pattern = pattern
         loadState(state)
     }

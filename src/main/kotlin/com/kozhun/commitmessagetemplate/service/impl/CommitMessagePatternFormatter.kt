@@ -1,17 +1,30 @@
 package com.kozhun.commitmessagetemplate.service.impl
 
 import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.service
+import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.CommitMessageFormatter
-import kotlin.random.Random
+import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
+import git4idea.repo.GitRepositoryManager
 
 @Service(Service.Level.PROJECT)
-class CommitMessagePatternFormatter : CommitMessageFormatter {
+class CommitMessagePatternFormatter(
+    private val project: Project
+) : CommitMessageFormatter {
+
+    // TODO: refactor it. Open-close!!!
     override fun getCommitMessageTemplate(): String {
-        return "Hello + ${random.nextInt()}"
+        val pattern = settings().pattern
+        return pattern
+            ?.replace("\$TASK", getTaskValue())
+            ?: ""
     }
 
-    companion object {
-        // TODO: remove it. Needed for testing.
-        private val random = Random(3)
+    private fun settings() = project.service<SettingsStorage>().state
+
+    private fun getTaskValue(): String {
+        val manager = GitRepositoryManager.getInstance(project)
+        // TODO: optimize get current branch.
+        return manager.repositories.first()?.currentBranch?.name ?: ""
     }
 }
