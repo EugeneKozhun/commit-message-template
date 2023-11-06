@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.service
+package com.kozhun.commitmessagetemplate.service.formatter
 
 interface CommitMessageFormatter {
     fun getCommitMessageTemplate(): String

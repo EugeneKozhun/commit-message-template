@@ -2,15 +2,16 @@ package com.kozhun.commitmessagetemplate.action
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.components.service
 import com.intellij.openapi.vcs.CommitMessageI
 import com.intellij.openapi.vcs.VcsDataKeys
 import com.intellij.openapi.vcs.ui.Refreshable
-import com.kozhun.commitmessagetemplate.service.impl.CommitMessagePatternFormatter
+import com.kozhun.commitmessagetemplate.service.formatter.impl.CommitMessagePatternFormatter
 
 class GenerateCommitMessageAction : AnAction() {
     override fun actionPerformed(anActionEvent: AnActionEvent) {
-        val formatter = anActionEvent.project?.service<CommitMessagePatternFormatter>() ?: return
+        val formatter = anActionEvent.project
+            ?.let { CommitMessagePatternFormatter.getInstance(it) }
+            ?: return
         getCommitMessageInput(anActionEvent)
             ?.setCommitMessage(formatter.getCommitMessageTemplate())
     }
