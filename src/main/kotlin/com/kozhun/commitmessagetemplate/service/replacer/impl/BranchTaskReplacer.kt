@@ -4,20 +4,24 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
+import git4idea.repo.GitRepository
 import git4idea.repo.GitRepositoryManager
 
 @Service(Service.Level.PROJECT)
 class BranchTaskReplacer(
     private val project: Project
 ) : Replacer {
-    override fun replace(value: String): String {
-        return value.replace(TASK_ANCHOR, getTaskValue())
+    override fun replace(message: String): String {
+        return message.replace(TASK_ANCHOR, getTaskId())
     }
 
-    private fun getTaskValue(): String {
-        val manager = GitRepositoryManager.getInstance(project)
-        // TODO: optimize get current branch.
-        return manager.repositories.first()?.currentBranch?.name ?: ""
+    private fun getTaskId(): String {
+        val gitRepositoryManager = GitRepositoryManager.getInstance(project)
+        return getCurrentRepository(gitRepositoryManager)?.currentBranch?.name ?: ""
+    }
+
+    private fun getCurrentRepository(manager: GitRepositoryManager): GitRepository? {
+        return manager.repositories.firstOrNull()
     }
 
     companion object {
