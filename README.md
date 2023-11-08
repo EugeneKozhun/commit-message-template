@@ -1,4 +1,4 @@
-# Commit Message Template Plugin
+# <img alt="pluginIcon.svg" height="25" src="src/main/resources/META-INF/pluginIcon.svg" width="25" title="App icon"/> Commit Message Template Plugin
 
 This IntelliJ IDEA extension simplifies the process of writing commit messages according to the conventions adopted in
 your project.
