@@ -4,6 +4,7 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.formatter.CommitMessageFormatter
+import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskReplacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 
@@ -11,11 +12,16 @@ import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 class CommitMessagePatternFormatter(
     private val project: Project
 ) : CommitMessageFormatter {
+    private val replacers: List<Replacer>
+    init {
+        replacers = listOf(
+            BranchTaskReplacer.getInstance(project)
+        )
+    }
 
     override fun getCommitMessageTemplate(): String {
         val pattern = SettingsStorage.getInstance(project).state.pattern ?: return ""
-        val branchTaskReplacer = BranchTaskReplacer.getInstance(project)
-        return branchTaskReplacer.replace(pattern)
+        return replacers.fold(pattern) { result, replacer -> replacer.replace(result) }
     }
 
     companion object {
