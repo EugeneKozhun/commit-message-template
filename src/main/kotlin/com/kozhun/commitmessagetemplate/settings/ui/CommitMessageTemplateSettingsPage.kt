@@ -3,6 +3,7 @@ package com.kozhun.commitmessagetemplate.settings.ui
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
+import javax.swing.JEditorPane
 import javax.swing.JPanel
 import javax.swing.JTextArea
 
@@ -10,6 +11,7 @@ import javax.swing.JTextArea
 class CommitMessageTemplateSettingsPage {
     private lateinit var rootPanel: JPanel
     private lateinit var patternField: JTextArea
+    private lateinit var noteField: JTextArea
 
     private var storage: SettingsStorage? = null
 
