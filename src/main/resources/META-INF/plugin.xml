@@ -25,8 +25,11 @@ s
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <projectConfigurable groupId="tools" displayName="Commit Message Template" id="preferences.CommitMessageTemplateConfigurable" instance="com.kozhun.commitmessagetemplate.settings.CommitMessageTemplateSettings" />
-<!--        <projectService serviceInterface="com.kozhun.commitmessagetemplate.CommitMessageTemplateConfig" serviceImplementation="commitmessagetemplate.CommitMessageTemplateConfig"/>-->
+        <projectConfigurable
+                groupId="tools"
+                displayName="Commit Message Template"
+                id="preferences.CommitMessageTemplateConfigurable"
+                instance="com.kozhun.commitmessagetemplate.settings.CommitMessageTemplateSettings" />
     </extensions>
 
     <actions>
