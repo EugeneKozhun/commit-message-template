@@ -13,6 +13,7 @@ class CommitMessagePatternFormatter(
     private val project: Project
 ) : CommitMessageFormatter {
     private val replacers: List<Replacer>
+
     init {
         replacers = listOf(
             BranchTaskIdReplacer.getInstance(project)

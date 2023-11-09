@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.kozhun"
-version = "0.1 Beta"
+version = "0.8"
 
 repositories {
     mavenCentral()
