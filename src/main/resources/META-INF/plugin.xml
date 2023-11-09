@@ -14,11 +14,13 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
+        <h3>Overview</h3>
         <p>This IntelliJ IDEA extension simplifies the process of writing commit messages according to the conventions
             adopted in your project.</p>
 
         <h3>Features</h3>
-        <p>Enable setting a standard commit message template for your project.</p>
+        <p>1. Enable setting a standard commit message template for your project.</p>
+        <p>2. You can use keywords to dynamically set values in a message.</p>
 
         <h3>Configuration</h3>
         <p>1. Go to <strong>File > Settings > Other > Commit Message Template</strong>.</p>
