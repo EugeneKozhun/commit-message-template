@@ -1,4 +1,4 @@
-name: CI with Gradle
+name: Build & Test
 on:
   push:
     branches: [ "main" ]
@@ -16,11 +16,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build with gradle
+      - name: Build and Test with gradle
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
         with:
-          arguments: clean assemble
-      - name: Test with gradle
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
-        with:
-          arguments: test
+          arguments: clean assemble test
