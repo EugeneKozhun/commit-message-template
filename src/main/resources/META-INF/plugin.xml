@@ -29,7 +29,7 @@
                 groupId="tools"
                 displayName="Commit Message Template"
                 id="preferences.CommitMessageTemplateConfigurable"
-                instance="com.kozhun.commitmessagetemplate.settings.CommitMessageTemplateSettings" />
+                instance="com.kozhun.commitmessagetemplate.settings.page.CommitMessageTemplateSettings" />
     </extensions>
 
     <actions>
