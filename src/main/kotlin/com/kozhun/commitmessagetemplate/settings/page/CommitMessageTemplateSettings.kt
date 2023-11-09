@@ -25,7 +25,7 @@ class CommitMessageTemplateSettings(
                 patternField = textArea()
                     .apply {
                         label("Message pattern:", LabelPosition.TOP)
-                        comment(comment = """Notes:<br/><strong>${"$"}TASK</strong> - Task ID which is extracted from the name of the current branch.""".trimMargin())
+                        comment(comment = """Notes:<br/><strong>${"$"}TASK-ID</strong> - Task ID which is extracted from the name of the current branch.""".trimMargin())
                         horizontalAlign(HorizontalAlign.FILL)
                     }
                     .component

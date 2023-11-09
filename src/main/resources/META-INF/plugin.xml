@@ -35,9 +35,10 @@
     <actions>
         <action id="com.kozhun.commitmessagetemplate.action.GenerateCommitMessageAction"
                 class="com.kozhun.commitmessagetemplate.action.GenerateCommitMessageAction"
-                text="Format" description="Format the message according to the template"
+                text="Insert Pattern Message"
+                description="Format the message according to the template"
                 icon="/icons/format-button.svg">
-            <add-to-group group-id="Vcs.MessageActionGroup" anchor="last"/>
+            <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
         </action>
     </actions>
 
