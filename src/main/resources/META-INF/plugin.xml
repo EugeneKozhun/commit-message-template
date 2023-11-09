@@ -14,8 +14,24 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    Plugin for format your commit message with template.
-  ]]></description>
+        <p>This IntelliJ IDEA extension simplifies the process of writing commit messages according to the conventions
+            adopted in your project.</p>
+
+        <h3>Features</h3>
+        <p>Enable setting a standard commit message template for your project.</p>
+
+        <h3>Configuration</h3>
+        <p>1. Go to <strong>File > Settings > Other > Commit Message Template</strong>.</p>
+        <p>2. Enter your desired commit message template.</p>
+
+        <h3>Usage</h3>
+        <p>Simplicity is key! 🙂</p>
+        <p>A button is added to the commit window, allowing you to insert the template into the commit message input
+            field.</p>
+
+        <h3>Links</h3>
+        <a href="https://github.com/EugeneKozhun">GitHub</a> | <a href="https://www.linkedin.com/in/eugene-kozhun-6a6016187/">LinkedIn</a>
+        ]]></description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -29,7 +45,7 @@
                 parentId="other"
                 displayName="Commit Message Template"
                 id="preferences.CommitMessageTemplateConfigurable"
-                instance="com.kozhun.commitmessagetemplate.settings.page.CommitMessageTemplateSettings" />
+                instance="com.kozhun.commitmessagetemplate.settings.page.CommitMessageTemplateSettings"/>
     </extensions>
 
     <actions>
