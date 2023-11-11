@@ -8,6 +8,7 @@ import com.intellij.ui.dsl.builder.LabelPosition
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
+import java.util.ResourceBundle
 import javax.swing.JComponent
 
 class CommitMessageTemplateSettings(
@@ -17,15 +18,17 @@ class CommitMessageTemplateSettings(
     private var settingsStorage: SettingsStorage? = null
     private var settingsPage: DialogPanel? = null
     private var patternField: JBTextArea? = null
+    private var resourceBundle: ResourceBundle? = null
 
     override fun createComponent(): JComponent? {
         settingsStorage = SettingsStorage.getInstance(project)
+        resourceBundle = ResourceBundle.getBundle("messages")
         settingsPage = panel {
             row {
                 patternField = textArea()
                     .apply {
-                        label("Message pattern:", LabelPosition.TOP)
-                        comment(comment = """Notes:<br/><strong>${"$"}TASK-ID</strong> - Task ID which is extracted from the name of the current branch.""".trimMargin())
+                        label(resourceBundle!!.getString("settings.message-pattern-label"), LabelPosition.TOP)
+                        comment(comment = resourceBundle!!.getString("settings.message-pattern-notes"))
                         horizontalAlign(HorizontalAlign.FILL)
                     }
                     .component
@@ -54,6 +57,7 @@ class CommitMessageTemplateSettings(
         settingsStorage = null
         settingsPage = null
         patternField = null
+        resourceBundle = null
     }
 
     override fun getDisplayName(): String {
@@ -62,9 +66,5 @@ class CommitMessageTemplateSettings(
 
     override fun getId(): String {
         return "preferences.CommitMessageTemplateConfigurable";
-    }
-
-    override fun getHelpTopic(): String {
-        return "Some help info"
     }
 }
