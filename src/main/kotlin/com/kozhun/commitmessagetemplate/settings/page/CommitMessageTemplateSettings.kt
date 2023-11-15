@@ -36,11 +36,11 @@ class CommitMessageTemplateSettings(
                     }
                     .component
             }
-            collapsibleGroup("Custom Settings") {
+            collapsibleGroup(resourceBundle!!.getString("settings.custom.title")) {
                 row {
                     taskIdRegexField = expandableTextField()
                         .apply {
-                            label("\$TASK-ID regex:")
+                            label(resourceBundle!!.getString("settings.custom.task-id.label"))
                             horizontalAlign(HorizontalAlign.FILL)
                             comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_TASK_ID_REGEX}")
                         }
