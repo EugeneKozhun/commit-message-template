@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.settings.page
+package com.kozhun.commitmessagetemplate.settings.ui
 
 import com.intellij.openapi.options.ConfigurableWithId
 import com.intellij.openapi.project.Project
@@ -47,20 +47,17 @@ class CommitMessageTemplateSettings(
                         .component
                 }
             }
-
         }
         return settingsPage
     }
 
-    override fun isModified(): Boolean = patternField?.text != settingsStorage?.state?.pattern ||
-            taskIdRegexField?.text != settingsStorage?.state?.taskIdRegex
+    override fun isModified(): Boolean = patternField?.text != settingsStorage?.state?.pattern.orEmpty() ||
+            taskIdRegexField?.text != settingsStorage?.state?.taskIdRegex.orEmpty()
 
     override fun apply() {
-        patternField?.apply {
-            settingsStorage?.setPattern(text)
-        }
-        taskIdRegexField?.apply {
-            settingsStorage?.setTaskIdRegExp(text)
+        settingsStorage?.apply {
+            patternField?.also { setPattern(it.text) }
+            taskIdRegexField?.also { setTaskIdRegExp(it.text) }
         }
     }
 
@@ -75,6 +72,7 @@ class CommitMessageTemplateSettings(
         settingsStorage = null
         settingsPage = null
         patternField = null
+        taskIdRegexField = null
         resourceBundle = null
     }
 
