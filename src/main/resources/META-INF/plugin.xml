@@ -47,7 +47,7 @@
                 parentId="other"
                 displayName="Commit Message Template"
                 id="preferences.CommitMessageTemplateConfigurable"
-                instance="com.kozhun.commitmessagetemplate.settings.page.CommitMessageTemplateSettings"/>
+                instance="com.kozhun.commitmessagetemplate.settings.ui.CommitMessageTemplateSettings"/>
     </extensions>
 
     <actions>
