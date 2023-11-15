@@ -4,6 +4,7 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
+import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import git4idea.repo.GitRepository
 import git4idea.repo.GitRepositoryManager
 
@@ -18,7 +19,7 @@ class BranchTaskIdReplacer(
     private fun getTaskIdFromCurrentBranch(): String {
         val gitRepositoryManager = GitRepositoryManager.getInstance(project)
         return getCurrentRepository(gitRepositoryManager)?.currentBranch?.name
-            ?.let { DEFAULT_TASK_ID_REGEXP.find(it)?.value }
+            ?.let { getTaskIdRegex().find(it)?.value }
             ?: ""
     }
 
@@ -26,11 +27,17 @@ class BranchTaskIdReplacer(
         return manager.repositories.firstOrNull()
     }
 
+    private fun getTaskIdRegex(): Regex {
+        val settingsStorage = SettingsStorage.getInstance(project)
+        return settingsStorage.state.taskIdRegex?.toRegex() ?: DEFAULT_TASK_ID_REGEX
+    }
+
     companion object {
-        @JvmStatic
-        fun getInstance(project: Project): BranchTaskIdReplacer = project.service()
+        val DEFAULT_TASK_ID_REGEX = "[a-zA-Z0-9]+-\\d+".toRegex()
 
         private const val TASK_ID_ANCHOR = "\$TASK-ID"
-        private val DEFAULT_TASK_ID_REGEXP = "[a-zA-Z0-9]+-\\d+".toRegex()
+
+        @JvmStatic
+        fun getInstance(project: Project): BranchTaskIdReplacer = project.service()
     }
 }

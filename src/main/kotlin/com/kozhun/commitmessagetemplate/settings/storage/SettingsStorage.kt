@@ -15,6 +15,11 @@ class SettingsStorage : SimplePersistentStateComponent<SettingsState>(getDefault
         loadState(state)
     }
 
+    fun setTaskIdRegExp(regExp: String) {
+        state.taskIdRegex = regExp
+        loadState(state)
+    }
+
     companion object {
         @JvmStatic
         fun getInstance(project: Project): SettingsStorage = project.service()
