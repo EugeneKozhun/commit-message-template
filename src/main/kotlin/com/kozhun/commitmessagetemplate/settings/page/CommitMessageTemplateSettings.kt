@@ -4,9 +4,11 @@ import com.intellij.openapi.options.ConfigurableWithId
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.components.JBTextArea
+import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.LabelPosition
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
+import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import java.util.ResourceBundle
 import javax.swing.JComponent
@@ -18,6 +20,7 @@ class CommitMessageTemplateSettings(
     private var settingsStorage: SettingsStorage? = null
     private var settingsPage: DialogPanel? = null
     private var patternField: JBTextArea? = null
+    private var taskIdRegexField: JBTextField? = null
     private var resourceBundle: ResourceBundle? = null
 
     override fun createComponent(): JComponent? {
@@ -33,23 +36,38 @@ class CommitMessageTemplateSettings(
                     }
                     .component
             }
+            collapsibleGroup("Custom Settings") {
+                row {
+                    taskIdRegexField = expandableTextField()
+                        .apply {
+                            label("\$TASK-ID regex:")
+                            horizontalAlign(HorizontalAlign.FILL)
+                            comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_TASK_ID_REGEX}")
+                        }
+                        .component
+                }
+            }
+
         }
         return settingsPage
     }
 
-    override fun isModified(): Boolean {
-        return patternField?.text != settingsStorage?.state?.pattern
-    }
+    override fun isModified(): Boolean = patternField?.text != settingsStorage?.state?.pattern ||
+            taskIdRegexField?.text != settingsStorage?.state?.taskIdRegex
 
     override fun apply() {
         patternField?.apply {
             settingsStorage?.setPattern(text)
+        }
+        taskIdRegexField?.apply {
+            settingsStorage?.setTaskIdRegExp(text)
         }
     }
 
     override fun reset() {
         settingsStorage?.apply {
             patternField?.text = state.pattern
+            taskIdRegexField?.text = state.taskIdRegex
         }
     }
 
