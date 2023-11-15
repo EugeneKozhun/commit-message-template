@@ -46,6 +46,8 @@ class CommitMessageTemplateSettings(
                         }
                         .component
                 }
+            }.apply {
+                expanded = settingsStorage?.state?.taskIdRegex?.isNotBlank() ?: false
             }
         }
         return settingsPage
