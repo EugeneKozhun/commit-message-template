@@ -25,6 +25,7 @@
         <h3>Configuration</h3>
         <p>1. Go to <strong>File > Settings > Other > Commit Message Template</strong>.</p>
         <p>2. Enter your desired commit message template.</p>
+        <p>3. You can configure your own rule for get Task ID from branch name.</p>
 
         <h3>Usage</h3>
         <p>Simplicity is key! 🙂</p>
