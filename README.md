@@ -10,8 +10,6 @@
     <a href="https://github.com/EugeneKozhun/commit-message-template/blob/main/LICENSE.md"><img alt="plugin's license" src="https://img.shields.io/github/license/EugeneKozhun/commit-message-template"/></a>
 </p>
 
-## Description
-
 This IntelliJ IDEA extension simplifies the process of writing commit messages according to the conventions adopted in
 your project.
 
