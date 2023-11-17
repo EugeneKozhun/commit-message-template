@@ -41,8 +41,8 @@ class CommitMessageTemplateSettings(
                     taskIdRegexField = expandableTextField()
                         .apply {
                             label(resourceBundle!!.getString("settings.custom.task-id.label"))
-                            horizontalAlign(HorizontalAlign.FILL)
                             comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_TASK_ID_REGEX}")
+                            horizontalAlign(HorizontalAlign.FILL)
                         }
                         .component
                 }
