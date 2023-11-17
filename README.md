@@ -1,4 +1,16 @@
-# <img alt="pluginIcon.svg" height="25" src="src/main/resources/META-INF/pluginIcon.svg" width="25" title="App icon"/> Commit Message Template Plugin
+<h1 align="center">
+    <img src="src/main/resources/META-INF/pluginIcon.svg" width="84" height="84" alt="logo"/>
+    <br/>
+    Commit Message Template Plugin
+</h1>
+
+<p align="center">
+    <a href="https://plugins.jetbrains.com/plugin/23100-commit-message-template"><img alt="plugin's version" src="https://img.shields.io/jetbrains/plugin/v/23100-commit-message-template"/></a>
+    <a href="https://plugins.jetbrains.com/plugin/23100-commit-message-template"><img alt="plugin's downloads" src="https://img.shields.io/jetbrains/plugin/d/23100-commit-message-template"/></a>
+    <a href="https://github.com/EugeneKozhun/commit-message-template/blob/main/LICENSE.md"><img alt="plugin's license" src="https://img.shields.io/github/license/EugeneKozhun/commit-message-template"/></a>
+</p>
+
+## Description
 
 This IntelliJ IDEA extension simplifies the process of writing commit messages according to the conventions adopted in
 your project.
