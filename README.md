@@ -1,7 +1,7 @@
 <h1 align="center">
     <img src="src/main/resources/META-INF/pluginIcon.svg" width="84" height="84" alt="logo"/>
     <br/>
-    Commit Message Template Plugin
+    Commit Message Template
 </h1>
 
 <p align="center">
