@@ -31,24 +31,23 @@ your project.
 
 ## Installation
 
-1. Open IntelliJ IDEA.
-2. Navigate to `File > Settings > Plugins`.
-3. Select the `Marketplace` tab.
-4. Search for `Commit Message Template` and click `Install`.
+1. Open IntelliJ IDEA
+2. Navigate to `File > Settings > Plugins`
+3. Select the `Marketplace` tab
+4. Search for `Commit Message Template` and click `Install`
 
 ## Usage
 
-Simplicity is key!
-🙂
-
+Simplicity is key! 🙂
+<br/>
 A button is added to the commit window, allowing you to insert the template into the commit message input field.
 
 ## Configuration
 
 Customize the plugin to your needs:
 
-1. Go to `File > Settings > Other > Commit Message Template`.
-2. Enter your desired commit message template.
+1. Go to `File > Settings > Other > Commit Message Template`
+2. Enter your desired commit message template
 
 ---
 
