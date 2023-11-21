@@ -20,7 +20,7 @@ class CommitMessagePatternFormatter(
         )
     }
 
-    override fun getCommitMessageTemplate(): String {
+    override fun getFormattedCommitMessage(): String {
         val pattern = SettingsStorage.getInstance(project).state.pattern ?: return ""
         return replacers.fold(pattern) { result, replacer -> replacer.replace(result) }
     }
