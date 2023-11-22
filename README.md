@@ -27,7 +27,10 @@ your project.
 
 ## Features
 
-- Enable setting a standard commit message template for your project.
+- Enable setting a standard commit message template for your project
+- You can use keywords to dynamically set values in a message
+- You can configure your own rule for get Task ID from branch name
+- You can set the caret position in your template
 
 ## Installation
 
