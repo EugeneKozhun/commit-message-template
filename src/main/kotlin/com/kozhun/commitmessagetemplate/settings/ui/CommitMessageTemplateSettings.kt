@@ -13,6 +13,11 @@ import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import java.util.ResourceBundle
 import javax.swing.JComponent
 
+/**
+ * Represents the settings for the Commit Message Template plugin.
+ *
+ * @param project The current project.
+ */
 class CommitMessageTemplateSettings(
     private val project: Project
 ) : ConfigurableWithId {

@@ -8,6 +8,9 @@ import com.intellij.openapi.vcs.ui.CommitMessage
 import com.kozhun.commitmessagetemplate.service.caret.impl.CaretServiceDefaultImpl
 import com.kozhun.commitmessagetemplate.service.formatter.impl.CommitMessagePatternFormatter
 
+/**
+ * A class representing an action to generate a commit message.
+ */
 class GenerateCommitMessageAction : DumbAwareAction() {
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.EDT

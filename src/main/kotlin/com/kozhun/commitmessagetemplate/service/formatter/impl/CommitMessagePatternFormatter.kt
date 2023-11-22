@@ -8,6 +8,11 @@ import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 
+/**
+ * This class is responsible for formatting commit messages based on a pattern, using a list of Replacers.
+ *
+ * @param project The project associated with the formatter.
+ */
 @Service(Service.Level.PROJECT)
 class CommitMessagePatternFormatter(
     private val project: Project

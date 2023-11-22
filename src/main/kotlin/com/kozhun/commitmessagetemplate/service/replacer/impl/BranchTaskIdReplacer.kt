@@ -8,6 +8,11 @@ import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import git4idea.repo.GitRepository
 import git4idea.repo.GitRepositoryManager
 
+/**
+ * Replaces a predefined anchor in a given message with the task ID of the current Git branch.
+ *
+ * @param project The IntelliJ IDEA project.
+ */
 @Service(Service.Level.PROJECT)
 class BranchTaskIdReplacer(
     private val project: Project
