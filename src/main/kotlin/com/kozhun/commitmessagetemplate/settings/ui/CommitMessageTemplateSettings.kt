@@ -84,10 +84,10 @@ class CommitMessageTemplateSettings(
     }
 
     override fun getDisplayName(): String {
-        return "Commit Message Template";
+        return "Commit Message Template"
     }
 
     override fun getId(): String {
-        return "preferences.CommitMessageTemplateConfigurable";
+        return "preferences.CommitMessageTemplateConfigurable"
     }
 }
