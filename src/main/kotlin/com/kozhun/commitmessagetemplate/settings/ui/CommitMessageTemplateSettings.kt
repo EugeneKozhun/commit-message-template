@@ -13,6 +13,11 @@ import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import java.util.ResourceBundle
 import javax.swing.JComponent
 
+/**
+ * Represents the settings for the Commit Message Template plugin.
+ *
+ * @param project The current project.
+ */
 class CommitMessageTemplateSettings(
     private val project: Project
 ) : ConfigurableWithId {
@@ -36,11 +41,11 @@ class CommitMessageTemplateSettings(
                     }
                     .component
             }
-            collapsibleGroup(resourceBundle!!.getString("settings.custom.title")) {
+            collapsibleGroup(resourceBundle!!.getString("settings.settings.title")) {
                 row {
                     taskIdRegexField = expandableTextField()
                         .apply {
-                            label(resourceBundle!!.getString("settings.custom.task-id.label"))
+                            label(resourceBundle!!.getString("settings.settings.task-id.label"))
                             comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_TASK_ID_REGEX}")
                             horizontalAlign(HorizontalAlign.FILL)
                         }
@@ -79,10 +84,10 @@ class CommitMessageTemplateSettings(
     }
 
     override fun getDisplayName(): String {
-        return "Commit Message Template";
+        return "Commit Message Template"
     }
 
     override fun getId(): String {
-        return "preferences.CommitMessageTemplateConfigurable";
+        return "preferences.CommitMessageTemplateConfigurable"
     }
 }

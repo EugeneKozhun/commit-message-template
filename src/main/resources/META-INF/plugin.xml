@@ -21,11 +21,13 @@
         <h3>Features</h3>
         <p>1. Enable setting a standard commit message template for your project.</p>
         <p>2. You can use keywords to dynamically set values in a message.</p>
+        <p>3. You can configure your own rule for get Task ID from branch name.</p>
+        <p>4. You can set the caret position in your template.</p>
 
         <h3>Configuration</h3>
         <p>1. Go to <strong>File > Settings > Other > Commit Message Template</strong>.</p>
         <p>2. Enter your desired commit message template.</p>
-        <p>3. You can configure your own rule for get Task ID from branch name.</p>
+        <p>3. (Optional) Create your own rules for extract values.</p>
 
         <h3>Usage</h3>
         <p>Simplicity is key! 🙂</p>
