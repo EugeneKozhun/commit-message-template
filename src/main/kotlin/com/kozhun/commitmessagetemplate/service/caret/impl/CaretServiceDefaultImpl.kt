@@ -15,13 +15,14 @@ class CaretServiceDefaultImpl : CaretService {
 
     override fun getCaretOffsetByAnchor(message: String): Pair<String, Int> {
         return when (val caretOffset = message.indexOf(CARET_ANCHOR)) {
-            -1 -> message to message.length
+            NOT_FOUND_INDEX -> message to message.length
             else -> message.replace(CARET_ANCHOR, "") to caretOffset
         }
     }
 
     companion object {
         private const val CARET_ANCHOR = "\$CARET"
+        private const val NOT_FOUND_INDEX = -1
 
         @JvmStatic
         fun getInstance(project: Project): CaretServiceDefaultImpl = project.service()
