@@ -8,7 +8,6 @@ import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.COLUMNS_SHORT
 import com.intellij.ui.dsl.builder.DslComponentProperty
-import com.intellij.ui.dsl.builder.LabelPosition
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.gridLayout.Gaps
 import com.intellij.util.ui.JBEmptyBorder
@@ -39,9 +38,8 @@ class CommitMessageTemplateSettings(
         return panel {
             row {
                 patternField = JBTextArea().defaultUI()
-                scrollCell(JBScrollPane(patternField))
+                cell(JBScrollPane(patternField))
                     .apply {
-                        label(resourceBundle.getString("settings.message-pattern-label"), LabelPosition.TOP)
                         comment(comment = resourceBundle.getString("settings.message-pattern-notes"))
                         align(AlignX.FILL)
                     }
