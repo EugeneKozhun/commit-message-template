@@ -5,14 +5,12 @@ import com.intellij.openapi.project.Project
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.components.JBTextField
-import com.intellij.ui.dsl.builder.Align
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.COLUMNS_SHORT
 import com.intellij.ui.dsl.builder.DslComponentProperty
 import com.intellij.ui.dsl.builder.LabelPosition
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.gridLayout.Gaps
-import com.intellij.ui.dsl.gridLayout.HorizontalAlign
 import com.intellij.util.ui.JBEmptyBorder
 import com.intellij.util.ui.JBFont
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
