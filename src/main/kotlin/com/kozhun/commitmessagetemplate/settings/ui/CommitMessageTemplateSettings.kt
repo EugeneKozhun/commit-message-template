@@ -45,8 +45,7 @@ class CommitMessageTemplateSettings(
                         comment(comment = resourceBundle.getString("settings.message-pattern-notes"))
                         horizontalAlign(HorizontalAlign.FILL)
                     }
-                    .component
-                    .apply {
+                    .applyToComponent {
                         border = BorderFactory.createEmptyBorder()
                         preferredSize = Dimension(preferredSize.width, TEXT_AREA_HEIGHT)
                     }
