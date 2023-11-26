@@ -45,7 +45,7 @@ class BranchTaskIdReplacer(
     }
 
     companion object {
-        const val TASK_ID_ANCHOR = "\$TASK-ID"
+        const val TASK_ID_ANCHOR = "\$TASK_ID"
         val DEFAULT_TASK_ID_REGEX = "[a-zA-Z0-9]+-\\d+".toRegex()
 
         @JvmStatic
