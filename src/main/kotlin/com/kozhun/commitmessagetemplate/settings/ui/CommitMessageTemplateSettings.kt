@@ -8,6 +8,7 @@ import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.COLUMNS_SHORT
 import com.intellij.ui.dsl.builder.DslComponentProperty
+import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.gridLayout.Gaps
 import com.intellij.util.ui.JBEmptyBorder
@@ -59,6 +60,7 @@ class CommitMessageTemplateSettings(
                         .component
                 }
             }.apply {
+                topGap(TopGap.NONE)
                 expanded = isNotDefaultSettingsApplied()
             }
         }
