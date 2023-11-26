@@ -5,6 +5,8 @@ import com.intellij.openapi.project.Project
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.components.JBTextField
+import com.intellij.ui.dsl.builder.Align
+import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.COLUMNS_SHORT
 import com.intellij.ui.dsl.builder.DslComponentProperty
 import com.intellij.ui.dsl.builder.LabelPosition
@@ -43,7 +45,7 @@ class CommitMessageTemplateSettings(
                     .apply {
                         label(resourceBundle.getString("settings.message-pattern-label"), LabelPosition.TOP)
                         comment(comment = resourceBundle.getString("settings.message-pattern-notes"))
-                        horizontalAlign(HorizontalAlign.FILL)
+                        align(AlignX.FILL)
                     }
                     .applyToComponent {
                         border = BorderFactory.createEmptyBorder()
@@ -56,7 +58,7 @@ class CommitMessageTemplateSettings(
                         .apply {
                             label(resourceBundle.getString("settings.settings.task-id.label"))
                             comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_TASK_ID_REGEX}")
-                            horizontalAlign(HorizontalAlign.FILL)
+                            align(AlignX.FILL)
                         }
                         .component
                 }

@@ -17,11 +17,11 @@ dependencies {
 }
 
 intellij {
-    version.set("2022.2.5")
+    version.set("2023.1.5")
     type.set("IC")
 
     plugins.set(listOf(
-        "git4idea"
+        "Git4Idea"
     ))
 }
 
@@ -39,8 +39,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("232.*")
+        sinceBuild.set("231")
+        untilBuild.set("233.*")
     }
 
     signPlugin {
