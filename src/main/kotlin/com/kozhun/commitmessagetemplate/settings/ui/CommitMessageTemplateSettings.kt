@@ -7,17 +7,14 @@ import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.COLUMNS_SHORT
-import com.intellij.ui.dsl.builder.DslComponentProperty
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.panel
-import com.intellij.ui.dsl.gridLayout.Gaps
 import com.intellij.util.ui.JBEmptyBorder
 import com.intellij.util.ui.JBFont
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import java.awt.Dimension
 import java.util.ResourceBundle
-import javax.swing.BorderFactory
 import javax.swing.JComponent
 
 /**
@@ -38,14 +35,13 @@ class CommitMessageTemplateSettings(
         val resourceBundle = ResourceBundle.getBundle("messages")
         return panel {
             row {
-                patternField = JBTextArea().defaultUI()
+                patternField = JBTextArea().setupUI()
                 cell(JBScrollPane(patternField))
                     .apply {
                         comment(comment = resourceBundle.getString("settings.message-pattern-notes"))
                         align(AlignX.FILL)
                     }
                     .applyToComponent {
-                        border = BorderFactory.createEmptyBorder()
                         preferredSize = Dimension(preferredSize.width, TEXT_AREA_HEIGHT)
                     }
             }
@@ -100,13 +96,10 @@ class CommitMessageTemplateSettings(
 
 /**
  * Sets the default UI properties for a JBTextArea.
- * Duplicated from textArea().
  */
-private fun JBTextArea.defaultUI(): JBTextArea {
+private fun JBTextArea.setupUI() = this.apply {
     border = JBEmptyBorder(3, 5, 3, 5)
     columns = COLUMNS_SHORT
     font = JBFont.regular()
     emptyText.setFont(JBFont.regular())
-    putClientProperty(DslComponentProperty.VISUAL_PADDINGS, Gaps.EMPTY)
-    return this
 }
