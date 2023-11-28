@@ -2,7 +2,6 @@ package com.kozhun.commitmessagetemplate.settings.ui
 
 import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.options.ConfigurableWithId
 import com.intellij.openapi.project.Project
 import com.intellij.ui.components.JBTextField
@@ -81,7 +80,7 @@ class CommitMessageTemplateSettings(
 
     override fun disposeUIResources() {
         super.disposeUIResources()
-        EditorFactory.getInstance().releaseEditor(patternEditor);
+        PatternEditorUtil.dispose(patternEditor)
     }
 
     override fun getDisplayName(): String {
