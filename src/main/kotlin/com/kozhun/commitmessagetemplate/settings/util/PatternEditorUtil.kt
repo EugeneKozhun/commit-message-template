@@ -13,7 +13,6 @@ object PatternEditorUtil {
         val editorFactory = EditorFactory.getInstance()
         val editor = editorFactory.createEditor(document, project)
 
-        editor.contentComponent.setFocusable(true)
         editor.settings.apply {
             additionalLinesCount = 0
             isLineNumbersShown = false
