@@ -7,6 +7,8 @@ plugins {
 group = "com.kozhun"
 version = "1.1.0"
 
+sourceSets["main"].java.srcDirs("src/main/gen")
+
 repositories {
     mavenCentral()
 }
