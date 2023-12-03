@@ -94,6 +94,6 @@ class CommitMessageTemplateSettings(
     private fun isNotDefaultSettingsApplied() = settingsStorage.state.taskIdRegex?.isNotBlank() ?: false
 
     companion object {
-        private const val TEXT_AREA_HEIGHT = 100
+        private const val TEXT_AREA_HEIGHT = 125
     }
 }
