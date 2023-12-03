@@ -30,7 +30,7 @@ object PatternEditorUtil {
 
         editor.settings.apply {
             additionalLinesCount = 0
-            isLineNumbersShown = false
+            isLineNumbersShown = true
             isVirtualSpace = false
             isLineMarkerAreaShown = false
             isIndentGuidesShown = false
