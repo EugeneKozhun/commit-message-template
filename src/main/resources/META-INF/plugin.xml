@@ -51,6 +51,18 @@
                 displayName="Commit Message Template"
                 id="preferences.CommitMessageTemplateConfigurable"
                 instance="com.kozhun.commitmessagetemplate.settings.ui.CommitMessageTemplateSettings"/>
+        <fileType
+                name="Commit Message Template"
+                implementationClass="com.kozhun.commitmessagetemplate.language.CMTFileType"
+                fieldName="INSTANCE"
+                language="CMT"
+                extensions="cmt"/>
+        <lang.parserDefinition
+                language="CMT"
+                implementationClass="com.kozhun.commitmessagetemplate.language.parser.CMTParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="CMT"
+                implementationClass="com.kozhun.commitmessagetemplate.language.highlighter.CMTSyntaxHighlighterFactory"/>
     </extensions>
 
     <actions>
