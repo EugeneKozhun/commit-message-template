@@ -22,7 +22,6 @@ import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.*;
 %type IElementType
 %unicode
 
-EOL=\R
 WHITE_SPACE=\s+
 MESSAGE_PART=[^{\s}|$CARET_POSITION|$TASK_ID]+
 
