@@ -24,14 +24,14 @@ import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.*;
 
 EOL=\R
 WHITE_SPACE=\s+
-
+MESSAGE_PART=[^{\s}|$CARET_POSITION|$TASK_ID]+
 
 %%
 <YYINITIAL> {
-  \$TASK_ID                          { return TASK_ID; }
-  \$CARET_POSITION                   { return CARET_POSITION; }
-  {WHITE_SPACE}                      { return WHITE_SPACE; }
-  [^{\s}|$CARET_POSITION|$TASK_ID]+  { return OTHER_TEXT; }
+  \$TASK_ID         { return TASK_ID; }
+  \$CARET_POSITION  { return CARET_POSITION; }
+  {WHITE_SPACE}     { return WHITE_SPACE; }
+  {MESSAGE_PART}    { return OTHER_TEXT; }
 }
 
 [^] { return OTHER_TEXT; }
