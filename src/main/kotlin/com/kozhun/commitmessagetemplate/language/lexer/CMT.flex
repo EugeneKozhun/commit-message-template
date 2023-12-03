@@ -23,7 +23,7 @@ import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.*;
 %unicode
 
 WHITE_SPACE=\s+
-MESSAGE_PART=[^{\s}|$CARET_POSITION|$TASK_ID]+
+MESSAGE_PART=[^$]+
 
 %%
 <YYINITIAL> {
