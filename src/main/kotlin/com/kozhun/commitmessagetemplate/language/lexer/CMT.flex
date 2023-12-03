@@ -28,10 +28,10 @@ WHITE_SPACE=\s+
 
 %%
 <YYINITIAL> {
-  {WHITE_SPACE}       { return WHITE_SPACE; }
-  "\$TASK_ID"         { return TASK_ID; }
-  "\$CARET_POSITION"  { return CARET_POSITION; }
-  .                   { return TOKEN; }
+  \$TASK_ID                          { return TASK_ID; }
+  \$CARET_POSITION                   { return CARET_POSITION; }
+  {WHITE_SPACE}                      { return WHITE_SPACE; }
+  [^{\s}|$CARET_POSITION|$TASK_ID]+  { return OTHER_TEXT; }
 }
 
-[^] { return BAD_CHARACTER; }
+[^] { return OTHER_TEXT; }

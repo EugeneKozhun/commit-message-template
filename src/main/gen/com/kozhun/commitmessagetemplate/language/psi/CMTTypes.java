@@ -11,19 +11,15 @@ import com.kozhun.commitmessagetemplate.language.psi.impl.*;
 public interface CMTTypes {
 
   IElementType CARET_POSITION = new CMTElementType("CARET_POSITION");
-  IElementType OTHER = new CMTElementType("OTHER");
   IElementType TASK_ID = new CMTElementType("TASK_ID");
 
-  IElementType TOKEN = new CMTTokenType("TOKEN");
+  IElementType OTHER_TEXT = new CMTTokenType("OTHER_TEXT");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
       if (type == CARET_POSITION) {
         return new CMTCaretPositionImpl(node);
-      }
-      else if (type == OTHER) {
-        return new CMTOtherImpl(node);
       }
       else if (type == TASK_ID) {
         return new CMTTaskIdImpl(node);

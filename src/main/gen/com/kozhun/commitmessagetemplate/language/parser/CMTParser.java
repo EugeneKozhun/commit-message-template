@@ -59,25 +59,13 @@ public class CMTParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // task_id|caret_position|other
+  // task_id|caret_position|OTHER_TEXT
   static boolean item_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "item_")) return false;
     boolean r;
     r = task_id(b, l + 1);
     if (!r) r = caret_position(b, l + 1);
-    if (!r) r = other(b, l + 1);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // TOKEN
-  public static boolean other(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "other")) return false;
-    if (!nextTokenIs(b, TOKEN)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, TOKEN);
-    exit_section_(b, m, OTHER, r);
+    if (!r) r = consumeToken(b, OTHER_TEXT);
     return r;
   }
 

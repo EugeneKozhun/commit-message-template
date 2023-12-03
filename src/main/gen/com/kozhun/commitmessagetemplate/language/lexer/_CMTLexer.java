@@ -38,8 +38,7 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_CMAP_TOP = zzUnpackcmap_top();
 
   private static final String ZZ_CMAP_TOP_PACKED_0 =
-    "\1\0\25\u0100\1\u0200\11\u0100\1\u0300\17\u0100\1\u0400\247\u0100"+
-    "\10\u0500\u1020\u0100";
+    "\1\0\25\u0100\1\u0200\11\u0100\1\u0300\17\u0100\1\u0400\u10cf\u0100";
 
   private static int [] zzUnpackcmap_top() {
     int [] result = new int[4352];
@@ -70,12 +69,12 @@ public class _CMTLexer implements FlexLexer {
     "\11\0\5\1\22\0\1\1\3\0\1\2\34\0\1\3"+
     "\1\0\1\4\1\5\1\6\3\0\1\7\1\0\1\10"+
     "\2\0\1\11\1\12\1\13\1\0\1\14\1\15\1\16"+
-    "\12\0\1\17\45\0\1\1\32\0\1\1\u01df\0\1\1"+
-    "\177\0\13\1\35\0\2\1\5\0\1\1\57\0\1\1"+
-    "\240\0\1\1\377\0\u0100\20";
+    "\12\0\1\17\33\0\3\20\7\0\1\1\32\0\1\1"+
+    "\u01df\0\1\1\177\0\13\1\35\0\2\1\5\0\1\1"+
+    "\57\0\1\1\240\0\1\1\377\0";
 
   private static int [] zzUnpackcmap_blocks() {
-    int [] result = new int[1536];
+    int [] result = new int[1280];
     int offset = 0;
     offset = zzUnpackcmap_blocks(ZZ_CMAP_BLOCKS_PACKED_0, offset, result);
     return result;
@@ -99,8 +98,7 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\1\1\3\15\0\1\4\6\0"+
-    "\1\5";
+    "\1\0\1\1\1\2\2\1\15\0\1\3\6\0\1\4";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[26];
@@ -128,10 +126,10 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\21\0\42\0\63\0\21\0\104\0\125\0\146"+
-    "\0\167\0\210\0\231\0\252\0\273\0\314\0\335\0\356"+
-    "\0\377\0\u0110\0\21\0\u0121\0\u0132\0\u0143\0\u0154\0\u0165"+
-    "\0\u0176\0\21";
+    "\0\0\0\21\0\42\0\63\0\104\0\125\0\146\0\167"+
+    "\0\210\0\231\0\252\0\273\0\314\0\335\0\356\0\377"+
+    "\0\u0110\0\u0121\0\104\0\u0132\0\u0143\0\u0154\0\u0165\0\u0176"+
+    "\0\u0187\0\104";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[26];
@@ -157,8 +155,8 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\4\15\2\1\5\22\0\1\3\23\0"+
-    "\1\6\11\0\1\7\5\0\1\10\20\0\1\11\31\0"+
+    "\1\2\1\3\1\4\16\5\1\2\21\0\1\3\23\0"+
+    "\1\6\11\0\1\7\26\0\1\10\20\0\1\11\31\0"+
     "\1\12\21\0\1\13\11\0\1\14\22\0\1\15\26\0"+
     "\1\16\21\0\1\17\20\0\1\20\10\0\1\21\24\0"+
     "\1\22\12\0\1\23\25\0\1\24\23\0\1\25\12\0"+
@@ -166,7 +164,7 @@ public class _CMTLexer implements FlexLexer {
     "\1\32\7\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[391];
+    int [] result = new int[408];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -204,7 +202,7 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\2\1\1\11\15\0\1\11\6\0\1\11";
+    "\1\0\3\1\1\11\15\0\1\11\6\0\1\11";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[26];
@@ -522,30 +520,25 @@ public class _CMTLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return TOKEN;
+            { return OTHER_TEXT;
             }
           // fall through
-          case 6: break;
+          case 5: break;
           case 2:
             { return WHITE_SPACE;
             }
           // fall through
-          case 7: break;
+          case 6: break;
           case 3:
-            { return BAD_CHARACTER;
-            }
-          // fall through
-          case 8: break;
-          case 4:
             { return TASK_ID;
             }
           // fall through
-          case 9: break;
-          case 5:
+          case 7: break;
+          case 4:
             { return CARET_POSITION;
             }
           // fall through
-          case 10: break;
+          case 8: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

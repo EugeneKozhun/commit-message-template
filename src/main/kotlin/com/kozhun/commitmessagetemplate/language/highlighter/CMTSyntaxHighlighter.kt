@@ -23,10 +23,11 @@ class CMTSyntaxHighlighter : SyntaxHighlighterBase() {
     }
 
     companion object {
-        private val TASK_ID = createTextAttributesKey("TASK_ID", DefaultLanguageHighlighterColors.CONSTANT)
-        private val CARET_POSITION = createTextAttributesKey("CARET_POSITION", DefaultLanguageHighlighterColors.KEYWORD)
-
-        private val TASK_ID_KEYS = arrayOf(TASK_ID)
-        private val CARET_POSITION_KEYS = arrayOf(CARET_POSITION)
+        private val TASK_ID_KEYS = arrayOf(
+            createTextAttributesKey("TASK_ID", DefaultLanguageHighlighterColors.CONSTANT)
+        )
+        private val CARET_POSITION_KEYS = arrayOf(
+            createTextAttributesKey("CARET_POSITION", DefaultLanguageHighlighterColors.KEYWORD)
+        )
     }
 }
