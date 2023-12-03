@@ -14,7 +14,7 @@ import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
  * @param project The project associated with the formatter.
  */
 @Service(Service.Level.PROJECT)
-class CommitMessagePatternFormatter(
+class CommitMessageFormatterDefaultImpl(
     private val project: Project
 ) : CommitMessageFormatter {
     private val replacers: List<Replacer>
@@ -32,6 +32,6 @@ class CommitMessagePatternFormatter(
 
     companion object {
         @JvmStatic
-        fun getInstance(project: Project): CommitMessagePatternFormatter = project.service()
+        fun getInstance(project: Project): CommitMessageFormatterDefaultImpl = project.service()
     }
 }

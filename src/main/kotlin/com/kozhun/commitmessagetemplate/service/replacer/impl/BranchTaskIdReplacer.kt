@@ -17,6 +17,13 @@ import git4idea.repo.GitRepositoryManager
 class BranchTaskIdReplacer(
     private val project: Project
 ) : Replacer {
+
+    /**
+     * Replaces the occurrence of TASK_ID_ANCHOR in the given message with the task ID from the current branch.
+     *
+     * @param message the original message that may contain TASK_ID_ANCHOR.
+     * @return the message with TASK_ID_ANCHOR replaced by the task ID from the current branch.
+     */
     override fun replace(message: String): String {
         return message.replace(TASK_ID_ANCHOR, getTaskIdFromCurrentBranch())
     }
@@ -38,9 +45,8 @@ class BranchTaskIdReplacer(
     }
 
     companion object {
+        const val TASK_ID_ANCHOR = "\$TASK_ID"
         val DEFAULT_TASK_ID_REGEX = "[a-zA-Z0-9]+-\\d+".toRegex()
-
-        private const val TASK_ID_ANCHOR = "\$TASK-ID"
 
         @JvmStatic
         fun getInstance(project: Project): BranchTaskIdReplacer = project.service()

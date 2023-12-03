@@ -1,0 +1,20 @@
+{
+  parserClass="com.kozhun.commitmessagetemplate.language.parser.CMTParser"
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="CMT"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.kozhun.commitmessagetemplate.language.psi"
+  psiImplPackage="com.kozhun.commitmessagetemplate.language.psi.impl"
+
+  elementTypeHolderClass="com.kozhun.commitmessagetemplate.language.psi.CMTTypes"
+  elementTypeClass="com.kozhun.commitmessagetemplate.language.grammar.CMTElementType"
+  tokenTypeClass="com.kozhun.commitmessagetemplate.language.grammar.CMTTokenType"
+}
+
+cmtFile ::= item_*
+
+private item_ ::= (task_id|caret_position|OTHER_TEXT)
+
+task_id ::= '$TASK_ID'
+caret_position ::= '$CARET_POSITION'

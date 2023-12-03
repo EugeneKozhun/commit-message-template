@@ -1,29 +1,37 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.20"
+    id("org.jetbrains.kotlin.jvm") version "1.9.21"
     id("org.jetbrains.intellij") version "1.16.0"
 }
 
 group = "com.kozhun"
-version = "1.1.0"
+version = "1.2.0"
+
+sourceSets["main"].java.srcDirs("src/main/gen")
 
 repositories {
     mavenCentral()
 }
 
-// Configure Gradle IntelliJ Plugin
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("io.mockk:mockk:1.13.8")
+}
+
 intellij {
-    version.set("2022.2.5")
-    type.set("IC") // Target IDE Platform
+    version.set("2023.1.5")
+    type.set("IC")
 
     plugins.set(listOf(
-        "git4idea"
+        "Git4Idea"
     ))
 }
 
 tasks {
-    // Set the JVM compatibility versions
+    test {
+        useJUnitPlatform()
+    }
+
     withType<JavaCompile> {
         sourceCompatibility = "17"
         targetCompatibility = "17"
@@ -33,8 +41,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("232.*")
+        sinceBuild.set("231")
+        untilBuild.set("233.*")
     }
 
     signPlugin {
