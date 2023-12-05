@@ -5,6 +5,7 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
+import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 import git4idea.repo.GitRepository
 import git4idea.repo.GitRepositoryManager
 
@@ -41,7 +42,7 @@ class BranchTaskIdReplacer(
 
     private fun getTaskIdRegex(): Regex {
         val settingsStorage = SettingsStorage.getInstance(project)
-        return settingsStorage.state.taskIdRegex?.toRegex() ?: DEFAULT_TASK_ID_REGEX
+        return settingsStorage.state.taskIdRegex?.toNotBlankRegex() ?: DEFAULT_TASK_ID_REGEX
     }
 
     companion object {
