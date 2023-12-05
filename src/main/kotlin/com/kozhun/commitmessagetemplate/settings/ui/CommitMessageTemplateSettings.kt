@@ -9,6 +9,7 @@ import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.panel
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
+import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTypeReplacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.settings.util.PatternEditorUtil
 import java.awt.Dimension
@@ -25,6 +26,7 @@ class CommitMessageTemplateSettings(
 ) : ConfigurableWithId {
     private lateinit var settingsStorage: SettingsStorage
     private lateinit var taskIdRegexField: JBTextField
+    private lateinit var typeRegexField: JBTextField
     private lateinit var patternEditor: Editor
 
     override fun createComponent(): JComponent {
@@ -44,28 +46,37 @@ class CommitMessageTemplateSettings(
             }
             collapsibleGroup(resourceBundle.getString("settings.settings.title")) {
                 row {
+                    label(resourceBundle.getString("settings.settings.task-id.label"))
                     taskIdRegexField = expandableTextField()
                         .apply {
-                            label(resourceBundle.getString("settings.settings.task-id.label"))
                             comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_TASK_ID_REGEX}")
                             align(AlignX.FILL)
-                        }
-                        .component
+                        }.component
+                }
+                row {
+                    label(resourceBundle.getString("settings.settings.type.label"))
+                    typeRegexField = expandableTextField()
+                        .apply {
+                            comment(comment = "Default: ${BranchTypeReplacer.DEFAULT_TYPE_REGEX}")
+                            align(AlignX.FILL)
+                        }.component
                 }
             }.apply {
                 topGap(TopGap.NONE)
-                expanded = isNotDefaultSettingsApplied()
+                expanded = !usedDefaultSettings()
             }
         }
     }
 
     override fun isModified(): Boolean = patternEditor.document.text != settingsStorage.state.pattern.orEmpty() ||
-            taskIdRegexField.text != settingsStorage.state.taskIdRegex.orEmpty()
+            taskIdRegexField.text != settingsStorage.state.taskIdRegex.orEmpty() ||
+            typeRegexField.text != settingsStorage.state.typeRegex.orEmpty()
 
     override fun apply() {
         settingsStorage.apply {
             patternEditor.document.also { setPattern(it.text) }
             taskIdRegexField.also { setTaskIdRegExp(it.text) }
+            typeRegexField.also { setTypeRegExp(it.text) }
         }
     }
 
@@ -74,6 +85,7 @@ class CommitMessageTemplateSettings(
             settingsStorage.apply {
                 patternEditor.document.setText(state.pattern.orEmpty())
                 taskIdRegexField.text = state.taskIdRegex
+                typeRegexField.text = state.typeRegex
             }
         }
     }
@@ -91,7 +103,10 @@ class CommitMessageTemplateSettings(
         return "preferences.CommitMessageTemplateConfigurable"
     }
 
-    private fun isNotDefaultSettingsApplied() = settingsStorage.state.taskIdRegex?.isNotBlank() ?: false
+    private fun usedDefaultSettings(): Boolean {
+        val state = settingsStorage.state
+        return state.taskIdRegex.isNullOrBlank() && state.typeRegex.isNullOrBlank()
+    }
 
     companion object {
         private const val TEXT_AREA_HEIGHT = 125

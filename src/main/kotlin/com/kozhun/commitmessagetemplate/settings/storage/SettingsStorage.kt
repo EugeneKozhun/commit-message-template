@@ -23,6 +23,11 @@ class SettingsStorage : SimplePersistentStateComponent<SettingsState>(getDefault
         loadState(state)
     }
 
+    fun setTypeRegExp(regExp: String) {
+        state.typeRegex = regExp
+        loadState(state)
+    }
+
     companion object {
         @JvmStatic
         fun getInstance(project: Project): SettingsStorage = project.service()

@@ -8,4 +8,5 @@ import com.intellij.openapi.components.BaseState
 class SettingsState : BaseState() {
     var pattern by string("")
     var taskIdRegex by string("")
+    var typeRegex by string("")
 }
