@@ -28,6 +28,11 @@ class SettingsStorage : SimplePersistentStateComponent<SettingsState>(getDefault
         loadState(state)
     }
 
+    fun setTypePostprocessor(postprocessor: String) {
+        state.typePostprocessor = postprocessor
+        loadState(state)
+    }
+
     companion object {
         @JvmStatic
         fun getInstance(project: Project): SettingsStorage = project.service()

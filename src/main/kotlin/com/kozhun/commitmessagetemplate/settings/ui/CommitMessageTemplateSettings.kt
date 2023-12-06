@@ -4,12 +4,16 @@ import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.options.ConfigurableWithId
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
+import com.intellij.ui.dsl.builder.BottomGap
+import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.panel
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTypeReplacer
+import com.kozhun.commitmessagetemplate.settings.enums.BranchTypePostprocessor
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.settings.util.PatternEditorUtil
 import java.awt.Dimension
@@ -27,6 +31,7 @@ class CommitMessageTemplateSettings(
     private lateinit var settingsStorage: SettingsStorage
     private lateinit var taskIdRegexField: JBTextField
     private lateinit var typeRegexField: JBTextField
+    private lateinit var typePostprocessorField: ComboBox<String>
     private lateinit var patternEditor: Editor
 
     override fun createComponent(): JComponent {
@@ -44,39 +49,53 @@ class CommitMessageTemplateSettings(
                         preferredSize = Dimension(preferredSize.width, TEXT_AREA_HEIGHT)
                     }
             }
-            collapsibleGroup(resourceBundle.getString("settings.settings.title")) {
+            collapsibleGroup("Task ID Settings (\$TASK_ID)") {
                 row {
-                    label(resourceBundle.getString("settings.settings.task-id.label"))
                     taskIdRegexField = expandableTextField()
                         .apply {
+                            label(resourceBundle.getString("settings.settings.task-id.label"))
                             comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_TASK_ID_REGEX}")
                             align(AlignX.FILL)
                         }.component
                 }
+            }.apply {
+                expanded = !usedDefaultSettingsForTaskId()
+            }.withoutGaps()
+            collapsibleGroup("Branch Type Settings (\$TYPE)") {
                 row {
-                    label(resourceBundle.getString("settings.settings.type.label"))
                     typeRegexField = expandableTextField()
                         .apply {
+                            label(resourceBundle.getString("settings.settings.type.label"))
                             comment(comment = "Default: ${BranchTypeReplacer.DEFAULT_TYPE_REGEX}")
                             align(AlignX.FILL)
                         }.component
                 }
+                row {
+                    typePostprocessorField = comboBox(BranchTypePostprocessor.values().map { it.label }, null)
+                        .apply {
+                            label("Postprocess:")
+                        }.component
+                }
             }.apply {
-                topGap(TopGap.NONE)
-                expanded = !usedDefaultSettings()
-            }
+                expanded = !usedDefaultSettingsForType()
+            }.withoutGaps()
         }
     }
 
-    override fun isModified(): Boolean = patternEditor.document.text != settingsStorage.state.pattern.orEmpty() ||
-            taskIdRegexField.text != settingsStorage.state.taskIdRegex.orEmpty() ||
-            typeRegexField.text != settingsStorage.state.typeRegex.orEmpty()
+    override fun isModified(): Boolean {
+        val state = settingsStorage.state
+        return patternEditor.document.text != state.pattern.orEmpty() ||
+                taskIdRegexField.text != state.taskIdRegex.orEmpty() ||
+                typeRegexField.text != state.typeRegex.orEmpty() ||
+                typePostprocessorField.item != (state.typePostprocessor ?: BranchTypePostprocessor.NONE.label)
+    }
 
     override fun apply() {
         settingsStorage.apply {
             patternEditor.document.also { setPattern(it.text) }
             taskIdRegexField.also { setTaskIdRegExp(it.text) }
             typeRegexField.also { setTypeRegExp(it.text) }
+            typePostprocessorField.also { setTypePostprocessor(it.item) }
         }
     }
 
@@ -86,6 +105,7 @@ class CommitMessageTemplateSettings(
                 patternEditor.document.setText(state.pattern.orEmpty())
                 taskIdRegexField.text = state.taskIdRegex
                 typeRegexField.text = state.typeRegex
+                typePostprocessorField.item = state.typePostprocessor?.takeIf { it.isNotBlank() } ?: BranchTypePostprocessor.NONE.label
             }
         }
     }
@@ -103,12 +123,20 @@ class CommitMessageTemplateSettings(
         return "preferences.CommitMessageTemplateConfigurable"
     }
 
-    private fun usedDefaultSettings(): Boolean {
+    private fun usedDefaultSettingsForTaskId() = settingsStorage.state.taskIdRegex.isNullOrBlank()
+
+    private fun usedDefaultSettingsForType(): Boolean {
         val state = settingsStorage.state
-        return state.taskIdRegex.isNullOrBlank() && state.typeRegex.isNullOrBlank()
+        return state.typeRegex.isNullOrBlank() &&
+                (state.typePostprocessor == null || state.typePostprocessor == BranchTypePostprocessor.NONE.label)
     }
 
     companion object {
         private const val TEXT_AREA_HEIGHT = 125
     }
+}
+
+private fun Row.withoutGaps() = apply {
+    topGap(TopGap.NONE)
+    bottomGap(BottomGap.NONE)
 }

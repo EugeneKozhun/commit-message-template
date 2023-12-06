@@ -4,6 +4,7 @@ import ai.grazie.utils.capitalize
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.kozhun.commitmessagetemplate.settings.enums.BranchTypePostprocessor
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
@@ -28,7 +29,17 @@ class BranchTypeReplacer(
     }
 
     private fun withSelectedCase(value: String): String {
-        return value.capitalize()
+        val settingsStorage = SettingsStorage.getInstance(project)
+        val branchTypePostprocessor = settingsStorage.state.typePostprocessor
+            ?.let { BranchTypePostprocessor.labelValueOf(it) }
+            ?: BranchTypePostprocessor.NONE
+
+        return when (branchTypePostprocessor) {
+            BranchTypePostprocessor.CAPITALIZE -> value.capitalize()
+            BranchTypePostprocessor.UPPERCASE -> value.uppercase()
+            BranchTypePostprocessor.LOWERCASE -> value.lowercase()
+            else -> value
+        }
     }
 
     companion object {

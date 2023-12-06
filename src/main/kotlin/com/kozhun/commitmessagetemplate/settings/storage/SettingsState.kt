@@ -9,4 +9,5 @@ class SettingsState : BaseState() {
     var pattern by string("")
     var taskIdRegex by string("")
     var typeRegex by string("")
+    var typePostprocessor by string("")
 }
