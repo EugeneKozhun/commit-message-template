@@ -16,17 +16,17 @@ class CMTSyntaxHighlighter : SyntaxHighlighterBase() {
 
     override fun getTokenHighlights(tokenType: IElementType): Array<TextAttributesKey> {
         return when (tokenType) {
-            CMTTypes.TASK_ID -> TASK_ID_KEYS
-            CMTTypes.CARET_POSITION -> CARET_POSITION_KEYS
+            CMTTypes.TASK_ID, CMTTypes.TYPE -> keywordKeys
+            CMTTypes.CARET_POSITION -> caretPositionKeys
             else -> arrayOf()
         }
     }
 
     companion object {
-        private val TASK_ID_KEYS = arrayOf(
-            createTextAttributesKey("TASK_ID", DefaultLanguageHighlighterColors.CONSTANT)
+        private val keywordKeys = arrayOf(
+            createTextAttributesKey("TASK_ID", DefaultLanguageHighlighterColors.CONSTANT),
         )
-        private val CARET_POSITION_KEYS = arrayOf(
+        private val caretPositionKeys = arrayOf(
             createTextAttributesKey("CARET_POSITION", DefaultLanguageHighlighterColors.KEYWORD)
         )
     }
