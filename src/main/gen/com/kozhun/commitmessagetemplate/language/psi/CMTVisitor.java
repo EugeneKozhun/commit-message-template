@@ -15,6 +15,10 @@ public class CMTVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitType(@NotNull CMTType o) {
+    visitPsiElement(o);
+  }
+
   public void visitPsiElement(@NotNull PsiElement o) {
     visitElement(o);
   }

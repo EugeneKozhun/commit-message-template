@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.formatter.CommitMessageFormatter
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
+import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTypeReplacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 
 /**
@@ -21,6 +22,7 @@ class CommitMessageFormatterDefaultImpl(
 
     init {
         replacers = listOf(
+            BranchTypeReplacer.getInstance(project),
             BranchTaskIdReplacer.getInstance(project)
         )
     }

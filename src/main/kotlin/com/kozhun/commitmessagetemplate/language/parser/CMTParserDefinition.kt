@@ -15,6 +15,9 @@ import com.kozhun.commitmessagetemplate.language.lexer.CMTLexerAdapter
 import com.kozhun.commitmessagetemplate.language.psi.CMTFile
 import com.kozhun.commitmessagetemplate.language.psi.CMTTypes
 
+/**
+ * The implementation of the ParserDefinition interface for CMT language.
+ */
 class CMTParserDefinition : ParserDefinition {
 
     override fun createLexer(project: Project): Lexer {

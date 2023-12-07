@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.kozhun"
-version = "1.2.1"
+version = "1.3.0"
 
 sourceSets["main"].java.srcDirs("src/main/gen")
 

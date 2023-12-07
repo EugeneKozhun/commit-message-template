@@ -12,6 +12,7 @@ public interface CMTTypes {
 
   IElementType CARET_POSITION = new CMTElementType("CARET_POSITION");
   IElementType TASK_ID = new CMTElementType("TASK_ID");
+  IElementType TYPE = new CMTElementType("TYPE");
 
   IElementType OTHER_TEXT = new CMTTokenType("OTHER_TEXT");
 
@@ -23,6 +24,9 @@ public interface CMTTypes {
       }
       else if (type == TASK_ID) {
         return new CMTTaskIdImpl(node);
+      }
+      else if (type == TYPE) {
+        return new CMTTypeImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }
