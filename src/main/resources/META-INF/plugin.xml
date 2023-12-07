@@ -72,6 +72,7 @@
                 description="Format the message according to the template"
                 icon="/icons/format-button.svg">
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
+            <keyboard-shortcut first-keystroke="ctrl shift T" keymap="$default"/>
         </action>
     </actions>
 

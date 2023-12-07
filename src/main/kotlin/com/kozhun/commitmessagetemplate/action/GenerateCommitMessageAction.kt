@@ -12,6 +12,10 @@ import com.kozhun.commitmessagetemplate.service.formatter.impl.CommitMessageForm
  * A class representing an action to generate a commit message.
  */
 class GenerateCommitMessageAction : DumbAwareAction() {
+    init {
+        isEnabledInModalContext = true
+    }
+
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.EDT
     }
