@@ -27,7 +27,7 @@
         <p>4. You can set the caret position in your template.</p>
 
         <h3>Configuration</h3>
-        <p>1. Go to <strong>File > Settings > Other > Commit Message Template</strong>.</p>
+        <p>1. Go to <strong>File > Settings > Version Control > Commit Message Template</strong>.</p>
         <p>2. Enter your desired commit message template.</p>
         <p>3. (Optional) Create your own rules for extract values.</p>
 
@@ -47,6 +47,7 @@
             <li>Added standard shortcut for the template insertion button.</li>
             <li>New variable <strong>$TASK</strong> that enables extracting the task type from the branch name.</li>
             <li>Added a functionality that allows changing the case for the <strong>$TASK</strong> value to suit different naming conventions.</li>
+            <li>Moved plugin setting page to <strong>Version Control</strong> tab.</li>
             <li>Reworked the plugin setting page for enhanced user interaction and usability.</li>
         </ul>
         <h3>1.2.1</h3>
@@ -74,7 +75,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <projectConfigurable
-                parentId="other"
+                parentId="project.propVCSSupport.Mappings"
                 displayName="Commit Message Template"
                 id="preferences.CommitMessageTemplateConfigurable"
                 instance="com.kozhun.commitmessagetemplate.settings.ui.CommitMessageTemplateSettings"/>
