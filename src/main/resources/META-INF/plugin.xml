@@ -14,18 +14,20 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>Overview</h3>
-        <p>This IntelliJ IDEA extension simplifies the process of writing commit messages according to the conventions
+        <p xmlns="http://www.w3.org/1999/html">This extension simplifies the process of writing commit messages
+            according to the conventions
             adopted in your project.</p>
 
         <h3>Features</h3>
         <p>1. Enable setting a standard commit message template for your project.</p>
-        <p>2. You can use keywords to dynamically set values in a message.</p>
-        <p>3. You can configure your own rule for get Task ID from branch name.</p>
+        <p>2. You can use keywords (<strong>$TASK_ID</strong>, <strong>$TYPE</strong>, <strong>$CARET_POSITION</strong>)
+            to dynamically set values in a message.</p>
+        <p>3. You can configure your own rule for get Task ID (<strong>$TASK_ID</strong) and Task Type
+                (<strong>$TYPE</strong>) from branch name.</p>
         <p>4. You can set the caret position in your template.</p>
 
         <h3>Configuration</h3>
-        <p>1. Go to <strong>File > Settings > Other > Commit Message Template</strong>.</p>
+        <p>1. Go to <strong>File > Settings > Version Control > Commit Message Template</strong>.</p>
         <p>2. Enter your desired commit message template.</p>
         <p>3. (Optional) Create your own rules for extract values.</p>
 
@@ -35,8 +37,34 @@
             field.</p>
 
         <h3>Links</h3>
-        <a href="https://github.com/EugeneKozhun">GitHub</a> | <a href="https://www.linkedin.com/in/eugene-kozhun-6a6016187/">LinkedIn</a>
+        <a href="https://github.com/EugeneKozhun">GitHub</a> | <a
+                href="https://www.linkedin.com/in/eugene-kozhun-6a6016187/">LinkedIn</a>
         ]]></description>
+
+    <change-notes><![CDATA[
+        <h3>1.3.0</h3>
+        <ul>
+            <li>Added standard shortcut for the template insertion button.</li>
+            <li>New variable <strong>$TASK</strong> that enables extracting the task type from the branch name.</li>
+            <li>Added a functionality that allows changing the case for the <strong>$TASK</strong> value to suit different naming conventions.</li>
+            <li>Moved plugin setting page to <strong>Version Control</strong> tab.</li>
+            <li>Reworked the plugin setting page for enhanced user interaction and usability.</li>
+        </ul>
+        <h3>1.2.1</h3>
+        <ul>
+            <li>Fixed the issue with settings values appearing empty.</li>
+        </ul>
+        <h3>1.2.0</h3>
+        <ul>
+            <li>Added syntax highlighting in a template pattern for easier comprehension and readability.</li>
+            <li>Revamped the plugin setting page for a more user-friendly and interactive experience.</li>
+        </ul>
+        <h3>1.1.0</h3>
+        <ul>
+            <li>Added a new variable <strong>$CARET_POSITION</strong> to set the caret's position after template insertion for personalized user experience.</li>
+        </ul>
+        ]]>
+    </change-notes>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -47,7 +75,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <projectConfigurable
-                parentId="other"
+                parentId="project.propVCSSupport.Mappings"
                 displayName="Commit Message Template"
                 id="preferences.CommitMessageTemplateConfigurable"
                 instance="com.kozhun.commitmessagetemplate.settings.ui.CommitMessageTemplateSettings"/>
@@ -72,6 +100,7 @@
                 description="Format the message according to the template"
                 icon="/icons/format-button.svg">
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
+            <keyboard-shortcut first-keystroke="ctrl shift T" keymap="$default"/>
         </action>
     </actions>
 

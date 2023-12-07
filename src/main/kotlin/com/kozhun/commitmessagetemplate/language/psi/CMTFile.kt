@@ -6,6 +6,11 @@ import com.intellij.psi.FileViewProvider
 import com.kozhun.commitmessagetemplate.language.CMTFileType
 import com.kozhun.commitmessagetemplate.language.CMTLanguage
 
+/**
+ * Class representing a CMT file.
+ *
+ * @param viewProvider The file view provider.
+ */
 class CMTFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, CMTLanguage.INSTANCE) {
 
     override fun getFileType(): FileType {

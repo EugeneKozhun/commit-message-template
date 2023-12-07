@@ -3,11 +3,8 @@ package com.kozhun.commitmessagetemplate.service.replacer.impl
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
-import git4idea.repo.GitRepository
-import git4idea.repo.GitRepositoryManager
 
 /**
  * Replaces a predefined anchor in a given message with the task ID of the current Git branch.
@@ -16,8 +13,8 @@ import git4idea.repo.GitRepositoryManager
  */
 @Service(Service.Level.PROJECT)
 class BranchTaskIdReplacer(
-    private val project: Project
-) : Replacer {
+    project: Project
+) : BranchReplacer(project) {
 
     /**
      * Replaces the occurrence of TASK_ID_ANCHOR in the given message with the task ID from the current branch.
@@ -30,14 +27,9 @@ class BranchTaskIdReplacer(
     }
 
     private fun getTaskIdFromCurrentBranch(): String {
-        val gitRepositoryManager = GitRepositoryManager.getInstance(project)
-        return getCurrentRepository(gitRepositoryManager)?.currentBranch?.name
+        return getCurrentBranchName()
             ?.let { getTaskIdRegex().find(it)?.value }
-            ?: ""
-    }
-
-    private fun getCurrentRepository(manager: GitRepositoryManager): GitRepository? {
-        return manager.repositories.firstOrNull()
+            .orEmpty()
     }
 
     private fun getTaskIdRegex(): Regex {
