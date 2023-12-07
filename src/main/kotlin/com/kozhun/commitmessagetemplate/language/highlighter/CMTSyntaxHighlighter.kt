@@ -9,6 +9,9 @@ import com.intellij.psi.tree.IElementType
 import com.kozhun.commitmessagetemplate.language.lexer.CMTLexerAdapter
 import com.kozhun.commitmessagetemplate.language.psi.CMTTypes
 
+/**
+ * CMT Syntax Highlighter for highlighting CMT code.
+ */
 class CMTSyntaxHighlighter : SyntaxHighlighterBase() {
     override fun getHighlightingLexer(): Lexer {
         return CMTLexerAdapter()

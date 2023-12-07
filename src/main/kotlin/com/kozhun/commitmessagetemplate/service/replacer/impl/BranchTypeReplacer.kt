@@ -8,6 +8,11 @@ import com.kozhun.commitmessagetemplate.settings.enums.BranchTypePostprocessor
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
+/**
+ * A class that replaces a specific substring in a given message based on the current branch type and settings.
+ *
+ * @property project The IntelliJ IDEA project.
+ */
 @Service(Service.Level.PROJECT)
 class BranchTypeReplacer(
     project: Project

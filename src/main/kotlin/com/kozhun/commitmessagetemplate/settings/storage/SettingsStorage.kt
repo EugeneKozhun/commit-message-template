@@ -13,21 +13,41 @@ import com.intellij.openapi.project.Project
 @State(name = "commit-message-template")
 class SettingsStorage : SimplePersistentStateComponent<SettingsState>(getDefaultState()) {
 
+    /**
+     * Sets the pattern used in the commit message template.
+     *
+     * @param pattern the pattern to set
+     */
     fun setPattern(pattern: String) {
         state.pattern = pattern
         loadState(state)
     }
 
+    /**
+     * Sets the custom regular expression used for matching task ID from the current branch.
+     *
+     * @param regExp the regular expression to set
+     */
     fun setTaskIdRegExp(regExp: String) {
         state.taskIdRegex = regExp
         loadState(state)
     }
 
+    /**
+     * Sets the custom regular expression used for matching a current branch type.
+     *
+     * @param regExp the regular expression to set
+     */
     fun setTypeRegExp(regExp: String) {
         state.typeRegex = regExp
         loadState(state)
     }
 
+    /**
+     * Sets the postprocessor for the branch type.
+     *
+     * @param postprocessor the postprocessor to set
+     */
     fun setTypePostprocessor(postprocessor: String) {
         state.typePostprocessor = postprocessor
         loadState(state)
