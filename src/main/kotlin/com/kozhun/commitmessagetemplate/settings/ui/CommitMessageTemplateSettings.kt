@@ -49,23 +49,23 @@ class CommitMessageTemplateSettings(
                         preferredSize = Dimension(preferredSize.width, TEXT_AREA_HEIGHT)
                     }
             }
-            collapsibleGroup("Task ID Settings (\$TASK_ID)") {
+            collapsibleGroup(resourceBundle.getString("settings.advanced.task-id.title")) {
                 row {
                     taskIdRegexField = expandableTextField()
                         .apply {
-                            label(resourceBundle.getString("settings.settings.task-id.label"))
+                            label(resourceBundle.getString("settings.advanced.common.label"))
                             comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_TASK_ID_REGEX}")
                             align(AlignX.FILL)
                         }.component
                 }
             }.apply {
-                expanded = !usedDefaultSettingsForTaskId()
+                expanded = !isUsedDefaultSettingsForTaskId()
             }.withoutGaps()
-            collapsibleGroup("Branch Type Settings (\$TYPE)") {
+            collapsibleGroup(resourceBundle.getString("settings.advanced.type.title")) {
                 row {
                     typeRegexField = expandableTextField()
                         .apply {
-                            label(resourceBundle.getString("settings.settings.type.label"))
+                            label(resourceBundle.getString("settings.advanced.common.label"))
                             comment(comment = "Default: ${BranchTypeReplacer.DEFAULT_TYPE_REGEX}")
                             align(AlignX.FILL)
                         }.component
@@ -73,11 +73,11 @@ class CommitMessageTemplateSettings(
                 row {
                     typePostprocessorField = comboBox(BranchTypePostprocessor.values().map { it.label }, null)
                         .apply {
-                            label("Postprocess:")
+                            label(resourceBundle.getString("settings.advanced.type.postprocess"))
                         }.component
                 }
             }.apply {
-                expanded = !usedDefaultSettingsForType()
+                expanded = !isUsedDefaultSettingsForType()
             }.withoutGaps()
         }
     }
@@ -123,9 +123,9 @@ class CommitMessageTemplateSettings(
         return "preferences.CommitMessageTemplateConfigurable"
     }
 
-    private fun usedDefaultSettingsForTaskId() = settingsStorage.state.taskIdRegex.isNullOrBlank()
+    private fun isUsedDefaultSettingsForTaskId() = settingsStorage.state.taskIdRegex.isNullOrBlank()
 
-    private fun usedDefaultSettingsForType(): Boolean {
+    private fun isUsedDefaultSettingsForType(): Boolean {
         val state = settingsStorage.state
         return state.typeRegex.isNullOrBlank() &&
                 (state.typePostprocessor == null || state.typePostprocessor == BranchTypePostprocessor.NONE.label)
