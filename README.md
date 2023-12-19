@@ -22,7 +22,7 @@
     </a>
 </p>
 
-This IntelliJ IDEA extension simplifies the process of writing commit messages according to the conventions adopted in
+This JetBrains IDE's extension simplifies the process of writing commit messages according to the conventions adopted in
 your project.
 
 ## Features
@@ -33,10 +33,10 @@ your project.
 
 ## Installation
 
-1. Open IntelliJ IDEA
-2. Navigate to `File > Settings > Plugins`
-3. Select the `Marketplace` tab
-4. Search for `Commit Message Template` and click `Install`
+1. Open IDE.
+2. Navigate to `File > Settings > Plugins`.
+3. Select the `Marketplace` tab.
+4. Search for `Commit Message Template` and click `Install`.
 
 ## Usage
 
@@ -48,8 +48,9 @@ A button is added to the commit window, allowing you to insert the template into
 
 Customize the plugin to your needs:
 
-1. Go to `File > Settings > Version Control > Commit Message Template`
-2. Enter your desired commit message template
+1. Go to `File > Settings > Version Control > Commit Message Template`.
+2. Enter your desired commit message template.
+3. (Optional) Configure your own rules for Task id & Type.
 
 ---
 
