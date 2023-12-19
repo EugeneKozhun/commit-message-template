@@ -20,6 +20,16 @@
     <a href="https://github.com/EugeneKozhun/commit-message-template/blob/main/LICENSE.md">
         <img alt="plugin's license" src="https://img.shields.io/github/license/EugeneKozhun/commit-message-template"/>
     </a>
+    <br/>
+    <a href="https://sonarcloud.io/project/overview?id=EugeneKozhun_commit-message-template">
+        <img alt="maintainability rating" src="https://sonarcloud.io/api/project_badges/measure?project=EugeneKozhun_commit-message-template&metric=sqale_rating"/>
+    </a>
+    <a href="https://sonarcloud.io/project/overview?id=EugeneKozhun_commit-message-template">
+        <img alt="security rating" src="https://sonarcloud.io/api/project_badges/measure?project=EugeneKozhun_commit-message-template&metric=security_rating"/>
+    </a>
+    <a href="https://sonarcloud.io/project/overview?id=EugeneKozhun_commit-message-template">
+        <img alt="Quality gate" src="https://sonarcloud.io/api/project_badges/measure?project=EugeneKozhun_commit-message-template&metric=alert_status"/>
+    </a>
 </p>
 
 This JetBrains IDE's extension simplifies the process of writing commit messages according to the conventions adopted in
