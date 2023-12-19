@@ -14,6 +14,7 @@ import com.intellij.ui.dsl.builder.panel
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTypeReplacer
 import com.kozhun.commitmessagetemplate.settings.enums.BranchTypePostprocessor
+import com.kozhun.commitmessagetemplate.settings.storage.SettingsState
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.settings.util.PatternEditorUtil
 import java.awt.Dimension
@@ -87,7 +88,14 @@ class CommitMessageTemplateSettings(
         return patternEditor.document.text != state.pattern.orEmpty() ||
                 taskIdRegexField.text != state.taskIdRegex.orEmpty() ||
                 typeRegexField.text != state.typeRegex.orEmpty() ||
-                typePostprocessorField.item != (state.typePostprocessor ?: BranchTypePostprocessor.NONE.label)
+                isTypePostprocessorModified(state)
+    }
+
+    private fun isTypePostprocessorModified(state: SettingsState): Boolean {
+        val typePostprocessorState = state.typePostprocessor
+        val isEmptyState = typePostprocessorState.isNullOrBlank()
+        return (!isEmptyState && typePostprocessorField.item != typePostprocessorState)
+                || (isEmptyState && typePostprocessorField.item != BranchTypePostprocessor.NONE.label)
     }
 
     override fun apply() {
@@ -128,7 +136,7 @@ class CommitMessageTemplateSettings(
     private fun isUsedDefaultSettingsForType(): Boolean {
         val state = settingsStorage.state
         return state.typeRegex.isNullOrBlank() &&
-                (state.typePostprocessor == null || state.typePostprocessor == BranchTypePostprocessor.NONE.label)
+                (state.typePostprocessor.isNullOrBlank() || state.typePostprocessor == BranchTypePostprocessor.NONE.label)
     }
 
     companion object {

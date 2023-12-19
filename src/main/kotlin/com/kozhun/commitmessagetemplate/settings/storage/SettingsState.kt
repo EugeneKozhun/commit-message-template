@@ -21,7 +21,6 @@ class SettingsState : BaseState() {
      */
     var typeRegex by string("")
 
-
     /**
      * Represents a Postprocessor for branch type.
      */
