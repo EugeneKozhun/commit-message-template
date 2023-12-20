@@ -1,3 +1,7 @@
+// Versions
+val mockkVersion = "1.13.8"
+val junitVersion = "5.8.1"
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.9.21"
@@ -14,8 +18,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    testImplementation("io.mockk:mockk:$mockkVersion")
 }
 
 intellij {
