@@ -5,30 +5,27 @@
 </h1>
 
 <p align="center">
-    <a href="https://plugins.jetbrains.com/plugin/23100-commit-message-template">
+    <a href="https://plugins.jetbrains.com/plugin/23100-commit-message-template" style="text-decoration: none">
         <img alt="plugin's version" src="https://img.shields.io/jetbrains/plugin/v/23100-commit-message-template"/>
     </a>
-    <a href="https://plugins.jetbrains.com/plugin/23100-commit-message-template">
+    <a href="https://plugins.jetbrains.com/plugin/23100-commit-message-template" style="text-decoration: none">
         <img alt="plugin's downloads" src="https://img.shields.io/jetbrains/plugin/d/23100-commit-message-template"/>
     </a>
-    <a href="https://plugins.jetbrains.com/plugin/23100-commit-message-template">
+    <a href="https://plugins.jetbrains.com/plugin/23100-commit-message-template" style="text-decoration: none">
         <img alt="plugin's rating" src="https://img.shields.io/jetbrains/plugin/r/stars/23100-commit-message-template"/>
     </a>
-    <a href="https://github.com/EugeneKozhun/commit-message-template/actions/workflows/publish.yml">
+    <a href="https://github.com/EugeneKozhun/commit-message-template/actions/workflows/publish.yml" style="text-decoration: none">
         <img alt="deploy" src="https://img.shields.io/github/actions/workflow/status/EugeneKozhun/commit-message-template/publish.yml?label=deploy"/>
     </a>
-    <a href="https://github.com/EugeneKozhun/commit-message-template/blob/main/LICENSE.md">
+    <a href="https://github.com/EugeneKozhun/commit-message-template/blob/main/LICENSE.md" style="text-decoration: none">
         <img alt="plugin's license" src="https://img.shields.io/github/license/EugeneKozhun/commit-message-template"/>
     </a>
     <br/>
-    <a href="https://sonarcloud.io/project/overview?id=EugeneKozhun_commit-message-template">
+    <a href="https://sonarcloud.io/project/overview?id=EugeneKozhun_commit-message-template" style="text-decoration: none">
         <img alt="maintainability rating" src="https://sonarcloud.io/api/project_badges/measure?project=EugeneKozhun_commit-message-template&metric=sqale_rating"/>
     </a>
-    <a href="https://sonarcloud.io/project/overview?id=EugeneKozhun_commit-message-template">
+    <a href="https://sonarcloud.io/project/overview?id=EugeneKozhun_commit-message-template" style="text-decoration: none">
         <img alt="security rating" src="https://sonarcloud.io/api/project_badges/measure?project=EugeneKozhun_commit-message-template&metric=security_rating"/>
-    </a>
-    <a href="https://sonarcloud.io/project/overview?id=EugeneKozhun_commit-message-template">
-        <img alt="Quality gate" src="https://sonarcloud.io/api/project_badges/measure?project=EugeneKozhun_commit-message-template&metric=alert_status"/>
     </a>
 </p>
 
