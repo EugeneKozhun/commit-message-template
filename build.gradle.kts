@@ -1,11 +1,11 @@
 // Versions
 val mockkVersion = "1.13.8"
-val junitVersion = "5.8.1"
+val junitVersion = "5.10.1"
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.21"
-    id("org.jetbrains.intellij") version "1.16.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.22"
+    id("org.jetbrains.intellij") version "1.16.1"
 }
 
 group = "com.kozhun"
