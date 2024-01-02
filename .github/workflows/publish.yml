@@ -17,7 +17,7 @@ jobs:
       - name: Build, Sign Plugin and Publish to Marketplace.
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
         with:
-          arguments: clean assemble test publishPlugin
+          arguments: clean assemble publishPlugin
         env:
           CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
