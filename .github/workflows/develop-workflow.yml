@@ -1,7 +1,9 @@
 name: Build & Test
 on:
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "main" ]
+  push:
+    branches: [ "!main", "**" ]
 permissions:
   contents: read
 jobs:
