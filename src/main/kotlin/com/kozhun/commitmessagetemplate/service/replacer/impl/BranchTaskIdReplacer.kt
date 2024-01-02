@@ -3,6 +3,8 @@ package com.kozhun.commitmessagetemplate.service.replacer.impl
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.kozhun.commitmessagetemplate.service.git.branch.impl.GitBranchServiceImpl
+import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
@@ -13,8 +15,8 @@ import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
  */
 @Service(Service.Level.PROJECT)
 class BranchTaskIdReplacer(
-    project: Project
-) : BranchReplacer(project) {
+    private val project: Project
+) : Replacer {
 
     /**
      * Replaces the occurrence of TASK_ID_ANCHOR in the given message with the task ID from the current branch.
@@ -27,8 +29,8 @@ class BranchTaskIdReplacer(
     }
 
     private fun getTaskIdFromCurrentBranch(): String {
-        return getCurrentBranchName()
-            ?.let { getTaskIdRegex().find(it)?.value }
+        return GitBranchServiceImpl.getInstance(project).getCurrentBranch().name
+            .let { getTaskIdRegex().find(it)?.value }
             .orEmpty()
     }
 

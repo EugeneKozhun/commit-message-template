@@ -4,6 +4,8 @@ import ai.grazie.utils.capitalize
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.kozhun.commitmessagetemplate.service.git.branch.impl.GitBranchServiceImpl
+import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.settings.enums.BranchTypePostprocessor
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
@@ -15,16 +17,16 @@ import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
  */
 @Service(Service.Level.PROJECT)
 class BranchTypeReplacer(
-    project: Project
-) : BranchReplacer(project) {
+    private val project: Project
+) : Replacer {
     override fun replace(message: String): String {
         val foundType = getTypeFromCurrentBranch()
         return message.replace(TYPE_ANCHOR, withSelectedCase(foundType))
     }
 
     private fun getTypeFromCurrentBranch(): String {
-        return getCurrentBranchName()
-            ?.let { getTypeRegex().find(it)?.value }
+        return GitBranchServiceImpl.getInstance(project).getCurrentBranch().name
+            .let { getTypeRegex().find(it)?.value }
             .orEmpty()
     }
 
