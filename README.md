@@ -61,4 +61,4 @@ Customize the plugin to your needs:
 
 ---
 
-© 2023 Eugene Kozhun
+© 2024 Eugene Kozhun
