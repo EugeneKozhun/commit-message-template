@@ -11,20 +11,20 @@ import git4idea.repo.GitRepositoryManager
 @Service(Service.Level.PROJECT)
 class GitBranchServiceImpl(
     private val project: Project
-): GitBranchService {
+) : GitBranchService {
 
     override fun getCurrentBranch(): GitBranch {
         val gitRepositoryManager = GitRepositoryManager.getInstance(project)
         return getCurrentRepository(gitRepositoryManager).currentBranch
-            ?: throwBranchNotFound()
+            ?: branchNotFoundError()
     }
 
     private fun getCurrentRepository(manager: GitRepositoryManager): GitRepository {
-        return manager.repositories.firstOrNull() ?: throwBranchNotFound()
+        return manager.repositories.firstOrNull() ?: branchNotFoundError()
     }
 
-    private fun throwBranchNotFound(): Nothing {
-        throw IllegalStateException("Current git branch not found.")
+    private fun branchNotFoundError(): Nothing {
+        error("Current git branch not found.")
     }
 
     companion object {

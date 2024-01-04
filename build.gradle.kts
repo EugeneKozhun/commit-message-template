@@ -6,6 +6,7 @@ plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.9.22"
     id("org.jetbrains.intellij") version "1.16.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.4"
 }
 
 group = "com.kozhun"
@@ -26,9 +27,11 @@ intellij {
     version.set("2023.1.5")
     type.set("IC")
 
-    plugins.set(listOf(
-        "Git4Idea"
-    ))
+    plugins.set(
+        listOf(
+            "Git4Idea"
+        )
+    )
 }
 
 tasks {
@@ -58,4 +61,10 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+}
+
+detekt {
+    source.setFrom("src/main/kotlin")
+    config.setFrom("detekt-config.yml")
+    buildUponDefaultConfig = true
 }
