@@ -25,6 +25,6 @@ class CaretServiceDefaultImpl : CaretService {
         const val CARET_POSITION_ANCHOR = "\$CARET_POSITION"
 
         @JvmStatic
-        fun getInstance(project: Project): CaretServiceDefaultImpl = project.service()
+        fun getInstance(project: Project): CaretService = project.service<CaretServiceDefaultImpl>()
     }
 }

@@ -54,6 +54,6 @@ class BranchTypeReplacer(
         val DEFAULT_TYPE_REGEX = "bugfix|feature|hotfix|enhancement|refactoring".toRegex(RegexOption.IGNORE_CASE)
 
         @JvmStatic
-        fun getInstance(project: Project): BranchTypeReplacer = project.service()
+        fun getInstance(project: Project): Replacer = project.service<BranchTypeReplacer>()
     }
 }

@@ -44,6 +44,6 @@ class BranchTaskIdReplacer(
         val DEFAULT_TASK_ID_REGEX = "[a-zA-Z0-9]+-\\d+".toRegex()
 
         @JvmStatic
-        fun getInstance(project: Project): BranchTaskIdReplacer = project.service()
+        fun getInstance(project: Project): Replacer = project.service<BranchTaskIdReplacer>()
     }
 }

@@ -30,6 +30,6 @@ class CommitMessageFormatterDefaultImpl(
 
     companion object {
         @JvmStatic
-        fun getInstance(project: Project): CommitMessageFormatterDefaultImpl = project.service()
+        fun getInstance(project: Project): CommitMessageFormatter = project.service<CommitMessageFormatterDefaultImpl>()
     }
 }

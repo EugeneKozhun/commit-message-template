@@ -55,7 +55,7 @@ class SettingsStorage : SimplePersistentStateComponent<SettingsState>(getDefault
 
     companion object {
         @JvmStatic
-        fun getInstance(project: Project): SettingsStorage = project.service()
+        fun getInstance(project: Project): SettingsStorage = project.service<SettingsStorage>()
     }
 }
 
