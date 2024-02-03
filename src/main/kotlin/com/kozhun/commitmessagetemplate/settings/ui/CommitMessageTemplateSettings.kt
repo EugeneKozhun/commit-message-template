@@ -27,6 +27,7 @@ import javax.swing.JComponent
  *
  * @param project The current project.
  */
+@Suppress("TooManyFunctions")
 class CommitMessageTemplateSettings(
     private val project: Project
 ) : ConfigurableWithId {
@@ -39,6 +40,7 @@ class CommitMessageTemplateSettings(
     private lateinit var projectNamePostprocessorField: ComboBox<String>
     private lateinit var patternEditor: Editor
 
+    @Suppress("LongMethod")
     override fun createComponent(): JComponent {
         settingsStorage = project.storage()
         patternEditor = PatternEditorUtil.createEditor(project)
@@ -90,7 +92,7 @@ class CommitMessageTemplateSettings(
                         projectNameRegexField = expandableTextField()
                             .apply {
                                 label(resourceBundle.getString("settings.advanced.common.label"))
-                                comment(comment = "Default: ${ProjectNameReplacer.DEFAULT_REGEX}")
+                                comment(comment = "Default: ${project.name}")
                                 align(AlignX.FILL)
                             }.component
                     }

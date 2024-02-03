@@ -8,6 +8,7 @@ import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import com.kozhun.commitmessagetemplate.util.storage
 import com.kozhun.commitmessagetemplate.util.toCase
+import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
 @Service(Service.Level.PROJECT)
 class ProjectNameReplacer(
@@ -24,8 +25,8 @@ class ProjectNameReplacer(
             .affectedPaths
             .asSequence()
             .mapNotNull { it.path }
-            .flatMap { it.split("/") }
-            .mapNotNull { DEFAULT_REGEX.find(it)?.value }
+            .mapNotNull { getRegex().find(it) }
+            .map { it.value }
             .filter { it.isNotEmpty() }
             .distinct()
             .joinToString(getSeparator())
@@ -45,12 +46,13 @@ class ProjectNameReplacer(
             ?: DEFAULT_SEPARATOR
     }
 
+    private fun getRegex(): Regex {
+        return project.storage().state.projectNameRegex?.toNotBlankRegex() ?: project.name.toRegex(RegexOption.IGNORE_CASE)
+    }
+
     companion object {
         const val ANCHOR = "\$PROJECT_NAME"
         const val DEFAULT_SEPARATOR = "|"
-
-        // TODO: change it to something relevant
-        val DEFAULT_REGEX = "party|aml|soft".toRegex(RegexOption.IGNORE_CASE)
 
         @JvmStatic
         fun getInstance(project: Project): Replacer = project.service<ProjectNameReplacer>()
