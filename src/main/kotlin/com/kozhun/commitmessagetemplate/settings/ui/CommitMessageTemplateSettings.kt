@@ -8,6 +8,7 @@ import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.BottomGap
+import com.intellij.ui.dsl.builder.LabelPosition
 import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.panel
@@ -61,7 +62,7 @@ class CommitMessageTemplateSettings(
                     row {
                         taskIdRegexField = expandableTextField()
                             .apply {
-                                label(resourceBundle.getString("settings.advanced.common.label"))
+                                label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                                 comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_REGEX}")
                                 align(AlignX.FILL)
                             }.component
@@ -73,7 +74,7 @@ class CommitMessageTemplateSettings(
                     row {
                         typeRegexField = expandableTextField()
                             .apply {
-                                label(resourceBundle.getString("settings.advanced.common.label"))
+                                label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                                 comment(comment = "Default: ${BranchTypeReplacer.DEFAULT_REGEX}")
                                 align(AlignX.FILL)
                             }.component
@@ -81,7 +82,7 @@ class CommitMessageTemplateSettings(
                     row {
                         typePostprocessorField = comboBox(StringCase.values().map { it.label }, null)
                             .apply {
-                                label(resourceBundle.getString("settings.advanced.common.postprocess"))
+                                label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
                             }.component
                     }
                 }.apply {
@@ -91,7 +92,7 @@ class CommitMessageTemplateSettings(
                     row {
                         projectNameRegexField = expandableTextField()
                             .apply {
-                                label(resourceBundle.getString("settings.advanced.common.label"))
+                                label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                                 comment(comment = "Default: ${project.name}")
                                 align(AlignX.FILL)
                             }.component
@@ -99,15 +100,13 @@ class CommitMessageTemplateSettings(
                     row {
                         projectNameSeparatorField = textField()
                             .apply {
-                                label(resourceBundle.getString("settings.advanced.common.separator"))
+                                label(resourceBundle.getString("settings.advanced.common.separator"), LabelPosition.TOP)
                                 comment(comment = "Default: ${ProjectNameReplacer.DEFAULT_SEPARATOR}")
                                 align(AlignX.FILL)
                             }.component
-                    }
-                    row {
-                        projectNamePostprocessorField = comboBox(StringCase.values().map { it.label }, null)
+                        projectNamePostprocessorField = comboBox(StringCase.values().map { it.label })
                             .apply {
-                                label(resourceBundle.getString("settings.advanced.common.postprocess"))
+                                label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
                             }.component
                     }
                 }.apply {
