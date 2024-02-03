@@ -3,9 +3,9 @@ package com.kozhun.commitmessagetemplate.service.replacer.impl
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.kozhun.commitmessagetemplate.service.git.branch.impl.GitBranchServiceImpl
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
-import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
+import com.kozhun.commitmessagetemplate.util.branches
+import com.kozhun.commitmessagetemplate.util.storage
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
 /**
@@ -25,23 +25,22 @@ class BranchTaskIdReplacer(
      * @return the message with TASK_ID_ANCHOR replaced by the task ID from the current branch.
      */
     override fun replace(message: String): String {
-        return message.replace(TASK_ID_ANCHOR, getTaskIdFromCurrentBranch())
+        return message.replace(ANCHOR, getTaskIdFromCurrentBranch())
     }
 
     private fun getTaskIdFromCurrentBranch(): String {
-        return GitBranchServiceImpl.getInstance(project).getCurrentBranch().name
+        return project.branches().getCurrentBranch().name
             .let { getTaskIdRegex().find(it)?.value }
             .orEmpty()
     }
 
     private fun getTaskIdRegex(): Regex {
-        val settingsStorage = SettingsStorage.getInstance(project)
-        return settingsStorage.state.taskIdRegex?.toNotBlankRegex() ?: DEFAULT_TASK_ID_REGEX
+        return project.storage().state.taskIdRegex?.toNotBlankRegex() ?: DEFAULT_REGEX
     }
 
     companion object {
-        const val TASK_ID_ANCHOR = "\$TASK_ID"
-        val DEFAULT_TASK_ID_REGEX = "[a-zA-Z0-9]+-\\d+".toRegex()
+        const val ANCHOR = "\$TASK_ID"
+        val DEFAULT_REGEX = "[a-zA-Z0-9]+-\\d+".toRegex()
 
         @JvmStatic
         fun getInstance(project: Project): Replacer = project.service<BranchTaskIdReplacer>()

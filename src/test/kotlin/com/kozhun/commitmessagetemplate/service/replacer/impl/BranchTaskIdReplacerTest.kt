@@ -48,28 +48,28 @@ class BranchTaskIdReplacerTest : BaseReplacerTest() {
     fun `replace with mismatched task-id`() {
         mockSettingState()
         mockBranchName(BRANCH_WITHOUT_TASK_ID)
-        assertEquals("[]: Some changes", replacer.replace("[${BranchTaskIdReplacer.TASK_ID_ANCHOR}]: Some changes"))
+        assertEquals("[]: Some changes", replacer.replace("[${BranchTaskIdReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with task-id in branch`() {
         mockSettingState()
         mockBranchName(BRANCH_WITH_TASK_ID)
-        assertEquals("[$TASK_ID]: Some changes", replacer.replace("[${BranchTaskIdReplacer.TASK_ID_ANCHOR}]: Some changes"))
+        assertEquals("[$TASK_ID]: Some changes", replacer.replace("[${BranchTaskIdReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with custom mismatched task-id in branch`() {
         mockSettingState(customTaskIdRegex = CUSTOM_TASK_ID_REGEX)
         mockBranchName(BRANCH_WITH_TASK_ID)
-        assertEquals("[]: Some changes", replacer.replace("[${BranchTaskIdReplacer.TASK_ID_ANCHOR}]: Some changes"))
+        assertEquals("[]: Some changes", replacer.replace("[${BranchTaskIdReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with custom task-id in branch`() {
         mockSettingState(customTaskIdRegex = CUSTOM_TASK_ID_REGEX)
         mockBranchName(BRANCH_WITH_CUSTOM_TASK_ID)
-        assertEquals("[$CUSTOM_TASK_ID]: Some changes", replacer.replace("[${BranchTaskIdReplacer.TASK_ID_ANCHOR}]: Some changes"))
+        assertEquals("[$CUSTOM_TASK_ID]: Some changes", replacer.replace("[${BranchTaskIdReplacer.ANCHOR}]: Some changes"))
     }
 
     private companion object {

@@ -29,6 +29,7 @@ MESSAGE_PART=[^$]+
 <YYINITIAL> {
   \$TASK_ID         { return TASK_ID; }
   \$TYPE            { return TYPE; }
+  \$PROJECT_NAME    { return PROJECT_NAME; }
   \$CARET_POSITION  { return CARET_POSITION; }
   {WHITE_SPACE}     { return WHITE_SPACE; }
   {MESSAGE_PART}    { return OTHER_TEXT; }

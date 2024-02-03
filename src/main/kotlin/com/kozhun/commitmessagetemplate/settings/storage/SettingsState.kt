@@ -22,7 +22,22 @@ class SettingsState : BaseState() {
     var typeRegex by string("")
 
     /**
-     * Represents a Postprocessor for branch type.
+     * Represents a string case postprocessor for a branch type.
      */
     var typePostprocessor by string("")
+
+    /**
+     * Represents a custom regular expression used for matching Project Name from the file path.
+     */
+    var projectNameRegex by string("")
+
+    /**
+     *
+     */
+    var projectNameSeparator by string("")
+
+    /**
+     * Represents a string case postprocessor for a project name.
+     */
+    var projectNamePostprocessor by string("")
 }

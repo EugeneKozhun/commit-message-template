@@ -3,7 +3,7 @@ package com.kozhun.commitmessagetemplate.service.replacer.impl
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.git.branch.GitBranchService
 import com.kozhun.commitmessagetemplate.service.git.branch.impl.GitBranchServiceImpl
-import com.kozhun.commitmessagetemplate.settings.enums.BranchTypePostprocessor
+import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsState
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import git4idea.GitLocalBranch
@@ -28,7 +28,7 @@ abstract class BaseReplacerTest {
     protected fun mockSettingState(
         customTaskIdRegex: String = "",
         customTypeRegex: String = "",
-        typePostprocessor: BranchTypePostprocessor = BranchTypePostprocessor.NONE
+        typePostprocessor: StringCase = StringCase.NONE
     ) {
         mockkStatic(SettingsStorage::class)
 

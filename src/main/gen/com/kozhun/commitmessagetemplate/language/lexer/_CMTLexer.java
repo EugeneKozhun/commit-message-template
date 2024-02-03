@@ -67,11 +67,11 @@ public class _CMTLexer implements FlexLexer {
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
     "\11\0\5\1\22\0\1\1\3\0\1\2\34\0\1\3"+
-    "\1\0\1\4\1\5\1\6\3\0\1\7\1\0\1\10"+
-    "\2\0\1\11\1\12\1\13\1\0\1\14\1\15\1\16"+
-    "\4\0\1\17\5\0\1\20\45\0\1\1\32\0\1\1"+
-    "\u01df\0\1\1\177\0\13\1\35\0\2\1\5\0\1\1"+
-    "\57\0\1\1\240\0\1\1\377\0";
+    "\1\0\1\4\1\5\1\6\3\0\1\7\1\10\1\11"+
+    "\1\0\1\12\1\13\1\14\1\15\1\0\1\16\1\17"+
+    "\1\20\4\0\1\21\5\0\1\22\45\0\1\1\32\0"+
+    "\1\1\u01df\0\1\1\177\0\13\1\35\0\2\1\5\0"+
+    "\1\1\57\0\1\1\240\0\1\1\377\0";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[1280];
@@ -98,11 +98,11 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\1\12\0\1\3\5\0\1\4"+
-    "\6\0\1\5";
+    "\1\0\1\1\1\2\1\1\16\0\1\3\10\0\1\4"+
+    "\11\0\1\5\1\0\1\6";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[28];
+    int [] result = new int[40];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -127,13 +127,14 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\21\0\42\0\63\0\104\0\125\0\146\0\167"+
-    "\0\210\0\231\0\252\0\273\0\314\0\335\0\356\0\377"+
-    "\0\u0110\0\u0121\0\u0132\0\u0143\0\356\0\u0154\0\u0165\0\u0176"+
-    "\0\u0187\0\u0198\0\u01a9\0\356";
+    "\0\0\0\23\0\46\0\71\0\114\0\137\0\162\0\205"+
+    "\0\230\0\253\0\276\0\321\0\344\0\367\0\u010a\0\u011d"+
+    "\0\u0130\0\u0143\0\u0156\0\u0169\0\u017c\0\u018f\0\u01a2\0\u01b5"+
+    "\0\u01c8\0\u01db\0\u01ee\0\u0156\0\u0201\0\u0214\0\u0227\0\u023a"+
+    "\0\u024d\0\u0260\0\u0273\0\u0286\0\u0299\0\u0156\0\u02ac\0\u0156";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[28];
+    int [] result = new int[40];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -156,17 +157,20 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\4\20\2\1\0\17\2\1\3\1\0"+
-    "\16\2\4\0\1\5\11\0\1\6\5\0\1\7\20\0"+
-    "\1\10\13\0\1\11\15\0\1\12\21\0\1\13\16\0"+
-    "\1\14\13\0\1\15\22\0\1\16\16\0\1\17\30\0"+
-    "\1\20\22\0\1\21\41\0\1\22\7\0\1\23\24\0"+
-    "\1\24\12\0\1\25\25\0\1\26\23\0\1\27\12\0"+
-    "\1\30\27\0\1\31\11\0\1\32\23\0\1\33\17\0"+
-    "\1\34\7\0";
+    "\1\2\1\3\1\4\22\2\1\0\21\2\1\3\1\0"+
+    "\20\2\4\0\1\5\10\0\1\6\2\0\1\7\5\0"+
+    "\1\10\35\0\1\11\7\0\1\12\15\0\1\13\17\0"+
+    "\1\14\20\0\1\15\25\0\1\16\20\0\1\17\13\0"+
+    "\1\20\24\0\1\21\23\0\1\22\17\0\1\23\34\0"+
+    "\1\24\10\0\1\25\36\0\1\26\45\0\1\27\4\0"+
+    "\1\30\25\0\1\31\30\0\1\32\25\0\1\33\7\0"+
+    "\1\34\31\0\1\35\30\0\1\36\17\0\1\37\16\0"+
+    "\1\40\16\0\1\41\16\0\1\42\37\0\1\43\14\0"+
+    "\1\44\17\0\1\45\21\0\1\46\30\0\1\47\21\0"+
+    "\1\50\7\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[442];
+    int [] result = new int[703];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -204,10 +208,11 @@ public class _CMTLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\3\1\12\0\1\11\5\0\1\11\6\0\1\11";
+    "\1\0\3\1\16\0\1\11\10\0\1\11\11\0\1\11"+
+    "\1\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[28];
+    int [] result = new int[40];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -525,27 +530,32 @@ public class _CMTLexer implements FlexLexer {
             { return OTHER_TEXT;
             }
           // fall through
-          case 6: break;
+          case 7: break;
           case 2:
             { return WHITE_SPACE;
             }
           // fall through
-          case 7: break;
+          case 8: break;
           case 3:
             { return TYPE;
             }
           // fall through
-          case 8: break;
+          case 9: break;
           case 4:
             { return TASK_ID;
             }
           // fall through
-          case 9: break;
+          case 10: break;
           case 5:
+            { return PROJECT_NAME;
+            }
+          // fall through
+          case 11: break;
+          case 6:
             { return CARET_POSITION;
             }
           // fall through
-          case 10: break;
+          case 12: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

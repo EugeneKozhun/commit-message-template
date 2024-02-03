@@ -1,6 +1,6 @@
 package com.kozhun.commitmessagetemplate.settings.enums
 
-enum class BranchTypePostprocessor(val label: String) {
+enum class StringCase(val label: String) {
     NONE("None"),
     CAPITALIZE("Capitalize"),
     UPPERCASE("UPPERCASE"),

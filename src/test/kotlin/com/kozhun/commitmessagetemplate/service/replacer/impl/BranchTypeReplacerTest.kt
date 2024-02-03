@@ -1,6 +1,6 @@
 package com.kozhun.commitmessagetemplate.service.replacer.impl
 
-import com.kozhun.commitmessagetemplate.settings.enums.BranchTypePostprocessor
+import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -41,14 +41,14 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
     fun `replace non-type branch with template`() {
         mockSettingState()
         mockBranchName(BRANCH_WITHOUT_TYPE_ID)
-        assertEquals("[]: Some changes", replacer.replace("[${BranchTypeReplacer.TYPE_ANCHOR}]: Some changes"))
+        assertEquals("[]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with type in branch`() {
         mockSettingState()
         mockBranchName(BRANCH_WITH_TYPE)
-        assertEquals("[${TYPE}]: Some changes", replacer.replace("[${BranchTypeReplacer.TYPE_ANCHOR}]: Some changes"))
+        assertEquals("[${TYPE}]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
 
@@ -56,35 +56,35 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
     fun `replace with mismatched type`() {
         mockSettingState(customTypeRegex = CUSTOM_TYPE_REGEX)
         mockBranchName(BRANCH_WITH_TYPE)
-        assertEquals("[]: Some changes", replacer.replace("[${BranchTypeReplacer.TYPE_ANCHOR}]: Some changes"))
+        assertEquals("[]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with custom type in branch`() {
         mockSettingState(customTypeRegex = CUSTOM_TYPE_REGEX)
         mockBranchName(BRANCH_WITH_CUSTOM_TYPE)
-        assertEquals("[${CUSTOM_TYPE}]: Some changes", replacer.replace("[${BranchTypeReplacer.TYPE_ANCHOR}]: Some changes"))
+        assertEquals("[${CUSTOM_TYPE}]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with lowercase postprocessor`() {
-        mockSettingState(typePostprocessor = BranchTypePostprocessor.LOWERCASE)
+        mockSettingState(typePostprocessor = StringCase.LOWERCASE)
         mockBranchName("Feature/CMT-123-refactoring")
-        assertEquals("[feature]: Some changes", replacer.replace("[${BranchTypeReplacer.TYPE_ANCHOR}]: Some changes"))
+        assertEquals("[feature]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with UPPERCASE postprocessor`() {
-        mockSettingState(typePostprocessor = BranchTypePostprocessor.UPPERCASE)
+        mockSettingState(typePostprocessor = StringCase.UPPERCASE)
         mockBranchName(BRANCH_WITH_TYPE)
-        assertEquals("[FEATURE]: Some changes", replacer.replace("[${BranchTypeReplacer.TYPE_ANCHOR}]: Some changes"))
+        assertEquals("[FEATURE]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with CAPITALIZE postprocessor`() {
-        mockSettingState(typePostprocessor = BranchTypePostprocessor.CAPITALIZE)
+        mockSettingState(typePostprocessor = StringCase.CAPITALIZE)
         mockBranchName(BRANCH_WITH_TYPE)
-        assertEquals("[Feature]: Some changes", replacer.replace("[${BranchTypeReplacer.TYPE_ANCHOR}]: Some changes"))
+        assertEquals("[Feature]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
     private companion object {
