@@ -1,6 +1,7 @@
 package com.kozhun.commitmessagetemplate.settings.storage
 
 import com.intellij.openapi.components.BaseState
+import com.kozhun.commitmessagetemplate.service.replacer.impl.ProjectNameReplacer
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 
 /**
@@ -10,17 +11,17 @@ class SettingsState : BaseState() {
     /**
      * Represents a message pattern used in template.
      */
-    var pattern by string("")
+    var pattern by string()
 
     /**
      * Represents a custom regular expression used for matching task ID from the current branch.
      */
-    var taskIdRegex by string("")
+    var taskIdRegex by string()
 
     /**
      * Represents a custom regular expression used for matching a current branch type.
      */
-    var typeRegex by string("")
+    var typeRegex by string()
 
     /**
      * Represents a branch type synonyms.
@@ -35,7 +36,7 @@ class SettingsState : BaseState() {
     /**
      * Represents a custom regular expression used for matching Project Name from the file path.
      */
-    var projectNameRegex by string("")
+    var projectNameRegex by string()
 
     /**
      * Represents a project/subproject name separator.
@@ -46,4 +47,18 @@ class SettingsState : BaseState() {
      * Represents a string case postprocessor for a project name.
      */
     var projectNamePostprocessor by string(StringCase.NONE.label)
+
+    fun isDefaultTaskFields(): Boolean {
+        return taskIdRegex.isNullOrBlank()
+    }
+
+    fun isDefaultTypeFields(): Boolean {
+        return typeRegex.isNullOrBlank() && typePostprocessor == StringCase.NONE.label
+    }
+
+    fun isDefaultProjectNameFields(): Boolean {
+        return projectNameRegex.isNullOrBlank() &&
+                (projectNameSeparator == ProjectNameReplacer.DEFAULT_SEPARATOR) &&
+                (projectNamePostprocessor == StringCase.NONE.label)
+    }
 }
