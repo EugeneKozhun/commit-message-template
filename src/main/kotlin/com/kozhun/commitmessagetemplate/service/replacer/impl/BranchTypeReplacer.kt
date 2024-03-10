@@ -20,14 +20,18 @@ class BranchTypeReplacer(
     private val project: Project
 ) : Replacer {
     override fun replace(message: String): String {
-        val foundType = getTypeFromCurrentBranch()
-        return message.replace(ANCHOR, changeCase(foundType))
+        return changeCase(replaceWithSynonym(getTypeFromCurrentBranch()))
+            .let { message.replace(ANCHOR, it) }
     }
 
     private fun getTypeFromCurrentBranch(): String {
         return project.branches().getCurrentBranch().name
             .let { getTypeRegex().find(it)?.value }
             .orEmpty()
+    }
+
+    private fun replaceWithSynonym(type: String): String {
+        return project.storage().state.typeSynonyms[type] ?: type
     }
 
     private fun getTypeRegex(): Regex {

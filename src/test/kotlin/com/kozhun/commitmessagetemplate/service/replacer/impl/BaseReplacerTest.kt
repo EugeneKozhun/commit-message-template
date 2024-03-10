@@ -38,6 +38,7 @@ abstract class BaseReplacerTest {
         every { settingsStateMock.taskIdRegex } returns customTaskIdRegex
         every { settingsStateMock.typeRegex } returns customTypeRegex
         every { settingsStateMock.typePostprocessor } returns typePostprocessor.label
+        every { settingsStateMock.typeSynonyms } returns mutableMapOf()
 
         every { settingsStorageMock.state } returns settingsStateMock
         every { SettingsStorage.getInstance(projectMock) } returns settingsStorageMock

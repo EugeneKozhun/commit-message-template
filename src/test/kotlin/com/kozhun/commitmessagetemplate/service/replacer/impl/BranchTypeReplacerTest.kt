@@ -87,6 +87,13 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
         assertEquals("[Feature]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
+    @Test
+    fun `replace with NONE postprocessor`() {
+        mockSettingState(typePostprocessor = StringCase.NONE)
+        mockBranchName(BRANCH_WITH_TYPE)
+        assertEquals("[${TYPE}]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
+    }
+
     private companion object {
         const val BRANCH_WITHOUT_TYPE_ID = "master"
 

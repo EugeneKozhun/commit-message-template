@@ -1,6 +1,7 @@
 package com.kozhun.commitmessagetemplate.settings.storage
 
 import com.intellij.openapi.components.BaseState
+import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 
 /**
  * Represents the state of the settings in the application.
@@ -22,9 +23,14 @@ class SettingsState : BaseState() {
     var typeRegex by string("")
 
     /**
+     * Represents a branch type synonyms.
+     */
+    var typeSynonyms by map<String, String>()
+
+    /**
      * Represents a string case postprocessor for a branch type.
      */
-    var typePostprocessor by string("")
+    var typePostprocessor by string(StringCase.NONE.label)
 
     /**
      * Represents a custom regular expression used for matching Project Name from the file path.
@@ -32,12 +38,12 @@ class SettingsState : BaseState() {
     var projectNameRegex by string("")
 
     /**
-     *
+     * Represents a project/subproject name separator.
      */
-    var projectNameSeparator by string("")
+    var projectNameSeparator by string("|")
 
     /**
      * Represents a string case postprocessor for a project name.
      */
-    var projectNamePostprocessor by string("")
+    var projectNamePostprocessor by string(StringCase.NONE.label)
 }
