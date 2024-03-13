@@ -17,8 +17,8 @@ your project.
 
 ## Features
 
-- Set the standard commit message template for your project
-- You can use keywords for a ticket id and branch type to dynamically set values in a message
+- Set the default commit message template for your project
+- You can use keywords to dynamically set values in a message
 - You can set the caret position in your template
 
 ## Installation
@@ -40,7 +40,7 @@ Customize the plugin to your needs:
 
 1. Go to `File > Settings > Version Control > Commit Message Template`.
 2. Enter your desired commit message template.
-3. (Optional) Configure your own rules for Task id & Type.
+3. (Optional) Configure your own rules for the variables.
 
 ---
 
