@@ -2,6 +2,8 @@ name: Build & Test
 on:
   pull_request:
     branches: [ "main" ]
+  push:
+    branches: [ "!main", "**" ]
 permissions:
   contents: read
 jobs:
@@ -14,7 +16,15 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build and Test with gradle
+      - name: Clean & Build
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
         with:
-          arguments: clean assemble test
+          arguments: clean assemble
+      - name: Lint
+        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
+        with:
+          arguments: detekt
+      - name: Test
+        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
+        with:
+          arguments: test

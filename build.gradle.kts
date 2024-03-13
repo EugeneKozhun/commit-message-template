@@ -1,11 +1,16 @@
+// Versions
+val mockkVersion = "1.13.9"
+val junitVersion = "5.10.2"
+
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.21"
-    id("org.jetbrains.intellij") version "1.16.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.22"
+    id("org.jetbrains.intellij") version "1.17.2"
+    id("io.gitlab.arturbosch.detekt") version "1.23.5"
 }
 
 group = "com.kozhun"
-version = "1.4.0"
+version = "1.5.0"
 
 sourceSets["main"].java.srcDirs("src/main/gen")
 
@@ -14,17 +19,19 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    testImplementation("io.mockk:mockk:$mockkVersion")
 }
 
 intellij {
     version.set("2023.1.5")
     type.set("IC")
 
-    plugins.set(listOf(
-        "Git4Idea"
-    ))
+    plugins.set(
+        listOf(
+            "Git4Idea"
+        )
+    )
 }
 
 tasks {
@@ -54,4 +61,10 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+}
+
+detekt {
+    source.setFrom("src/main/kotlin")
+    config.setFrom("detekt-config.yml")
+    buildUponDefaultConfig = true
 }

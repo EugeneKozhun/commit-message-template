@@ -14,27 +14,16 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <p xmlns="http://www.w3.org/1999/html">This extension simplifies the process of writing commit messages
-            according to the conventions
-            adopted in your project.</p>
+        <p xmlns="http://www.w3.org/1999/html">This extension simplifies the process of writing commit messages according to the conventions adopted in your project.</p>
 
         <h3>Features</h3>
-        <p>1. Enable setting a standard commit message template for your project.</p>
-        <p>2. You can use keywords (<strong>$TASK_ID</strong>, <strong>$TYPE</strong>, <strong>$CARET_POSITION</strong>)
-            to dynamically set values in a message.</p>
-        <p>3. You can configure your own rule for get Task ID (<strong>$TASK_ID</strong) and Task Type
-                (<strong>$TYPE</strong>) from branch name.</p>
+        <p>1. Enable the setting of a default commit message template for your project.</p>
+        <p>2. You can use keywords to dynamically set values in a message.</p>
+        <p>3. You can configure your own rule for keywords.</p>
         <p>4. You can set the caret position in your template.</p>
 
-        <h3>Configuration</h3>
-        <p>1. Go to <strong>File > Settings > Version Control > Commit Message Template</strong>.</p>
-        <p>2. Enter your desired commit message template.</p>
-        <p>3. (Optional) Create your own rules for extract values.</p>
-
         <h3>Usage</h3>
-        <p>Simplicity is key! 🙂</p>
-        <p>A button is added to the commit window, allowing you to insert the template into the commit message input
-            field.</p>
+        <p>Keep it simple. Just the button and the shortcut</p>
 
         <h3>Links</h3>
         <a href="https://github.com/EugeneKozhun">GitHub</a> | <a
@@ -42,6 +31,12 @@
         ]]></description>
 
     <change-notes><![CDATA[
+        <h3>1.5.0</h3>
+        <ul>
+            <li>Added $PROJECT_NAME for project/subproject inclusion in commit message</li>
+            <li>Optimised settings UI and performance</li>
+            <li>Updated libs and refactoring</li>
+        </ul>
         <h3>1.4.0</h3>
         <ul>
             <li>Fixed the reset button in settings on an empty project.</li>

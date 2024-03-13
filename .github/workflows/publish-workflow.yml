@@ -1,11 +1,11 @@
-name: Test, Sign & Publish
+name: Sign & Publish
 on:
   push:
     branches: [ "main" ]
 permissions:
   contents: read
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,10 +14,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build, Sign Plugin and Publish to Marketplace.
+      - name: Clean & Build
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
         with:
-          arguments: clean assemble test publishPlugin
+          arguments: clean assemble
+      - name: Sign & Publish plugin to Marketplace.
+        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
+        with:
+          arguments: publishPlugin
         env:
           CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
