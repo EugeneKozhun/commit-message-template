@@ -12,11 +12,6 @@ import com.intellij.openapi.project.Project
 @Service(Service.Level.PROJECT)
 @State(name = "commit-message-template")
 class SettingsStorage : SimplePersistentStateComponent<SettingsState>(getDefaultState()) {
-
-    fun updateState() {
-        loadState(state)
-    }
-
     companion object {
         @JvmStatic
         fun getInstance(project: Project): SettingsStorage = project.service<SettingsStorage>()
