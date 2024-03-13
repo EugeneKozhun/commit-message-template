@@ -29,7 +29,6 @@ import javax.swing.JComponent
  *
  * @param project The current project.
  */
-@Suppress("TooManyFunctions")
 class CommitMessageTemplateSettings(
     private val project: Project
 ) : ConfigurableWithId {
