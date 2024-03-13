@@ -1,7 +1,7 @@
 package com.kozhun.commitmessagetemplate.settings.storage
 
 import com.intellij.openapi.components.BaseState
-import com.kozhun.commitmessagetemplate.service.replacer.impl.ProjectNameReplacer
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_PROJECT_NAME_SEPARATOR
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 
 /**
@@ -41,7 +41,7 @@ class SettingsState : BaseState() {
     /**
      * Represents a project/subproject name separator.
      */
-    var projectNameSeparator by string("|")
+    var projectNameSeparator by string(DEFAULT_PROJECT_NAME_SEPARATOR)
 
     /**
      * Represents a string case postprocessor for a project name.
@@ -58,7 +58,7 @@ class SettingsState : BaseState() {
 
     fun isDefaultProjectNameFields(): Boolean {
         return projectNameRegex.isNullOrBlank() &&
-                (projectNameSeparator == ProjectNameReplacer.DEFAULT_SEPARATOR) &&
+                (projectNameSeparator == DEFAULT_PROJECT_NAME_SEPARATOR) &&
                 (projectNamePostprocessor == StringCase.NONE.label)
     }
 }

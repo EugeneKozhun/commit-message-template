@@ -3,6 +3,7 @@ package com.kozhun.commitmessagetemplate.service.replacer.impl
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TASK_ID_REGEX
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.util.branches
 import com.kozhun.commitmessagetemplate.util.storage
@@ -35,12 +36,11 @@ class BranchTaskIdReplacer(
     }
 
     private fun getTaskIdRegex(): Regex {
-        return project.storage().state.taskIdRegex?.toNotBlankRegex() ?: DEFAULT_REGEX
+        return project.storage().state.taskIdRegex?.toNotBlankRegex() ?: DEFAULT_TASK_ID_REGEX
     }
 
     companion object {
         const val ANCHOR = "\$TASK_ID"
-        val DEFAULT_REGEX = "[a-zA-Z0-9]+-\\d+".toRegex()
 
         @JvmStatic
         fun getInstance(project: Project): Replacer = project.service<BranchTaskIdReplacer>()

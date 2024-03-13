@@ -4,6 +4,7 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vcs.changes.ChangeListManager
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_PROJECT_NAME_SEPARATOR
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import com.kozhun.commitmessagetemplate.util.storage
@@ -43,7 +44,7 @@ class ProjectNameReplacer(
     private fun getSeparator(): String {
         return project.storage().state.projectNameSeparator
             ?.takeIf { it.isNotBlank() }
-            ?: DEFAULT_SEPARATOR
+            ?: DEFAULT_PROJECT_NAME_SEPARATOR
     }
 
     private fun getRegex(): Regex {
@@ -51,8 +52,7 @@ class ProjectNameReplacer(
     }
 
     companion object {
-        const val ANCHOR = "\$PROJECT_NAME"
-        const val DEFAULT_SEPARATOR = "|"
+        private const val ANCHOR = "\$PROJECT_NAME"
 
         @JvmStatic
         fun getInstance(project: Project): Replacer = project.service<ProjectNameReplacer>()

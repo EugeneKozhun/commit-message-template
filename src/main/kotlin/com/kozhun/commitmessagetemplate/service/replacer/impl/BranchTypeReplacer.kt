@@ -3,6 +3,7 @@ package com.kozhun.commitmessagetemplate.service.replacer.impl
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REGEX
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import com.kozhun.commitmessagetemplate.util.branches
@@ -35,7 +36,7 @@ class BranchTypeReplacer(
     }
 
     private fun getTypeRegex(): Regex {
-        return project.storage().state.typeRegex?.toNotBlankRegex() ?: DEFAULT_REGEX
+        return project.storage().state.typeRegex?.toNotBlankRegex() ?: DEFAULT_TYPE_REGEX
     }
 
     private fun changeCase(value: String): String {
@@ -47,7 +48,6 @@ class BranchTypeReplacer(
 
     companion object {
         const val ANCHOR = "\$TYPE"
-        val DEFAULT_REGEX = "bugfix|feature|hotfix|enhancement|refactoring".toRegex(RegexOption.IGNORE_CASE)
 
         @JvmStatic
         fun getInstance(project: Project): Replacer = project.service<BranchTypeReplacer>()

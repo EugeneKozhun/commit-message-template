@@ -13,9 +13,9 @@ import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.toMutableProperty
-import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
-import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTypeReplacer
-import com.kozhun.commitmessagetemplate.service.replacer.impl.ProjectNameReplacer
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_PROJECT_NAME_SEPARATOR
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TASK_ID_REGEX
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REGEX
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.settings.util.PatternEditorUtil
@@ -60,7 +60,7 @@ class CommitMessageTemplateSettings(
                     row {
                         expandableTextField()
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
-                            .comment(comment = "Default: ${BranchTaskIdReplacer.DEFAULT_REGEX}")
+                            .comment(comment = "Default: $DEFAULT_TASK_ID_REGEX")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::taskIdRegex)
                     }
@@ -71,7 +71,7 @@ class CommitMessageTemplateSettings(
                     row {
                         expandableTextField()
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
-                            .comment(comment = "Default: ${BranchTypeReplacer.DEFAULT_REGEX}")
+                            .comment(comment = "Default: $DEFAULT_TYPE_REGEX")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::typeRegex)
                     }
@@ -94,7 +94,7 @@ class CommitMessageTemplateSettings(
                     row {
                         textField()
                             .label(resourceBundle.getString("settings.advanced.common.separator"), LabelPosition.TOP)
-                            .comment(comment = "Default: ${ProjectNameReplacer.DEFAULT_SEPARATOR}")
+                            .comment(comment = "Default: $DEFAULT_PROJECT_NAME_SEPARATOR")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::projectNameSeparator)
 
