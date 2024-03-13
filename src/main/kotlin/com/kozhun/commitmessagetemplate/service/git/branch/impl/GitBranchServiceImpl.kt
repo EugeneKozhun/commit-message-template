@@ -15,16 +15,8 @@ class GitBranchServiceImpl(
 
     override fun getCurrentBranch(): GitBranch {
         val gitRepositoryManager = GitRepositoryManager.getInstance(project)
-        return getCurrentRepository(gitRepositoryManager).currentBranch
-            ?: branchNotFoundError()
-    }
-
-    private fun getCurrentRepository(manager: GitRepositoryManager): GitRepository {
-        return manager.repositories.firstOrNull() ?: branchNotFoundError()
-    }
-
-    private fun branchNotFoundError(): Nothing {
-        error("Current git branch not found.")
+        return gitRepositoryManager.repositories.firstOrNull()?.currentBranch
+            ?: error("Current git branch not found.")
     }
 
     companion object {

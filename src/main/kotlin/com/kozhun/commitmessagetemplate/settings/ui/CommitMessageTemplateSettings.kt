@@ -97,6 +97,7 @@ class CommitMessageTemplateSettings(
                             .comment(comment = "Default: ${ProjectNameReplacer.DEFAULT_SEPARATOR}")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::projectNameSeparator)
+
                         comboBox(StringCase.values().map { it.label })
                             .label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
                             .bindItem(settingsStorage.state::projectNamePostprocessor)
