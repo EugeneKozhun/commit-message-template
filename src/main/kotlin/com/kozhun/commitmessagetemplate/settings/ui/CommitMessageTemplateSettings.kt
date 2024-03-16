@@ -49,7 +49,7 @@ class CommitMessageTemplateSettings(
                     .align(AlignX.FILL)
                     .comment(comment = resourceBundle.getString("settings.message-pattern-notes"))
                     .bind(
-                        { _ -> patternEditor.document.text },
+                        { _ -> patternEditor.document.text.ifBlank { null } },
                         { _, value: String? -> runWriteAction { patternEditor.document.setText(value.orEmpty()) } },
                         settingsStorage.state::pattern.toMutableProperty()
                     )

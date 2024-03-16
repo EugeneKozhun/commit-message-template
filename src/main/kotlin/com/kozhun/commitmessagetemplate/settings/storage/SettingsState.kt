@@ -41,7 +41,7 @@ class SettingsState : BaseState() {
     /**
      * Represents a project/subproject name separator.
      */
-    var projectNameSeparator by string(DEFAULT_PROJECT_NAME_SEPARATOR)
+    var projectNameSeparator by string()
 
     /**
      * Represents a string case postprocessor for a project name.
@@ -58,7 +58,7 @@ class SettingsState : BaseState() {
 
     fun isDefaultProjectNameFields(): Boolean {
         return projectNameRegex.isNullOrBlank() &&
-                (projectNameSeparator == DEFAULT_PROJECT_NAME_SEPARATOR) &&
+                (projectNameSeparator.isNullOrBlank() || projectNameSeparator == DEFAULT_PROJECT_NAME_SEPARATOR) &&
                 (projectNamePostprocessor == StringCase.NONE.label)
     }
 }
