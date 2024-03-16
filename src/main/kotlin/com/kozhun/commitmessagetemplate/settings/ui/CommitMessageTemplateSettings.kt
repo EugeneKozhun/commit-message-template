@@ -111,8 +111,6 @@ class CommitMessageTemplateSettings(
     }
 
     override fun isModified(): Boolean {
-        println(panel)
-        println(panel.isModified())
         return panel.isModified()
     }
 
