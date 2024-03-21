@@ -44,8 +44,8 @@
         <h3>1.3.0</h3>
         <ul>
             <li>Added standard shortcut for the template insertion button.</li>
-            <li>New variable <strong>$TASK</strong> that enables extracting the task type from the branch name.</li>
-            <li>Added a functionality that allows changing the case for the <strong>$TASK</strong> value to suit different naming conventions.</li>
+            <li>New variable <strong>$TYPE</strong> that enables extracting the task type from the branch name.</li>
+            <li>Added a functionality that allows changing the case for the <strong>$TYPE</strong> value to suit different naming conventions.</li>
             <li>Moved plugin setting page to <strong>Version Control</strong> tab.</li>
             <li>Reworked the plugin setting page for enhanced user interaction and usability.</li>
         </ul>
