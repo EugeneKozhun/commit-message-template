@@ -1,7 +1,7 @@
 package com.kozhun.commitmessagetemplate.settings.storage
 
 import com.intellij.openapi.components.BaseState
-import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_PROJECT_NAME_SEPARATOR
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 
 /**
@@ -58,7 +58,7 @@ class SettingsState : BaseState() {
 
     fun isDefaultProjectNameFields(): Boolean {
         return projectNameRegex.isNullOrBlank() &&
-                (projectNameSeparator.isNullOrBlank() || projectNameSeparator == DEFAULT_PROJECT_NAME_SEPARATOR) &&
+                (projectNameSeparator.isNullOrBlank() || projectNameSeparator == DEFAULT_SCOPE_SEPARATOR) &&
                 (projectNamePostprocessor == StringCase.NONE.label)
     }
 }

@@ -14,9 +14,9 @@
 
 cmtFile ::= item_*
 
-private item_ ::= (task_id|type|project_name|caret_position|OTHER_TEXT)
+private item_ ::= (task_id|type|scope|caret_position|OTHER_TEXT)
 
 task_id ::= '$TASK_ID'
 type ::= '$TYPE'
-project_name ::= '$PROJECT_NAME'
+scope ::= '$SCOPE'
 caret_position ::= '$CARET_POSITION'

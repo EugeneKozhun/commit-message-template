@@ -3,6 +3,4 @@ package com.kozhun.commitmessagetemplate.language.psi;
 
 import com.intellij.psi.PsiElement;
 
-public interface CMTProjectName extends PsiElement {
-
-}
+public interface CMTScope extends PsiElement {}

@@ -1,15 +1,28 @@
 // This is a generated file. Not intended for manual editing.
 package com.kozhun.commitmessagetemplate.language.parser;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.LightPsiParser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.lang.PsiParser;
-import com.intellij.lang.LightPsiParser;
+import com.intellij.psi.tree.IElementType;
+
+import static com.intellij.lang.parser.GeneratedParserUtilBase.TRUE_CONDITION;
+import static com.intellij.lang.parser.GeneratedParserUtilBase._COLLAPSE_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase._NONE_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.adapt_builder_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.current_position_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.empty_element_parsed_guard_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.enter_section_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.exit_section_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.recursion_guard_;
+import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.CARET_POSITION;
+import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.OTHER_TEXT;
+import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.SCOPE;
+import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.TASK_ID;
+import static com.kozhun.commitmessagetemplate.language.psi.CMTTypes.TYPE;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class CMTParser implements PsiParser, LightPsiParser {
@@ -59,25 +72,25 @@ public class CMTParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // task_id|type|project_name|caret_position|OTHER_TEXT
+  // task_id|type|scope|caret_position|OTHER_TEXT
   static boolean item_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "item_")) return false;
     boolean r;
     r = task_id(b, l + 1);
     if (!r) r = type(b, l + 1);
-    if (!r) r = project_name(b, l + 1);
+    if (!r) r = scope(b, l + 1);
     if (!r) r = caret_position(b, l + 1);
     if (!r) r = consumeToken(b, OTHER_TEXT);
     return r;
   }
 
   /* ********************************************************** */
-  // '$PROJECT_NAME'
-  public static boolean project_name(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "project_name")) return false;
+  // '$SCOPE'
+  public static boolean scope(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "scope")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PROJECT_NAME, "<project name>");
-    r = consumeToken(b, "$PROJECT_NAME");
+    Marker m = enter_section_(b, l, _NONE_, SCOPE, "<scope>");
+    r = consumeToken(b, "$SCOPE");
     exit_section_(b, l, m, r, false, null);
     return r;
   }

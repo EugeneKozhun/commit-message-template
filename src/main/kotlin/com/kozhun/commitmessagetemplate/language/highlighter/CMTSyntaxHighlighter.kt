@@ -19,7 +19,7 @@ class CMTSyntaxHighlighter : SyntaxHighlighterBase() {
 
     override fun getTokenHighlights(tokenType: IElementType): Array<TextAttributesKey> {
         return when (tokenType) {
-            CMTTypes.TASK_ID, CMTTypes.TYPE, CMTTypes.PROJECT_NAME -> keywordKeys
+            CMTTypes.TASK_ID, CMTTypes.TYPE, CMTTypes.SCOPE -> keywordKeys
             CMTTypes.CARET_POSITION -> caretPositionKeys
             else -> arrayOf()
         }

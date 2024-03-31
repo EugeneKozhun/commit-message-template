@@ -13,7 +13,7 @@ import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.toMutableProperty
-import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_PROJECT_NAME_SEPARATOR
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TASK_ID_REGEX
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REGEX
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
@@ -93,7 +93,7 @@ class CommitMessageTemplateSettings(
                     row {
                         textField()
                             .label(resourceBundle.getString("settings.advanced.common.separator"), LabelPosition.TOP)
-                            .comment(comment = "Default: $DEFAULT_PROJECT_NAME_SEPARATOR")
+                            .comment(comment = "Default: $DEFAULT_SCOPE_SEPARATOR")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::projectNameSeparator)
 
