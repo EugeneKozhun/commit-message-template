@@ -88,21 +88,21 @@ class CommitMessageTemplateSettings(
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                             .comment(comment = "Default: ${project.name}")
                             .align(AlignX.FILL)
-                            .bindNullableText(settingsStorage.state::projectNameRegex)
+                            .bindNullableText(settingsStorage.state::scopeRegex)
                     }
                     row {
                         textField()
                             .label(resourceBundle.getString("settings.advanced.common.separator"), LabelPosition.TOP)
                             .comment(comment = "Default: $DEFAULT_SCOPE_SEPARATOR")
                             .align(AlignX.FILL)
-                            .bindNullableText(settingsStorage.state::projectNameSeparator)
+                            .bindNullableText(settingsStorage.state::scopeSeparator)
 
                         comboBox(StringCase.values().map { it.label })
                             .label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
-                            .bindItem(settingsStorage.state::projectNamePostprocessor)
+                            .bindItem(settingsStorage.state::scopePostprocessor)
                     }
                 }.apply {
-                    expanded = !settingsStorage.state.isDefaultProjectNameFields()
+                    expanded = !settingsStorage.state.isDefaultScopeFields()
                 }.withoutGaps()
             }
         }

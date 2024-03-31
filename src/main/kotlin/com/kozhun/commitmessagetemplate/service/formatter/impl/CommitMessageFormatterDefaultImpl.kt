@@ -6,7 +6,7 @@ import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.formatter.CommitMessageFormatter
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTypeReplacer
-import com.kozhun.commitmessagetemplate.service.replacer.impl.ProjectNameReplacer
+import com.kozhun.commitmessagetemplate.service.replacer.impl.ScopeReplacer
 import com.kozhun.commitmessagetemplate.util.storage
 
 /**
@@ -22,7 +22,7 @@ class CommitMessageFormatterDefaultImpl(
     private val replacers = listOf(
         BranchTypeReplacer.getInstance(project),
         BranchTaskIdReplacer.getInstance(project),
-        ProjectNameReplacer.getInstance(project)
+        ScopeReplacer.getInstance(project)
     )
 
     override fun getFormattedCommitMessage(): String {

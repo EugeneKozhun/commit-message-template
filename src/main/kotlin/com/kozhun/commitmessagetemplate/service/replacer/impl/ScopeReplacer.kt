@@ -12,16 +12,16 @@ import com.kozhun.commitmessagetemplate.util.toCase
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
 @Service(Service.Level.PROJECT)
-class ProjectNameReplacer(
+class ScopeReplacer(
     private val project: Project
 ) : Replacer {
 
     override fun replace(message: String): String {
-        val projectName = extractProjectName()
-        return message.replace(ANCHOR, projectName)
+        val scope = extractScope()
+        return message.replace(ANCHOR, scope)
     }
 
-    private fun extractProjectName(): String {
+    private fun extractScope(): String {
         return ChangeListManager.getInstance(project)
             .affectedPaths
             .asSequence()
@@ -35,26 +35,26 @@ class ProjectNameReplacer(
     }
 
     private fun changeCase(value: String): String {
-        return project.storage().state.projectNamePostprocessor
+        return project.storage().state.scopePostprocessor
             ?.let { StringCase.labelValueOf(it) }
             ?.let { value.toCase(it) }
             ?: value
     }
 
     private fun getSeparator(): String {
-        return project.storage().state.projectNameSeparator
+        return project.storage().state.scopeSeparator
             ?.takeIf { it.isNotBlank() }
             ?: DEFAULT_SCOPE_SEPARATOR
     }
 
     private fun getRegex(): Regex {
-        return project.storage().state.projectNameRegex?.toNotBlankRegex() ?: project.name.toRegex(RegexOption.IGNORE_CASE)
+        return project.storage().state.scopeRegex?.toNotBlankRegex() ?: project.name.toRegex(RegexOption.IGNORE_CASE)
     }
 
     companion object {
         private const val ANCHOR = "\$SCOPE"
 
         @JvmStatic
-        fun getInstance(project: Project): Replacer = project.service<ProjectNameReplacer>()
+        fun getInstance(project: Project): Replacer = project.service<ScopeReplacer>()
     }
 }

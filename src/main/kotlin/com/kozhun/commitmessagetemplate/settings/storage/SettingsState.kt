@@ -34,19 +34,19 @@ class SettingsState : BaseState() {
     var typePostprocessor by string(StringCase.NONE.label)
 
     /**
-     * Represents a custom regular expression used for matching Project Name from the file path.
+     * Represents a custom regular expression used for matching Scope from the file path.
      */
-    var projectNameRegex by string()
+    var scopeRegex by string()
 
     /**
-     * Represents a project/subproject name separator.
+     * Represents a scopes separator.
      */
-    var projectNameSeparator by string()
+    var scopeSeparator by string()
 
     /**
-     * Represents a string case postprocessor for a project name.
+     * Represents a string case postprocessor for a scope.
      */
-    var projectNamePostprocessor by string(StringCase.NONE.label)
+    var scopePostprocessor by string(StringCase.NONE.label)
 
     fun isDefaultTaskFields(): Boolean {
         return taskIdRegex.isNullOrBlank()
@@ -56,9 +56,9 @@ class SettingsState : BaseState() {
         return typeRegex.isNullOrBlank() && typePostprocessor == StringCase.NONE.label
     }
 
-    fun isDefaultProjectNameFields(): Boolean {
-        return projectNameRegex.isNullOrBlank() &&
-                (projectNameSeparator.isNullOrBlank() || projectNameSeparator == DEFAULT_SCOPE_SEPARATOR) &&
-                (projectNamePostprocessor == StringCase.NONE.label)
+    fun isDefaultScopeFields(): Boolean {
+        return scopeRegex.isNullOrBlank() &&
+                (scopeSeparator.isNullOrBlank() || scopeSeparator == DEFAULT_SCOPE_SEPARATOR) &&
+                (scopePostprocessor == StringCase.NONE.label)
     }
 }
