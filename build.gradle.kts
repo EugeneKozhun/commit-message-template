@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.kozhun"
-version = "1.5.2"
+version = "1.6.0"
 
 sourceSets["main"].java.srcDirs("src/main/gen")
 
