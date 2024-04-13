@@ -14,6 +14,21 @@ class SettingsState : BaseState() {
     var pattern by string()
 
     /**
+     * Remove whitespace at the start of string.
+     */
+    var trimWhitespacesStart by property(false)
+
+    /**
+     * Remove whitespace at the end of string.
+     */
+    var trimWhitespacesEnd by property(false)
+
+    /**
+     * Remove duplicated whitespaces.
+     */
+    var unnecessaryWhitespaces by property(false)
+
+    /**
      * Represents a custom regular expression used for matching task ID from the current branch.
      */
     var taskIdRegex by string()
@@ -44,6 +59,11 @@ class SettingsState : BaseState() {
     var scopeRegex by string()
 
     /**
+     * Default scope value.
+     */
+    var scopeDefault by string()
+
+    /**
      * Represents a scopes separator.
      */
     var scopeSeparator by string()
@@ -54,16 +74,17 @@ class SettingsState : BaseState() {
     var scopePostprocessor by string(StringCase.NONE.label)
 
     fun isDefaultTaskFields(): Boolean {
-        return taskIdRegex.isNullOrBlank()
+        return taskIdRegex.isNullOrEmpty()
     }
 
     fun isDefaultTypeFields(): Boolean {
-        return typeRegex.isNullOrBlank() && typePostprocessor == StringCase.NONE.label && typeDefault.isNullOrBlank()
+        return typeRegex.isNullOrEmpty() && typePostprocessor == StringCase.NONE.label && typeDefault.isNullOrEmpty()
     }
 
     fun isDefaultScopeFields(): Boolean {
-        return scopeRegex.isNullOrBlank() &&
-                (scopeSeparator.isNullOrBlank() || scopeSeparator == DEFAULT_SCOPE_SEPARATOR) &&
+        return scopeRegex.isNullOrEmpty() &&
+                scopeDefault.isNullOrEmpty() &&
+                (scopeSeparator.isNullOrEmpty() || scopeSeparator == DEFAULT_SCOPE_SEPARATOR) &&
                 (scopePostprocessor == StringCase.NONE.label)
     }
 }

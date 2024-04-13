@@ -11,6 +11,7 @@ import com.intellij.ui.dsl.builder.LabelPosition
 import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.bindItem
+import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.toMutableProperty
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
@@ -32,7 +33,6 @@ import javax.swing.JComponent
 class CommitMessageTemplateSettings(
     private val project: Project
 ) : ConfigurableWithId {
-
     private lateinit var settingsStorage: SettingsStorage
     private lateinit var patternEditor: Editor
     private lateinit var panel: DialogPanel
@@ -53,6 +53,14 @@ class CommitMessageTemplateSettings(
                         { _, value: String? -> runWriteAction { patternEditor.document.setText(value.orEmpty()) } },
                         settingsStorage.state::pattern.toMutableProperty()
                     )
+            }
+            row {
+                checkBox(resourceBundle.getString("settings.trim-whitespaces-start"))
+                    .bindSelected(settingsStorage.state::trimWhitespacesStart)
+                checkBox(resourceBundle.getString("settings.trim-whitespaces-end"))
+                    .bindSelected(settingsStorage.state::trimWhitespacesEnd)
+                checkBox(resourceBundle.getString("settings.duplicated-whitespaces"))
+                    .bindSelected(settingsStorage.state::unnecessaryWhitespaces)
             }
             group("Advanced Settings", false) {
                 collapsibleGroup(resourceBundle.getString("settings.advanced.task-id.title")) {
@@ -87,21 +95,24 @@ class CommitMessageTemplateSettings(
                 }.apply {
                     expanded = !settingsStorage.state.isDefaultTypeFields()
                 }.withoutGaps()
-                collapsibleGroup(resourceBundle.getString("settings.advanced.project-name.title")) {
+                collapsibleGroup(resourceBundle.getString("settings.advanced.scope.title")) {
                     row {
                         expandableTextField()
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
-                            .comment(comment = "Default: ${project.name}")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::scopeRegex)
                     }
                     row {
                         textField()
+                            .label(resourceBundle.getString("settings.advanced.scope.default-value"), LabelPosition.TOP)
+                            .comment("When the scope isn't defined.<br/>Default: ${project.name}")
+                            .align(AlignX.FILL)
+                            .bindNullableText(settingsStorage.state::scopeDefault)
+                        textField()
                             .label(resourceBundle.getString("settings.advanced.common.separator"), LabelPosition.TOP)
-                            .comment(comment = "Default: $DEFAULT_SCOPE_SEPARATOR")
+                            .comment(comment = "If there are multiple scopes.<br/>Default: $DEFAULT_SCOPE_SEPARATOR")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::scopeSeparator)
-
                         comboBox(StringCase.values().map { it.label })
                             .label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
                             .bindItem(settingsStorage.state::scopePostprocessor)

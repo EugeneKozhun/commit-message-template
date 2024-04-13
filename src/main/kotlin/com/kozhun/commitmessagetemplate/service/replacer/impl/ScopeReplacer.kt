@@ -26,9 +26,8 @@ class ScopeReplacer(
             .affectedPaths
             .asSequence()
             .mapNotNull { it.path }
-            .mapNotNull { getRegex().find(it) }
-            .map { it.value }
-            .filter { it.isNotEmpty() }
+            .map { getRegex()?.find(it) }
+            .map { it?.value.orDefaultScope() }
             .distinct()
             .joinToString(getSeparator())
             .let { changeCase(it) }
@@ -47,8 +46,15 @@ class ScopeReplacer(
             ?: DEFAULT_SCOPE_SEPARATOR
     }
 
-    private fun getRegex(): Regex {
-        return project.storage().state.scopeRegex?.toNotBlankRegex() ?: project.name.toRegex(RegexOption.IGNORE_CASE)
+    private fun getRegex(): Regex? {
+        return project.storage().state.scopeRegex?.toNotBlankRegex()
+    }
+
+    private fun String?.orDefaultScope(): String {
+        if (this != null) {
+            return this
+        }
+        return project.storage().state.scopeDefault ?: project.name
     }
 
     companion object {
