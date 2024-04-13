@@ -26,11 +26,14 @@ class ScopeReplacer(
             .affectedPaths
             .asSequence()
             .mapNotNull { it.path }
-            .map { getRegex()?.find(it) }
-            .map { it?.value.orDefaultScope() }
+            .map { getPathScope(it) }
             .distinct()
             .joinToString(getSeparator())
             .let { changeCase(it) }
+    }
+
+    private fun getPathScope(it: String): String {
+        return getRegex()?.find(it)?.value.orDefaultScope()
     }
 
     private fun changeCase(value: String): String {
