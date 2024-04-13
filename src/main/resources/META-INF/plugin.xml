@@ -94,6 +94,7 @@
         <lang.syntaxHighlighterFactory
                 language="CMT"
                 implementationClass="com.kozhun.commitmessagetemplate.language.highlighter.CMTSyntaxHighlighterFactory"/>
+        <postStartupActivity implementation="com.kozhun.commitmessagetemplate.listener.SettingsMigrator"/>
     </extensions>
 
     <actions>
