@@ -31,10 +31,9 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
 
     @Test
     fun `replace non-type branch with empty template`() {
-        val template = "Some changes"
         mockSettingState()
         mockBranchName(BRANCH_WITHOUT_TYPE_ID)
-        assertEquals(template, replacer.replace(template))
+        assertEquals("Some changes", replacer.replace("Some changes"))
     }
 
     @Test
@@ -42,6 +41,14 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
         mockSettingState()
         mockBranchName(BRANCH_WITHOUT_TYPE_ID)
         assertEquals("[]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
+    }
+
+
+    @Test
+    fun `replace with default type`() {
+        mockSettingState(customTypeDefault = TYPE_DEFAULT)
+        mockBranchName(BRANCH_WITHOUT_TYPE_ID)
+        assertEquals("[$TYPE_DEFAULT]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
@@ -98,6 +105,7 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
         const val BRANCH_WITHOUT_TYPE_ID = "master"
 
         const val TYPE = "feature"
+        const val TYPE_DEFAULT = "default"
         const val BRANCH_WITH_TYPE = "$TYPE/CMT-123-refactoring"
 
         const val CUSTOM_TYPE = "test"

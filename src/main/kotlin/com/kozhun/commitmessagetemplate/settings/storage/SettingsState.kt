@@ -24,6 +24,11 @@ class SettingsState : BaseState() {
     var typeRegex by string()
 
     /**
+     * Represents a default value for branch type.
+     */
+    var typeDefault by string()
+
+    /**
      * Represents a branch type synonyms.
      */
     var typeSynonyms by map<String, String>()
@@ -53,7 +58,7 @@ class SettingsState : BaseState() {
     }
 
     fun isDefaultTypeFields(): Boolean {
-        return typeRegex.isNullOrBlank() && typePostprocessor == StringCase.NONE.label
+        return typeRegex.isNullOrBlank() && typePostprocessor == StringCase.NONE.label && typeDefault.isNullOrBlank()
     }
 
     fun isDefaultScopeFields(): Boolean {

@@ -75,6 +75,11 @@ class CommitMessageTemplateSettings(
                             .bindNullableText(settingsStorage.state::typeRegex)
                     }
                     row {
+                        textField()
+                            .label(resourceBundle.getString("settings.advanced.type.default-type.value"), LabelPosition.TOP)
+                            .comment(resourceBundle.getString("settings.advanced.type.default-type.comment"))
+                            .align(AlignX.FILL)
+                            .bindNullableText(settingsStorage.state::typeDefault)
                         comboBox(StringCase.values().map { it.label }, null)
                             .label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
                             .bindItem(settingsStorage.state::typePostprocessor)

@@ -28,7 +28,7 @@ class BranchTypeReplacer(
     private fun getTypeFromCurrentBranch(): String {
         return project.branches().getCurrentBranch().name
             .let { getTypeRegex().find(it)?.value }
-            .orEmpty()
+            ?: getDefaultTypeValue()
     }
 
     private fun replaceWithSynonym(type: String): String {
@@ -44,6 +44,10 @@ class BranchTypeReplacer(
             ?.let { StringCase.labelValueOf(it) }
             ?.let { value.toCase(it) }
             ?: value
+    }
+
+    private fun getDefaultTypeValue(): String {
+        return project.storage().state.typeDefault.orEmpty()
     }
 
     companion object {

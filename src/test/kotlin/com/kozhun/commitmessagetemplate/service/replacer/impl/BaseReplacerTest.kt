@@ -28,6 +28,7 @@ abstract class BaseReplacerTest {
     protected fun mockSettingState(
         customTaskIdRegex: String = "",
         customTypeRegex: String = "",
+        customTypeDefault: String = "",
         typePostprocessor: StringCase = StringCase.NONE
     ) {
         mockkStatic(SettingsStorage::class)
@@ -37,6 +38,7 @@ abstract class BaseReplacerTest {
 
         every { settingsStateMock.taskIdRegex } returns customTaskIdRegex
         every { settingsStateMock.typeRegex } returns customTypeRegex
+        every { settingsStateMock.typeDefault } returns customTypeDefault
         every { settingsStateMock.typePostprocessor } returns typePostprocessor.label
         every { settingsStateMock.typeSynonyms } returns mutableMapOf()
 
