@@ -4,7 +4,7 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vcs.changes.ChangeListManager
-import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_PROJECT_NAME_SEPARATOR
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import com.kozhun.commitmessagetemplate.util.storage
@@ -12,49 +12,58 @@ import com.kozhun.commitmessagetemplate.util.toCase
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
 @Service(Service.Level.PROJECT)
-class ProjectNameReplacer(
+class ScopeReplacer(
     private val project: Project
 ) : Replacer {
 
     override fun replace(message: String): String {
-        val projectName = extractProjectName()
-        return message.replace(ANCHOR, projectName)
+        val scope = extractScope()
+        return message.replace(ANCHOR, scope)
     }
 
-    private fun extractProjectName(): String {
+    private fun extractScope(): String {
         return ChangeListManager.getInstance(project)
             .affectedPaths
             .asSequence()
             .mapNotNull { it.path }
-            .mapNotNull { getRegex().find(it) }
-            .map { it.value }
-            .filter { it.isNotEmpty() }
+            .map { getPathScope(it) }
             .distinct()
             .joinToString(getSeparator())
             .let { changeCase(it) }
     }
 
+    private fun getPathScope(it: String): String {
+        return getRegex()?.find(it)?.value.orDefaultScope()
+    }
+
     private fun changeCase(value: String): String {
-        return project.storage().state.projectNamePostprocessor
+        return project.storage().state.scopePostprocessor
             ?.let { StringCase.labelValueOf(it) }
             ?.let { value.toCase(it) }
             ?: value
     }
 
     private fun getSeparator(): String {
-        return project.storage().state.projectNameSeparator
+        return project.storage().state.scopeSeparator
             ?.takeIf { it.isNotBlank() }
-            ?: DEFAULT_PROJECT_NAME_SEPARATOR
+            ?: DEFAULT_SCOPE_SEPARATOR
     }
 
-    private fun getRegex(): Regex {
-        return project.storage().state.projectNameRegex?.toNotBlankRegex() ?: project.name.toRegex(RegexOption.IGNORE_CASE)
+    private fun getRegex(): Regex? {
+        return project.storage().state.scopeRegex?.toNotBlankRegex()
+    }
+
+    private fun String?.orDefaultScope(): String {
+        if (this != null) {
+            return this
+        }
+        return project.storage().state.scopeDefault ?: project.name
     }
 
     companion object {
-        private const val ANCHOR = "\$PROJECT_NAME"
+        private const val ANCHOR = "\$SCOPE"
 
         @JvmStatic
-        fun getInstance(project: Project): Replacer = project.service<ProjectNameReplacer>()
+        fun getInstance(project: Project): Replacer = project.service<ScopeReplacer>()
     }
 }

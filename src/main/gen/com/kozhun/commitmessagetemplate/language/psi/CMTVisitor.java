@@ -11,7 +11,7 @@ public class CMTVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitProjectName(@NotNull CMTProjectName o) {
+  public void visitScope(@NotNull CMTScope o) {
     visitPsiElement(o);
   }
 

@@ -5,12 +5,12 @@ val junitVersion = "5.10.2"
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
-    id("org.jetbrains.intellij") version "1.17.2"
-    id("io.gitlab.arturbosch.detekt") version "1.23.5"
+    id("org.jetbrains.intellij") version "1.17.3"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
 group = "com.kozhun"
-version = "1.5.2"
+version = "1.6.0"
 
 sourceSets["main"].java.srcDirs("src/main/gen")
 

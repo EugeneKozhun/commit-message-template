@@ -15,12 +15,15 @@
 This JetBrains IDE's extension simplifies the process of writing commit messages according to the conventions adopted in
 your project.
 
-## Features
+## Key features
 
-- Enable the setting of a default commit message template for your project
-- You can use keywords to dynamically set values in a message
-- You can configure your own rule for keywords
-- You can set the caret position in your template
+- Default commit message template
+- Configurable keywords to dynamically set values in a message
+  - Task id, scope, type
+  - Default values for variables
+- Caret position in your template
+- Whitespace formatting
+- Shortcut for applying commit template
 
 ## Installation
 
@@ -40,7 +43,8 @@ Customize the plugin to your needs:
 
 1. Go to `File > Settings > Version Control > Commit Message Template`.
 2. Enter your desired commit message template.
-3. (Optional) Configure your own rules for the variables.
+3. Set whitespace rules.
+4. (Optional) Configure your own rules for the variables.
 
 ---
 

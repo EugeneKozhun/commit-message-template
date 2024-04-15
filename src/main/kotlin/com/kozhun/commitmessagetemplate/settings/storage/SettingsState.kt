@@ -1,7 +1,7 @@
 package com.kozhun.commitmessagetemplate.settings.storage
 
 import com.intellij.openapi.components.BaseState
-import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_PROJECT_NAME_SEPARATOR
+import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
 import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 
 /**
@@ -14,14 +14,44 @@ class SettingsState : BaseState() {
     var pattern by string()
 
     /**
+     * Remove whitespace at the start of string.
+     */
+    var trimWhitespacesStart by property(false)
+
+    /**
+     * Remove whitespace at the end of string.
+     */
+    var trimWhitespacesEnd by property(false)
+
+    /**
+     * Remove duplicated whitespaces.
+     */
+    var unnecessaryWhitespaces by property(false)
+
+    /**
      * Represents a custom regular expression used for matching task ID from the current branch.
      */
     var taskIdRegex by string()
 
     /**
+     * Represents a default value for task-id.
+     */
+    var taskIdDefault by string()
+
+    /**
+     * Represents a string case postprocessor for a task id.
+     */
+    var taskIdPostProcessor by string(StringCase.NONE.label)
+
+    /**
      * Represents a custom regular expression used for matching a current branch type.
      */
     var typeRegex by string()
+
+    /**
+     * Represents a default value for branch type.
+     */
+    var typeDefault by string()
 
     /**
      * Represents a branch type synonyms.
@@ -34,31 +64,41 @@ class SettingsState : BaseState() {
     var typePostprocessor by string(StringCase.NONE.label)
 
     /**
-     * Represents a custom regular expression used for matching Project Name from the file path.
+     * Represents a custom regular expression used for matching Scope from the file path.
      */
-    var projectNameRegex by string()
+    var scopeRegex by string()
 
     /**
-     * Represents a project/subproject name separator.
+     * Default scope value.
      */
-    var projectNameSeparator by string()
+    var scopeDefault by string()
 
     /**
-     * Represents a string case postprocessor for a project name.
+     * Represents a scopes separator.
      */
-    var projectNamePostprocessor by string(StringCase.NONE.label)
+    var scopeSeparator by string()
+
+    /**
+     * Represents a string case postprocessor for a scope.
+     */
+    var scopePostprocessor by string(StringCase.NONE.label)
 
     fun isDefaultTaskFields(): Boolean {
-        return taskIdRegex.isNullOrBlank()
+        return taskIdRegex.isNullOrEmpty() &&
+                taskIdDefault.isNullOrEmpty() &&
+                taskIdPostProcessor == StringCase.NONE.label
     }
 
     fun isDefaultTypeFields(): Boolean {
-        return typeRegex.isNullOrBlank() && typePostprocessor == StringCase.NONE.label
+        return typeRegex.isNullOrEmpty() &&
+                typeDefault.isNullOrEmpty() &&
+                typePostprocessor == StringCase.NONE.label
     }
 
-    fun isDefaultProjectNameFields(): Boolean {
-        return projectNameRegex.isNullOrBlank() &&
-                (projectNameSeparator.isNullOrBlank() || projectNameSeparator == DEFAULT_PROJECT_NAME_SEPARATOR) &&
-                (projectNamePostprocessor == StringCase.NONE.label)
+    fun isDefaultScopeFields(): Boolean {
+        return scopeRegex.isNullOrEmpty() &&
+                scopeDefault.isNullOrEmpty() &&
+                (scopeSeparator.isNullOrEmpty() || scopeSeparator == DEFAULT_SCOPE_SEPARATOR) &&
+                (scopePostprocessor == StringCase.NONE.label)
     }
 }

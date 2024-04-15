@@ -5,8 +5,10 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TASK_ID_REGEX
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
+import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import com.kozhun.commitmessagetemplate.util.branches
 import com.kozhun.commitmessagetemplate.util.storage
+import com.kozhun.commitmessagetemplate.util.toCase
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
 /**
@@ -26,17 +28,28 @@ class BranchTaskIdReplacer(
      * @return the message with TASK_ID_ANCHOR replaced by the task ID from the current branch.
      */
     override fun replace(message: String): String {
-        return message.replace(ANCHOR, getTaskIdFromCurrentBranch())
+        return changeCase(message.replace(ANCHOR, getTaskIdFromCurrentBranch()))
     }
 
     private fun getTaskIdFromCurrentBranch(): String {
         return project.branches().getCurrentBranch().name
             .let { getTaskIdRegex().find(it)?.value }
-            .orEmpty()
+            ?: getDefaultTaskIdValue()
     }
 
     private fun getTaskIdRegex(): Regex {
         return project.storage().state.taskIdRegex?.toNotBlankRegex() ?: DEFAULT_TASK_ID_REGEX
+    }
+
+    private fun getDefaultTaskIdValue(): String {
+        return project.storage().state.taskIdDefault.orEmpty()
+    }
+
+    private fun changeCase(value: String): String {
+        return project.storage().state.taskIdPostProcessor
+            ?.let { StringCase.labelValueOf(it) }
+            ?.let { value.toCase(it) }
+            ?: value
     }
 
     companion object {

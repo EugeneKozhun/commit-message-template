@@ -23,7 +23,7 @@ class BranchTaskIdReplacerTest : BaseReplacerTest() {
 
     @Test
     fun `replace empty template with custom regex`() {
-        mockSettingState(customTaskIdRegex = CUSTOM_TASK_ID_REGEX)
+        mockSettingState(taskIdRegex = CUSTOM_TASK_ID_REGEX)
         mockBranchName(BRANCH_WITHOUT_TASK_ID)
         assertEquals("", replacer.replace(""))
     }
@@ -39,7 +39,7 @@ class BranchTaskIdReplacerTest : BaseReplacerTest() {
     @Test
     fun `replace non-task-id branch template`() {
         val template = "Some changes"
-        mockSettingState(customTaskIdRegex = CUSTOM_TASK_ID_REGEX)
+        mockSettingState(taskIdRegex = CUSTOM_TASK_ID_REGEX)
         mockBranchName(BRANCH_WITH_TASK_ID)
         assertEquals(template, replacer.replace(template))
     }
@@ -52,6 +52,13 @@ class BranchTaskIdReplacerTest : BaseReplacerTest() {
     }
 
     @Test
+    fun `replace with custom default when task-id mismatched`() {
+        mockSettingState(taskIdDefault = "CMT-000")
+        mockBranchName(BRANCH_WITHOUT_TASK_ID)
+        assertEquals("[CMT-000]: Some changes", replacer.replace("[${BranchTaskIdReplacer.ANCHOR}]: Some changes"))
+    }
+
+    @Test
     fun `replace with task-id in branch`() {
         mockSettingState()
         mockBranchName(BRANCH_WITH_TASK_ID)
@@ -60,14 +67,14 @@ class BranchTaskIdReplacerTest : BaseReplacerTest() {
 
     @Test
     fun `replace with custom mismatched task-id in branch`() {
-        mockSettingState(customTaskIdRegex = CUSTOM_TASK_ID_REGEX)
+        mockSettingState(taskIdRegex = CUSTOM_TASK_ID_REGEX)
         mockBranchName(BRANCH_WITH_TASK_ID)
         assertEquals("[]: Some changes", replacer.replace("[${BranchTaskIdReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with custom task-id in branch`() {
-        mockSettingState(customTaskIdRegex = CUSTOM_TASK_ID_REGEX)
+        mockSettingState(taskIdRegex = CUSTOM_TASK_ID_REGEX)
         mockBranchName(BRANCH_WITH_CUSTOM_TASK_ID)
         assertEquals("[$CUSTOM_TASK_ID]: Some changes", replacer.replace("[${BranchTaskIdReplacer.ANCHOR}]: Some changes"))
     }
