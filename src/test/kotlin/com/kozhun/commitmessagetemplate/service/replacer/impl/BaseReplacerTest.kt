@@ -25,10 +25,13 @@ abstract class BaseReplacerTest {
         every { GitBranchServiceImpl.getInstance(projectMock) } returns gitBranchServiceMock
     }
 
+    @Suppress("LongParameterList")
     protected fun mockSettingState(
-        customTaskIdRegex: String = "",
-        customTypeRegex: String = "",
-        customTypeDefault: String = "",
+        taskIdRegex: String = "",
+        taskIdDefault: String = "",
+        taskIdPostprocessor: String = "",
+        typeRegex: String = "",
+        typeDefault: String = "",
         typePostprocessor: StringCase = StringCase.NONE
     ) {
         mockkStatic(SettingsStorage::class)
@@ -36,9 +39,12 @@ abstract class BaseReplacerTest {
         val settingsStorageMock = mockk<SettingsStorage>()
         val settingsStateMock = mockk<SettingsState>()
 
-        every { settingsStateMock.taskIdRegex } returns customTaskIdRegex
-        every { settingsStateMock.typeRegex } returns customTypeRegex
-        every { settingsStateMock.typeDefault } returns customTypeDefault
+        every { settingsStateMock.taskIdRegex } returns taskIdRegex
+        every { settingsStateMock.taskIdDefault } returns taskIdDefault
+        every { settingsStateMock.taskIdPostProcessor } returns taskIdPostprocessor
+
+        every { settingsStateMock.typeRegex } returns typeRegex
+        every { settingsStateMock.typeDefault } returns typeDefault
         every { settingsStateMock.typePostprocessor } returns typePostprocessor.label
         every { settingsStateMock.typeSynonyms } returns mutableMapOf()
 

@@ -24,7 +24,7 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
 
     @Test
     fun `replace empty template with custom regex`() {
-        mockSettingState(customTypeRegex = CUSTOM_TYPE_REGEX)
+        mockSettingState(typeRegex = CUSTOM_TYPE_REGEX)
         mockBranchName(BRANCH_WITHOUT_TYPE_ID)
         assertEquals("", replacer.replace(""))
     }
@@ -46,7 +46,7 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
 
     @Test
     fun `replace with default type`() {
-        mockSettingState(customTypeDefault = TYPE_DEFAULT)
+        mockSettingState(typeDefault = TYPE_DEFAULT)
         mockBranchName(BRANCH_WITHOUT_TYPE_ID)
         assertEquals("[$TYPE_DEFAULT]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
@@ -61,14 +61,14 @@ class BranchTypeReplacerTest : BaseReplacerTest() {
 
     @Test
     fun `replace with mismatched type`() {
-        mockSettingState(customTypeRegex = CUSTOM_TYPE_REGEX)
+        mockSettingState(typeRegex = CUSTOM_TYPE_REGEX)
         mockBranchName(BRANCH_WITH_TYPE)
         assertEquals("[]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }
 
     @Test
     fun `replace with custom type in branch`() {
-        mockSettingState(customTypeRegex = CUSTOM_TYPE_REGEX)
+        mockSettingState(typeRegex = CUSTOM_TYPE_REGEX)
         mockBranchName(BRANCH_WITH_CUSTOM_TYPE)
         assertEquals("[${CUSTOM_TYPE}]: Some changes", replacer.replace("[${BranchTypeReplacer.ANCHOR}]: Some changes"))
     }

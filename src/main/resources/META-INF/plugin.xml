@@ -16,14 +16,18 @@
     <description><![CDATA[
         <p xmlns="http://www.w3.org/1999/html">This extension simplifies the process of writing commit messages according to the conventions adopted in your project.</p>
 
-        <h3>Features</h3>
-        <p>1. Enable the setting of a default commit message template for your project.</p>
-        <p>2. You can use keywords to dynamically set values in a message.</p>
-        <p>3. You can configure your own rule for keywords.</p>
-        <p>4. You can set the caret position in your template.</p>
+        <h3 style="margin-bottom: 0">Key Features</h3>
+        <ul>
+            <li>Default commit message template.</li>
+            <li>Configurable keywords to dynamically set values in a message.</li>
+            <li>Default values for variables.</li>
+            <li>Caret position in your template (after insert).</li>
+            <li>Whitespace formatting.</li>
+            <li>Shortcut for applying commit template.</li>
+        </ul>
 
         <h3>Usage</h3>
-        <p>Keep it simple. Just the button and the shortcut</p>
+        <p>Keep it simple. Just the button and the shortcut :D</p>
 
         <h3>Links</h3>
         <a href="https://github.com/EugeneKozhun">GitHub</a> | <a
@@ -34,6 +38,8 @@
         <h3>1.6.0</h3>
         <ul>
             <li>Renamed <strong>$PROJECT_NAME</strong> to <strong>$SCOPE</strong></li>
+            <li>Added default values setting for <strong>$TASK_ID</strong>, <strong>$SCOPE</strong>, <strong>$SCOPE</strong></li>
+            <li>Added whitespace formatting setting</li>
         </ul>
         <h3>1.5.0</h3>
         <ul>
