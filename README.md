@@ -19,6 +19,7 @@ your project.
 
 - Default commit message template
 - Configurable keywords to dynamically set values in a message
+  - Task id, Scope, Type
   - Default values for variables
 - Caret position in your template
 - Whitespace formatting
