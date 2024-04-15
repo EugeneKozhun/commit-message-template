@@ -34,6 +34,16 @@ class SettingsState : BaseState() {
     var taskIdRegex by string()
 
     /**
+     * Represents a default value for task-id.
+     */
+    var taskIdDefault by string()
+
+    /**
+     * Represents a string case postprocessor for a task id.
+     */
+    var taskIdPostProcessor by string(StringCase.NONE.label)
+
+    /**
      * Represents a custom regular expression used for matching a current branch type.
      */
     var typeRegex by string()
@@ -74,11 +84,15 @@ class SettingsState : BaseState() {
     var scopePostprocessor by string(StringCase.NONE.label)
 
     fun isDefaultTaskFields(): Boolean {
-        return taskIdRegex.isNullOrEmpty()
+        return taskIdRegex.isNullOrEmpty() &&
+                taskIdDefault.isNullOrEmpty() &&
+                taskIdPostProcessor == StringCase.NONE.label
     }
 
     fun isDefaultTypeFields(): Boolean {
-        return typeRegex.isNullOrEmpty() && typePostprocessor == StringCase.NONE.label && typeDefault.isNullOrEmpty()
+        return typeRegex.isNullOrEmpty() &&
+                typeDefault.isNullOrEmpty() &&
+                typePostprocessor == StringCase.NONE.label
     }
 
     fun isDefaultScopeFields(): Boolean {

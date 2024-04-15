@@ -71,6 +71,16 @@ class CommitMessageTemplateSettings(
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::taskIdRegex)
                     }
+                    row {
+                        textField()
+                            .label(resourceBundle.getString("settings.advanced.task-id.default.value"), LabelPosition.TOP)
+                            .comment(resourceBundle.getString("settings.advanced.task-id.default.comment"))
+                            .align(AlignX.FILL)
+                            .bindNullableText(settingsStorage.state::taskIdDefault)
+                        comboBox(StringCase.values().map { it.label })
+                            .label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
+                            .bindItem(settingsStorage.state::taskIdPostProcessor)
+                    }
                 }.apply {
                     expanded = !settingsStorage.state.isDefaultTaskFields()
                 }.withoutGaps()
