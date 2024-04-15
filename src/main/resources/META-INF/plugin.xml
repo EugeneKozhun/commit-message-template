@@ -20,8 +20,9 @@
         <ul>
             <li>Default commit message template.</li>
             <li>Configurable keywords to dynamically set values in a message.</li>
+            <li>Task id, scope, type.</li>
             <li>Default values for variables.</li>
-            <li>Caret position in your template (after insert).</li>
+            <li>Caret position in your template.</li>
             <li>Whitespace formatting.</li>
             <li>Shortcut for applying commit template.</li>
         </ul>
