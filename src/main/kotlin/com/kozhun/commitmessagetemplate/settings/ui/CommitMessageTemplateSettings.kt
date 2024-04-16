@@ -110,12 +110,13 @@ class CommitMessageTemplateSettings(
                         expandableTextField()
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                             .align(AlignX.FILL)
+                            .comment("Default: ${project.name}")
                             .bindNullableText(settingsStorage.state::scopeRegex)
                     }
                     row {
                         textField()
                             .label(resourceBundle.getString("settings.advanced.scope.default-value"), LabelPosition.TOP)
-                            .comment("When the scope isn't defined.<br/>Default: ${project.name}")
+                            .comment("When the scope isn't defined.")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::scopeDefault)
                         textField()
