@@ -34,7 +34,7 @@ class ScopeReplacer(
     }
 
     private fun getPathScope(it: String): String {
-        return getRegex().find(it)?.value.orDefaultScope()
+        return getRegex()?.find(it)?.value.orDefaultScope()
     }
 
     private fun changeCase(value: String): String {
@@ -50,8 +50,8 @@ class ScopeReplacer(
             ?: DEFAULT_SCOPE_SEPARATOR
     }
 
-    private fun getRegex(): Regex {
-        return project.storage().state.scopeRegex?.toNotBlankRegex() ?: project.name.toRegex()
+    private fun getRegex(): Regex? {
+        return project.storage().state.scopeRegex?.toNotBlankRegex()
     }
 
     private fun String?.orDefaultScope(): String {
