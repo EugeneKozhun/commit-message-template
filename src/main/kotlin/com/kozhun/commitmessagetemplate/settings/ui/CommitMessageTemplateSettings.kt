@@ -62,12 +62,12 @@ class CommitMessageTemplateSettings(
                 checkBox(resourceBundle.getString("settings.duplicated-whitespaces"))
                     .bindSelected(settingsStorage.state::unnecessaryWhitespaces)
             }
-            group("Advanced Settings", false) {
+            group("Variable settings", false) {
                 collapsibleGroup(resourceBundle.getString("settings.advanced.task-id.title")) {
                     row {
                         expandableTextField()
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
-                            .comment(comment = "Default: $DEFAULT_TASK_ID_REGEX")
+                            .comment(comment = "Default regex: $DEFAULT_TASK_ID_REGEX")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::taskIdRegex)
                     }
@@ -88,7 +88,7 @@ class CommitMessageTemplateSettings(
                     row {
                         expandableTextField()
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
-                            .comment(comment = "Default: $DEFAULT_TYPE_REGEX")
+                            .comment(comment = "Default regex: $DEFAULT_TYPE_REGEX")
                             .align(AlignX.FILL)
                             .bindNullableText(settingsStorage.state::typeRegex)
                     }
@@ -110,7 +110,6 @@ class CommitMessageTemplateSettings(
                         expandableTextField()
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                             .align(AlignX.FILL)
-                            .comment("Default: ${project.name}")
                             .bindNullableText(settingsStorage.state::scopeRegex)
                     }
                     row {
