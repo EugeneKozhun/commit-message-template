@@ -1,6 +1,7 @@
 package com.kozhun.commitmessagetemplate.service.replacer.impl
 
 import com.intellij.openapi.vcs.changes.ChangeListManager
+import com.kozhun.commitmessagetemplate.settings.enums.StringCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
@@ -39,7 +40,8 @@ class ScopeReplacerTest : BaseReplacerTest() {
     @Test
     fun `should return default scope when affected paths not contain value by regex`() {
         mockSettingState(
-            scopeDefault = "cmt"
+            scopeDefault = "cmt",
+            scopePostprocessor = StringCase.CAPITALIZE
         )
         mockAffectedPaths(
             "something/something/something/something/something.kt",
@@ -94,6 +96,21 @@ class ScopeReplacerTest : BaseReplacerTest() {
         )
         mockBranchName(BRANCH_WITHOUT_TYPE_ID)
         assertEquals("test,project: default message", replacer.replace("$ANCHOR: default message"))
+    }
+
+    @Test
+    fun `should return few scopes when affected paths contain value by regex and uppercase postprocessor`() {
+        mockSettingState(
+            scopeRegex = "project|test",
+            scopePostprocessor = StringCase.UPPERCASE
+        )
+        mockAffectedPaths(
+            "something/something/something/something/something.kt",
+            "test/test/test/test/test.kt",
+            "project/project/project/project/project.kt"
+        )
+        mockBranchName(BRANCH_WITHOUT_TYPE_ID)
+        assertEquals("TEST|PROJECT: default message", replacer.replace("$ANCHOR: default message"))
     }
 
     private fun mockAffectedPaths(vararg paths: String) {

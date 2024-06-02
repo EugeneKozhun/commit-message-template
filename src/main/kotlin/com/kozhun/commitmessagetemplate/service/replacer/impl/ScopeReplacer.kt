@@ -31,8 +31,8 @@ class ScopeReplacer(
             .distinct()
             .joinToString(getSeparator())
             .takeIf { it.isNotEmpty() }
+            ?.let { changeCase(it) }
             .orDefaultScope()
-            .let { changeCase(it) }
     }
 
     private fun getPathScope(it: String): String? {
