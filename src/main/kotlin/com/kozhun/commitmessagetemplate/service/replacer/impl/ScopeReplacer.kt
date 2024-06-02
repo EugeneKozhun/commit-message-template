@@ -27,14 +27,16 @@ class ScopeReplacer(
             .asSequence()
             .mapNotNull { it.path }
             .map { getPathScope(it) }
-            .filter { it.isNotEmpty() }
+            .filter { !it.isNullOrEmpty() }
             .distinct()
             .joinToString(getSeparator())
+            .takeIf { it.isNotEmpty() }
+            .orDefaultScope()
             .let { changeCase(it) }
     }
 
-    private fun getPathScope(it: String): String {
-        return getRegex()?.find(it)?.value.orDefaultScope()
+    private fun getPathScope(it: String): String? {
+        return getRegex()?.find(it)?.value
     }
 
     private fun changeCase(value: String): String {
@@ -55,7 +57,7 @@ class ScopeReplacer(
     }
 
     private fun String?.orDefaultScope(): String {
-        if (this != null) {
+        if (!this.isNullOrEmpty()) {
             return this
         }
         return project.storage().state.scopeDefault.orEmpty()
