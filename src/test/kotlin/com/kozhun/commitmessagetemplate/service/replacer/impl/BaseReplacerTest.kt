@@ -32,22 +32,36 @@ abstract class BaseReplacerTest {
         taskIdPostprocessor: String = "",
         typeRegex: String = "",
         typeDefault: String = "",
-        typePostprocessor: StringCase = StringCase.NONE
+        typePostprocessor: StringCase = StringCase.NONE,
+        typeSynonyms: MutableMap<String, String> = mutableMapOf(),
+        scopeRegex: String = "",
+        scopeDefault: String = "",
+        scopeSeparator: String = "",
+        scopePostprocessor: StringCase = StringCase.NONE,
     ) {
         mockkStatic(SettingsStorage::class)
 
         val settingsStorageMock = mockk<SettingsStorage>()
         val settingsStateMock = mockk<SettingsState>()
 
+        // Task id
         every { settingsStateMock.taskIdRegex } returns taskIdRegex
         every { settingsStateMock.taskIdDefault } returns taskIdDefault
         every { settingsStateMock.taskIdPostProcessor } returns taskIdPostprocessor
 
+        // Type
         every { settingsStateMock.typeRegex } returns typeRegex
         every { settingsStateMock.typeDefault } returns typeDefault
         every { settingsStateMock.typePostprocessor } returns typePostprocessor.label
-        every { settingsStateMock.typeSynonyms } returns mutableMapOf()
+        every { settingsStateMock.typeSynonyms } returns typeSynonyms
 
+        // Scope
+        every { settingsStateMock.scopeRegex } returns scopeRegex
+        every { settingsStateMock.scopeDefault } returns scopeDefault
+        every { settingsStateMock.scopePostprocessor } returns scopePostprocessor.label
+        every { settingsStateMock.scopeSeparator } returns scopeSeparator
+
+        // Other
         every { settingsStorageMock.state } returns settingsStateMock
         every { SettingsStorage.getInstance(projectMock) } returns settingsStorageMock
     }
