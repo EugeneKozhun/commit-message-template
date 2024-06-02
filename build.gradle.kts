@@ -1,16 +1,18 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 // Versions
 val mockkVersion = "1.13.9"
 val junitVersion = "5.10.2"
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.23"
+    id("org.jetbrains.kotlin.jvm") version "2.0.0"
     id("org.jetbrains.intellij") version "1.17.3"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
 group = "com.kozhun"
-version = "1.7.0"
+version = "1.8.0"
 
 sourceSets["main"].java.srcDirs("src/main/gen")
 
@@ -43,13 +45,16 @@ tasks {
         sourceCompatibility = "17"
         targetCompatibility = "17"
     }
+
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+        }
     }
 
     patchPluginXml {
         sinceBuild.set("231")
-        untilBuild.set("241.*")
+        untilBuild.set("242.*")
     }
 
     signPlugin {
