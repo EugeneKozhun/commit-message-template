@@ -36,6 +36,12 @@
         ]]></description>
 
     <change-notes><![CDATA[
+        <h3>1.8.1</h3>
+        <ul>
+            <li>Improved <strong>$TASK_ID</strong> postprocessor logic. Applied only to the task id value, not to the whole message.</li>
+            <li>Updated internal libs</li>
+        </ul>
+
         <h3>1.8.0</h3>
         <ul>
             <li>Improved <strong>$SCOPE</strong> logic. Don't insert default value if there is at least one from regex.</li>

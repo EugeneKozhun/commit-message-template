@@ -28,12 +28,13 @@ class BranchTaskIdReplacer(
      * @return the message with TASK_ID_ANCHOR replaced by the task ID from the current branch.
      */
     override fun replace(message: String): String {
-        return changeCase(message.replace(ANCHOR, getTaskIdFromCurrentBranch()))
+        return message.replace(ANCHOR, getTaskIdFromCurrentBranch())
     }
 
     private fun getTaskIdFromCurrentBranch(): String {
         return project.branches().getCurrentBranch().name
             .let { getTaskIdRegex().find(it)?.value }
+            ?.let { changeCase(it) }
             ?: getDefaultTaskIdValue()
     }
 
