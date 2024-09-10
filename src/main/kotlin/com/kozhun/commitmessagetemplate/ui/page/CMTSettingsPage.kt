@@ -5,10 +5,13 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.options.ConfigurableWithId
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
+import com.intellij.ui.ContextHelpLabel
+import com.intellij.ui.components.JBLabel
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.BottomGap
 import com.intellij.ui.dsl.builder.LabelPosition
 import com.intellij.ui.dsl.builder.Row
+import com.intellij.ui.dsl.builder.RowLayout
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.bindSelected
@@ -23,8 +26,10 @@ import com.kozhun.commitmessagetemplate.ui.components.PatternEditorBuilder
 import com.kozhun.commitmessagetemplate.ui.components.TypeSynonymDialog
 import com.kozhun.commitmessagetemplate.ui.util.bindNullableText
 import com.kozhun.commitmessagetemplate.util.storage
+import java.awt.FlowLayout
 import java.util.ResourceBundle
 import javax.swing.JComponent
+import javax.swing.JPanel
 
 /**
  * Represents the settings for the Commit Message Template plugin.
@@ -38,6 +43,7 @@ class CMTSettingsPage(
     private lateinit var patternEditor: Editor
     private lateinit var panel: DialogPanel
     private lateinit var typeSynonyms: Map<String, String>
+    private lateinit var tagPanel: JPanel
 
 
     @Suppress("LongMethod")
@@ -45,6 +51,10 @@ class CMTSettingsPage(
         settingsStorage = project.storage()
         patternEditor = PatternEditorBuilder.buildEditor(project)
         typeSynonyms = settingsStorage.state.typeSynonyms
+
+        // TODO: move to separate component.
+        tagPanel = JPanel(FlowLayout(FlowLayout.LEFT))
+        updateTags()
 
         val resourceBundle = ResourceBundle.getBundle("messages")
 
@@ -74,7 +84,9 @@ class CMTSettingsPage(
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                             .comment(comment = "Default regex: $DEFAULT_TASK_ID_REGEX")
                             .align(AlignX.FILL)
+                            .resizableColumn()
                             .bindNullableText(settingsStorage.state::taskIdRegex)
+                        cell(ContextHelpLabel.create("Value extracted from current branch name")).align(AlignX.RIGHT)
                     }
                     row {
                         textField()
@@ -95,7 +107,9 @@ class CMTSettingsPage(
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                             .comment(comment = "Default regex: $DEFAULT_TYPE_REGEX")
                             .align(AlignX.FILL)
+                            .resizableColumn()
                             .bindNullableText(settingsStorage.state::typeRegex)
+                        cell(ContextHelpLabel.create("Value extracted from current branch name")).align(AlignX.RIGHT)
                     }
                     row {
                         textField()
@@ -108,13 +122,14 @@ class CMTSettingsPage(
                             .bindItem(settingsStorage.state::typePostprocessor)
                     }
                     row {
+                        cell(tagPanel)
+                    }
+                    row {
                         button("Synonyms Configuration") {
-                            val dialog = TypeSynonymDialog(project)
+                            val dialog = TypeSynonymDialog(typeSynonyms)
                             if (dialog.showAndGet()) {
                                 typeSynonyms = dialog.getSynonyms()
-
-                                panel.revalidate()
-                                panel.repaint()
+                                updateTags()
                             }
                         }
                     }
@@ -126,7 +141,9 @@ class CMTSettingsPage(
                         expandableTextField()
                             .label(resourceBundle.getString("settings.advanced.common.label"), LabelPosition.TOP)
                             .align(AlignX.FILL)
+                            .resizableColumn()
                             .bindNullableText(settingsStorage.state::scopeRegex)
+                        cell(ContextHelpLabel.create("Value extracted from the modified file's path")).align(AlignX.RIGHT)
                     }
                     row {
                         textField()
@@ -163,6 +180,7 @@ class CMTSettingsPage(
 
     override fun reset() {
         typeSynonyms = settingsStorage.state.typeSynonyms
+        updateTags()
         panel.reset()
     }
 
@@ -179,6 +197,18 @@ class CMTSettingsPage(
         return ID
     }
 
+    // TODO: move to separate component.
+    private fun updateTags() {
+        tagPanel.removeAll()
+
+        typeSynonyms.forEach { (key, value) ->
+            tagPanel.add(JBLabel("$key -> $value"))
+        }
+
+        tagPanel.revalidate()
+        tagPanel.repaint()
+    }
+
     companion object {
         private const val DISPLAY_NAME = "Commit Message Template"
         private const val ID = "preferences.CommitMessageTemplateConfigurable"
@@ -189,3 +219,4 @@ private fun Row.withoutGaps() = apply {
     topGap(TopGap.NONE)
     bottomGap(BottomGap.NONE)
 }
+

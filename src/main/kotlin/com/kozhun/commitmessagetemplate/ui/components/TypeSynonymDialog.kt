@@ -1,13 +1,11 @@
 package com.kozhun.commitmessagetemplate.ui.components
 
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.table.TableView
 import com.intellij.util.ui.ColumnInfo
 import com.intellij.util.ui.ListTableModel
-import com.kozhun.commitmessagetemplate.util.storage
 import java.awt.Dimension
 import javax.swing.JComponent
 import javax.swing.ListSelectionModel
@@ -25,9 +23,9 @@ class SynonymColumnInfo(
 }
 
 class TypeSynonymDialog(
-    project: Project
+    typeSynonyms: Map<String, String>
 ) : DialogWrapper(true) {
-    private val synonymPairs = project.storage().state.typeSynonyms
+    private val synonymPairs = typeSynonyms
         .map { SynonymPair(it.key, it.value) }
         .toMutableList()
     private val tableModel = ListTableModel(
