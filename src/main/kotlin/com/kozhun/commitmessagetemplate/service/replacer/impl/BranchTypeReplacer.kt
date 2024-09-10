@@ -5,7 +5,7 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REGEX
 import com.kozhun.commitmessagetemplate.service.replacer.Replacer
-import com.kozhun.commitmessagetemplate.settings.enums.StringCase
+import com.kozhun.commitmessagetemplate.enums.StringCase
 import com.kozhun.commitmessagetemplate.util.branches
 import com.kozhun.commitmessagetemplate.util.storage
 import com.kozhun.commitmessagetemplate.util.toCase

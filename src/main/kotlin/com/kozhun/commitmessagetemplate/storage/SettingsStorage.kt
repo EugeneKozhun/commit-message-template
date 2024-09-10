@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.settings.storage
+package com.kozhun.commitmessagetemplate.storage
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.SimplePersistentStateComponent

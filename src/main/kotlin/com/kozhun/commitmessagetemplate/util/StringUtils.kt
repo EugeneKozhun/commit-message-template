@@ -1,7 +1,7 @@
 package com.kozhun.commitmessagetemplate.util
 
 import ai.grazie.utils.capitalize
-import com.kozhun.commitmessagetemplate.settings.enums.StringCase
+import com.kozhun.commitmessagetemplate.enums.StringCase
 
 /**
  * Returns a regular expression based on the current string if it is not blank.

@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.settings.ui
+package com.kozhun.commitmessagetemplate.ui.page
 
 import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
@@ -17,10 +17,11 @@ import com.intellij.ui.dsl.builder.toMutableProperty
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TASK_ID_REGEX
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REGEX
-import com.kozhun.commitmessagetemplate.settings.enums.StringCase
-import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
-import com.kozhun.commitmessagetemplate.settings.util.PatternEditorUtil
-import com.kozhun.commitmessagetemplate.settings.util.bindNullableText
+import com.kozhun.commitmessagetemplate.enums.StringCase
+import com.kozhun.commitmessagetemplate.storage.SettingsStorage
+import com.kozhun.commitmessagetemplate.ui.components.PatternEditorBuilder
+import com.kozhun.commitmessagetemplate.ui.components.TypeSynonymDialog
+import com.kozhun.commitmessagetemplate.ui.util.bindNullableText
 import com.kozhun.commitmessagetemplate.util.storage
 import java.util.ResourceBundle
 import javax.swing.JComponent
@@ -30,17 +31,21 @@ import javax.swing.JComponent
  *
  * @param project The current project.
  */
-class CommitMessageTemplateSettings(
+class CMTSettingsPage(
     private val project: Project
 ) : ConfigurableWithId {
     private lateinit var settingsStorage: SettingsStorage
     private lateinit var patternEditor: Editor
     private lateinit var panel: DialogPanel
+    private lateinit var typeSynonyms: Map<String, String>
+
 
     @Suppress("LongMethod")
     override fun createComponent(): JComponent {
         settingsStorage = project.storage()
-        patternEditor = PatternEditorUtil.createEditor(project)
+        patternEditor = PatternEditorBuilder.buildEditor(project)
+        typeSynonyms = settingsStorage.state.typeSynonyms
+
         val resourceBundle = ResourceBundle.getBundle("messages")
 
         panel = panel {
@@ -102,6 +107,17 @@ class CommitMessageTemplateSettings(
                             .label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
                             .bindItem(settingsStorage.state::typePostprocessor)
                     }
+                    row {
+                        button("Synonyms Configuration") {
+                            val dialog = TypeSynonymDialog()
+                            if (dialog.showAndGet()) {
+                                typeSynonyms = dialog.getSynonyms()
+
+                                panel.revalidate()
+                                panel.repaint()
+                            }
+                        }
+                    }
                 }.apply {
                     expanded = !settingsStorage.state.isDefaultTypeFields()
                 }.withoutGaps()
@@ -137,20 +153,22 @@ class CommitMessageTemplateSettings(
     }
 
     override fun isModified(): Boolean {
-        return panel.isModified()
+        return panel.isModified() || settingsStorage.state.typeSynonyms != typeSynonyms
     }
 
     override fun apply() {
+        settingsStorage.state.typeSynonyms = typeSynonyms.toMutableMap()
         panel.apply()
     }
 
     override fun reset() {
+        typeSynonyms = settingsStorage.state.typeSynonyms
         panel.reset()
     }
 
     override fun disposeUIResources() {
         super.disposeUIResources()
-        PatternEditorUtil.dispose(patternEditor)
+        PatternEditorBuilder.dispose(patternEditor)
     }
 
     override fun getDisplayName(): String {

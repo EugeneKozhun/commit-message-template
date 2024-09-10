@@ -1,7 +1,7 @@
 package com.kozhun.commitmessagetemplate.service.replacer.impl
 
 import com.intellij.openapi.vcs.changes.ChangeListManager
-import com.kozhun.commitmessagetemplate.settings.enums.StringCase
+import com.kozhun.commitmessagetemplate.enums.StringCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
