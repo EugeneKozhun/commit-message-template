@@ -8,6 +8,7 @@ import com.intellij.ui.table.TableView
 import com.intellij.util.ui.ColumnInfo
 import com.intellij.util.ui.ListTableModel
 import com.kozhun.commitmessagetemplate.util.storage
+import java.awt.Dimension
 import javax.swing.JComponent
 import javax.swing.ListSelectionModel
 
@@ -53,6 +54,8 @@ class TypeSynonymDialog(
             .disableDownAction()
             .createPanel()
 
+        tablePanel.preferredSize = Dimension(MODAL_WIDTH, MODAL_HEIGHT)
+
         return JBScrollPane(tablePanel)
     }
 
@@ -72,5 +75,10 @@ class TypeSynonymDialog(
     fun getSynonyms(): Map<String, String> {
         return synonymPairs.filter { it.key.isNotBlank() && it.value.isNotBlank() }
             .associate { it.key to it.value }
+    }
+
+    companion object {
+        private const val MODAL_WIDTH = 500
+        private const val MODAL_HEIGHT = 200
     }
 }
