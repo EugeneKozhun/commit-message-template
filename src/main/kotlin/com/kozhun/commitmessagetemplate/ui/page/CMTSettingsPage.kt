@@ -109,7 +109,7 @@ class CMTSettingsPage(
                     }
                     row {
                         button("Synonyms Configuration") {
-                            val dialog = TypeSynonymDialog()
+                            val dialog = TypeSynonymDialog(project)
                             if (dialog.showAndGet()) {
                                 typeSynonyms = dialog.getSynonyms()
 

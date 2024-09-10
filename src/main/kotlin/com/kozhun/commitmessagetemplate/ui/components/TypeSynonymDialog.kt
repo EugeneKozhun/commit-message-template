@@ -1,11 +1,13 @@
 package com.kozhun.commitmessagetemplate.ui.components
 
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.table.TableView
 import com.intellij.util.ui.ColumnInfo
 import com.intellij.util.ui.ListTableModel
+import com.kozhun.commitmessagetemplate.util.storage
 import javax.swing.JComponent
 import javax.swing.ListSelectionModel
 
@@ -21,8 +23,12 @@ class SynonymColumnInfo(
     override fun setValue(item: SynonymPair, value: String) = setter(item, value)
 }
 
-class TypeSynonymDialog : DialogWrapper(true) {
-    private val synonymPairs = mutableListOf<SynonymPair>()
+class TypeSynonymDialog(
+    project: Project
+) : DialogWrapper(true) {
+    private val synonymPairs = project.storage().state.typeSynonyms
+        .map { SynonymPair(it.key, it.value) }
+        .toMutableList()
     private val tableModel = ListTableModel(
         arrayOf(
             SynonymColumnInfo("Value", { it.key }, { item, value -> item.key = value }),
@@ -51,8 +57,8 @@ class TypeSynonymDialog : DialogWrapper(true) {
     }
 
     private fun addSynonym() {
-            synonymPairs.add(SynonymPair("", ""))
-            tableModel.fireTableDataChanged()
+        synonymPairs.add(SynonymPair("", ""))
+        tableModel.fireTableDataChanged()
     }
 
     private fun removeSelectedSynonym() {
