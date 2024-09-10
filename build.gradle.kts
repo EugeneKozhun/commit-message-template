@@ -6,7 +6,7 @@ val junitVersion = "5.10.2"
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.0.10"
+    id("org.jetbrains.kotlin.jvm") version "2.0.20"
     id("org.jetbrains.intellij") version "1.17.4"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
