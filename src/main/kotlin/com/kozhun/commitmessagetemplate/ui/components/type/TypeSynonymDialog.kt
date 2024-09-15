@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.ui.components
+package com.kozhun.commitmessagetemplate.ui.components.type
 
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.ui.ToolbarDecorator
@@ -24,7 +24,7 @@ class SynonymColumnInfo(
 
 class TypeSynonymDialog(
     typeSynonyms: Map<String, String>
-) : DialogWrapper(true) {
+) : DialogWrapper(false) {
     private val synonymPairs = typeSynonyms
         .map { SynonymPair(it.key, it.value) }
         .toMutableList()

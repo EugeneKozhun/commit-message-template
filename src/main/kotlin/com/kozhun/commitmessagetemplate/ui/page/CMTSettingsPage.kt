@@ -6,12 +6,10 @@ import com.intellij.openapi.options.ConfigurableWithId
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.ContextHelpLabel
-import com.intellij.ui.components.JBLabel
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.BottomGap
 import com.intellij.ui.dsl.builder.LabelPosition
 import com.intellij.ui.dsl.builder.Row
-import com.intellij.ui.dsl.builder.RowLayout
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.bindSelected
@@ -23,19 +21,13 @@ import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REG
 import com.kozhun.commitmessagetemplate.enums.StringCase
 import com.kozhun.commitmessagetemplate.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.ui.components.PatternEditorBuilder
-import com.kozhun.commitmessagetemplate.ui.components.TypeSynonymDialog
+import com.kozhun.commitmessagetemplate.ui.components.type.TypeSynonymDialog
+import com.kozhun.commitmessagetemplate.ui.components.type.TypeSynonymsPanel
 import com.kozhun.commitmessagetemplate.ui.util.bindNullableText
 import com.kozhun.commitmessagetemplate.util.storage
-import java.awt.FlowLayout
 import java.util.ResourceBundle
 import javax.swing.JComponent
-import javax.swing.JPanel
 
-/**
- * Represents the settings for the Commit Message Template plugin.
- *
- * @param project The current project.
- */
 class CMTSettingsPage(
     private val project: Project
 ) : ConfigurableWithId {
@@ -43,18 +35,14 @@ class CMTSettingsPage(
     private lateinit var patternEditor: Editor
     private lateinit var panel: DialogPanel
     private lateinit var typeSynonyms: Map<String, String>
-    private lateinit var tagPanel: JPanel
-
+    private lateinit var typeSynonymsPanel: TypeSynonymsPanel
 
     @Suppress("LongMethod")
     override fun createComponent(): JComponent {
         settingsStorage = project.storage()
         patternEditor = PatternEditorBuilder.buildEditor(project)
         typeSynonyms = settingsStorage.state.typeSynonyms
-
-        // TODO: move to separate component.
-        tagPanel = JPanel(FlowLayout(FlowLayout.LEFT))
-        updateTags()
+        typeSynonymsPanel = TypeSynonymsPanel(typeSynonyms)
 
         val resourceBundle = ResourceBundle.getBundle("messages")
 
@@ -122,16 +110,16 @@ class CMTSettingsPage(
                             .bindItem(settingsStorage.state::typePostprocessor)
                     }
                     row {
-                        cell(tagPanel)
-                    }
-                    row {
                         button("Synonyms Configuration") {
                             val dialog = TypeSynonymDialog(typeSynonyms)
                             if (dialog.showAndGet()) {
                                 typeSynonyms = dialog.getSynonyms()
-                                updateTags()
+                                typeSynonymsPanel.reset(typeSynonyms)
                             }
                         }
+                    }
+                    row {
+                        cell(typeSynonymsPanel)
                     }
                 }.apply {
                     expanded = !settingsStorage.state.isDefaultTypeFields()
@@ -143,7 +131,8 @@ class CMTSettingsPage(
                             .align(AlignX.FILL)
                             .resizableColumn()
                             .bindNullableText(settingsStorage.state::scopeRegex)
-                        cell(ContextHelpLabel.create("Value extracted from the modified file's path")).align(AlignX.RIGHT)
+                        cell(ContextHelpLabel.create("Value extracted from the modified file's path"))
+                            .align(AlignX.RIGHT)
                     }
                     row {
                         textField()
@@ -175,12 +164,14 @@ class CMTSettingsPage(
 
     override fun apply() {
         settingsStorage.state.typeSynonyms = typeSynonyms.toMutableMap()
+
         panel.apply()
     }
 
     override fun reset() {
         typeSynonyms = settingsStorage.state.typeSynonyms
-        updateTags()
+        typeSynonymsPanel.reset(typeSynonyms)
+
         panel.reset()
     }
 
@@ -197,18 +188,6 @@ class CMTSettingsPage(
         return ID
     }
 
-    // TODO: move to separate component.
-    private fun updateTags() {
-        tagPanel.removeAll()
-
-        typeSynonyms.forEach { (key, value) ->
-            tagPanel.add(JBLabel("$key -> $value"))
-        }
-
-        tagPanel.revalidate()
-        tagPanel.repaint()
-    }
-
     companion object {
         private const val DISPLAY_NAME = "Commit Message Template"
         private const val ID = "preferences.CommitMessageTemplateConfigurable"
@@ -219,4 +198,3 @@ private fun Row.withoutGaps() = apply {
     topGap(TopGap.NONE)
     bottomGap(BottomGap.NONE)
 }
-
