@@ -24,7 +24,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: detekt
-      - name: Clean & Build
+      - name: Build
         uses: gradle/gradle-build-action@v2
         with:
           arguments: clean assemble
