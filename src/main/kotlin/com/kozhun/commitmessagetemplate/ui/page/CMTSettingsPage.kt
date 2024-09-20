@@ -1,5 +1,6 @@
 package com.kozhun.commitmessagetemplate.ui.page
 
+import SynonymDialog
 import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.options.ConfigurableWithId
@@ -50,8 +51,8 @@ class CMTSettingsPage(
 
         tableModel = ListTableModel(
             arrayOf(
-                SynonymColumnInfo("Value", { it.key }, { item, value -> item.key = value }),
-                SynonymColumnInfo("Synonym", { it.value }, { item, value -> item.value = value })
+                SynonymColumnInfo("Value") { it.key },
+                SynonymColumnInfo("Synonym") { it.value }
             ),
             getSynonymsMapFromStorage()
         )
@@ -213,6 +214,7 @@ class CMTSettingsPage(
     private fun createSynonymTablePanel(): JComponent {
         val tablePanel = ToolbarDecorator.createDecorator(table)
             .setAddAction { addSynonym() }
+            .setEditAction { editSelectedSynonym() }
             .setRemoveAction { removeSelectedSynonym() }
             .disableUpAction()
             .disableDownAction()
@@ -222,7 +224,24 @@ class CMTSettingsPage(
     }
 
     private fun addSynonym() {
-        tableModel.addRow(SynonymPair("", ""))
+        val dialog = SynonymDialog(getSynonymsMapFromTable().keys)
+        if (dialog.showAndGet()) {
+            val newPair = SynonymPair(dialog.value, dialog.synonym)
+            tableModel.addRow(newPair)
+            tableModel.fireTableDataChanged()
+        }
+    }
+
+    private fun editSelectedSynonym() {
+        val selectedRow = table.selectedObject
+        if (selectedRow != null) {
+            val dialog = SynonymDialog(getSynonymsMapFromTable().keys, selectedRow)
+            if (dialog.showAndGet()) {
+                selectedRow.key = dialog.value
+                selectedRow.value = dialog.synonym
+                tableModel.fireTableDataChanged()
+            }
+        }
     }
 
     private fun removeSelectedSynonym() {
