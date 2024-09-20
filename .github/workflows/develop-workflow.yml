@@ -20,14 +20,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Clean & Build
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: clean assemble
       - name: Lint
         uses: gradle/gradle-build-action@v2
         with:
           arguments: detekt
+      - name: Clean & Build
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: clean assemble
       - name: Test
         uses: gradle/gradle-build-action@v2
         with:
