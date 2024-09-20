@@ -6,6 +6,7 @@ import com.intellij.openapi.options.ConfigurableWithId
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.ContextHelpLabel
+import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.BottomGap
 import com.intellij.ui.dsl.builder.LabelPosition
@@ -15,34 +16,61 @@ import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.toMutableProperty
+import com.intellij.ui.table.TableView
+import com.intellij.util.ui.ColumnInfo
+import com.intellij.util.ui.ListTableModel
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TASK_ID_REGEX
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REGEX
 import com.kozhun.commitmessagetemplate.enums.StringCase
 import com.kozhun.commitmessagetemplate.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.ui.components.PatternEditorBuilder
-import com.kozhun.commitmessagetemplate.ui.components.type.TypeSynonymDialog
-import com.kozhun.commitmessagetemplate.ui.components.type.TypeSynonymsPanel
 import com.kozhun.commitmessagetemplate.ui.util.bindNullableText
 import com.kozhun.commitmessagetemplate.util.storage
 import java.util.ResourceBundle
 import javax.swing.JComponent
+import javax.swing.ListSelectionModel
 
+data class SynonymPair(var key: String, var value: String)
+
+class SynonymColumnInfo(
+    name: String,
+    private val getter: (SynonymPair) -> String,
+    private val setter: (SynonymPair, String) -> Unit
+) : ColumnInfo<SynonymPair, String>(name) {
+    override fun valueOf(item: SynonymPair): String = getter(item)
+    override fun isCellEditable(item: SynonymPair): Boolean = true
+    override fun setValue(item: SynonymPair, value: String) = setter(item, value)
+}
+
+@Suppress("TooManyFunctions")
 class CMTSettingsPage(
     private val project: Project
 ) : ConfigurableWithId {
     private lateinit var settingsStorage: SettingsStorage
     private lateinit var patternEditor: Editor
     private lateinit var panel: DialogPanel
-    private lateinit var typeSynonyms: Map<String, String>
-    private lateinit var typeSynonymsPanel: TypeSynonymsPanel
+
+    private lateinit var tableModel: ListTableModel<SynonymPair>
+    private lateinit var table: TableView<SynonymPair>
 
     @Suppress("LongMethod")
     override fun createComponent(): JComponent {
         settingsStorage = project.storage()
         patternEditor = PatternEditorBuilder.buildEditor(project)
-        typeSynonyms = settingsStorage.state.typeSynonyms
-        typeSynonymsPanel = TypeSynonymsPanel(typeSynonyms)
+
+        tableModel = ListTableModel(
+            arrayOf(
+                SynonymColumnInfo("Value", { it.key }, { item, value -> item.key = value }),
+                SynonymColumnInfo("Synonym", { it.value }, { item, value -> item.value = value })
+            ),
+            settingsStorage.state.typeSynonyms
+                .map { SynonymPair(it.key, it.value) }
+                .toMutableList()
+        )
+
+        table = TableView(tableModel)
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
 
         val resourceBundle = ResourceBundle.getBundle("messages")
 
@@ -109,18 +137,11 @@ class CMTSettingsPage(
                             .label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
                             .bindItem(settingsStorage.state::typePostprocessor)
                     }
-                    row {
-                        button("Synonyms Configuration") {
-                            val dialog = TypeSynonymDialog(typeSynonyms)
-                            if (dialog.showAndGet()) {
-                                typeSynonyms = dialog.getSynonyms()
-                                typeSynonymsPanel.reset(typeSynonyms)
-                            }
-                        }
-                    }
-                    row {
-                        cell(typeSynonymsPanel)
-                    }
+                    group("\$TYPE Synonyms", indent = false) {
+                        row {
+                            cell(createSynonymTablePanel()).align(AlignX.FILL)
+                        }.resizableRow()
+                    }.withoutGaps()
                 }.apply {
                     expanded = !settingsStorage.state.isDefaultTypeFields()
                 }.withoutGaps()
@@ -159,20 +180,26 @@ class CMTSettingsPage(
     }
 
     override fun isModified(): Boolean {
-        return panel.isModified() || settingsStorage.state.typeSynonyms != typeSynonyms
+        return panel.isModified() || settingsStorage.state.typeSynonyms != getSynonymsMap()
     }
 
     override fun apply() {
-        settingsStorage.state.typeSynonyms = typeSynonyms.toMutableMap()
-
+        settingsStorage.state.typeSynonyms = getSynonymsMap().toMutableMap()
         panel.apply()
     }
 
     override fun reset() {
-        typeSynonyms = settingsStorage.state.typeSynonyms
-        typeSynonymsPanel.reset(typeSynonyms)
-
+        tableModel.items = settingsStorage.state.typeSynonyms
+            .map { SynonymPair(it.key, it.value) }
+            .toMutableList()
+        tableModel.fireTableDataChanged()
         panel.reset()
+    }
+
+    private fun getSynonymsMap(): Map<String, String> {
+        return tableModel.items
+            .filter { it.key.isNotBlank() && it.value.isNotBlank() }
+            .associate { it.key to it.value }
     }
 
     override fun disposeUIResources() {
@@ -191,6 +218,28 @@ class CMTSettingsPage(
     companion object {
         private const val DISPLAY_NAME = "Commit Message Template"
         private const val ID = "preferences.CommitMessageTemplateConfigurable"
+    }
+
+    private fun createSynonymTablePanel(): JComponent {
+        val tablePanel = ToolbarDecorator.createDecorator(table)
+            .setAddAction { addSynonym() }
+            .setRemoveAction { removeSelectedSynonym() }
+            .disableUpAction()
+            .disableDownAction()
+            .createPanel()
+
+        return tablePanel
+    }
+
+    private fun addSynonym() {
+        tableModel.addRow(SynonymPair("", ""))
+    }
+
+    private fun removeSelectedSynonym() {
+        val selectedRow = table.selectedRow
+        if (selectedRow >= 0) {
+            tableModel.removeRow(selectedRow)
+        }
     }
 }
 
