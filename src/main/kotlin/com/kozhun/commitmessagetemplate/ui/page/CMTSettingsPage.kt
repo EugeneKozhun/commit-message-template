@@ -58,6 +58,7 @@ class CMTSettingsPage(
 
         table = TableView(tableModel)
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
+        table.putClientProperty("terminateEditOnFocusLost", true)
 
         val resourceBundle = ResourceBundle.getBundle("messages")
 
