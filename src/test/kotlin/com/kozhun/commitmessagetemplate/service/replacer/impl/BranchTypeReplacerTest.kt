@@ -1,6 +1,6 @@
 package com.kozhun.commitmessagetemplate.service.replacer.impl
 
-import com.kozhun.commitmessagetemplate.settings.enums.StringCase
+import com.kozhun.commitmessagetemplate.enums.StringCase
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach

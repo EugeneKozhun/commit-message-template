@@ -111,7 +111,7 @@
                 parentId="project.propVCSSupport.Mappings"
                 displayName="Commit Message Template"
                 id="preferences.CommitMessageTemplateConfigurable"
-                instance="com.kozhun.commitmessagetemplate.settings.ui.CommitMessageTemplateSettings"/>
+                instance="com.kozhun.commitmessagetemplate.ui.page.CMTSettingsPage"/>
         <fileType
                 name="Commit Message Template"
                 implementationClass="com.kozhun.commitmessagetemplate.language.CMTFileType"

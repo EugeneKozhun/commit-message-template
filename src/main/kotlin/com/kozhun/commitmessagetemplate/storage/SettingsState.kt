@@ -1,8 +1,8 @@
-package com.kozhun.commitmessagetemplate.settings.storage
+package com.kozhun.commitmessagetemplate.storage
 
 import com.intellij.openapi.components.BaseState
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
-import com.kozhun.commitmessagetemplate.settings.enums.StringCase
+import com.kozhun.commitmessagetemplate.enums.StringCase
 
 /**
  * Represents the state of the settings in the application.

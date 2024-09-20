@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.settings.util
+package com.kozhun.commitmessagetemplate.ui.util
 
 import com.intellij.ui.dsl.builder.Cell
 import com.intellij.ui.dsl.builder.MutableProperty
