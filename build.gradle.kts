@@ -1,14 +1,14 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 // Versions
-val mockkVersion = "1.13.9"
-val junitVersion = "5.10.2"
+val mockkVersion = "1.13.12"
+val junitVersion = "5.11.0"
 
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.0.20"
     id("org.jetbrains.intellij") version "1.17.4"
-    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
 
 group = "com.kozhun"
