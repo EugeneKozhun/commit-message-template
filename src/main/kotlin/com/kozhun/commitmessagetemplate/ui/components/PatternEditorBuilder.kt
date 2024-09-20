@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.settings.util
+package com.kozhun.commitmessagetemplate.ui.components
 
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.editor.Editor
@@ -13,7 +13,7 @@ import com.kozhun.commitmessagetemplate.language.CMTLanguage
 import java.awt.Dimension
 
 
-object PatternEditorUtil {
+object PatternEditorBuilder {
     private const val DEFAULT_DOCUMENT_TEXT = ""
     private const val VIRTUAL_FILE_NAME = "settings-pattern.cmt"
     private const val TEXT_AREA_HEIGHT = 125
@@ -24,7 +24,7 @@ object PatternEditorUtil {
      * @param project the project in which the editor will be created
      * @return the created editor
      */
-    fun createEditor(project: Project): Editor {
+    fun buildEditor(project: Project): Editor {
         val document = createDocument()
         val editorFactory = EditorFactory.getInstance()
         val editor = editorFactory.createEditor(document, project)

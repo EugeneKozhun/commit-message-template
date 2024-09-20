@@ -3,9 +3,9 @@ package com.kozhun.commitmessagetemplate.service.replacer.impl
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.git.branch.GitBranchService
 import com.kozhun.commitmessagetemplate.service.git.branch.impl.GitBranchServiceImpl
-import com.kozhun.commitmessagetemplate.settings.enums.StringCase
-import com.kozhun.commitmessagetemplate.settings.storage.SettingsState
-import com.kozhun.commitmessagetemplate.settings.storage.SettingsStorage
+import com.kozhun.commitmessagetemplate.enums.StringCase
+import com.kozhun.commitmessagetemplate.storage.SettingsState
+import com.kozhun.commitmessagetemplate.storage.SettingsStorage
 import git4idea.GitLocalBranch
 import io.mockk.every
 import io.mockk.mockk

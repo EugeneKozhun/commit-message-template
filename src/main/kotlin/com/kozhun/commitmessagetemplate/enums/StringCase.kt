@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.settings.enums
+package com.kozhun.commitmessagetemplate.enums
 
 enum class StringCase(val label: String) {
     NONE("None"),
