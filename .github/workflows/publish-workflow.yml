@@ -15,11 +15,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Clean & Build
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: clean assemble
       - name: Sign & Publish plugin to Marketplace.
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: publishPlugin
         env:
