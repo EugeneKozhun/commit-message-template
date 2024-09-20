@@ -25,8 +25,8 @@ import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REG
 import com.kozhun.commitmessagetemplate.enums.StringCase
 import com.kozhun.commitmessagetemplate.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.ui.components.PatternEditorBuilder
-import com.kozhun.commitmessagetemplate.ui.dto.SynonymColumnInfo
-import com.kozhun.commitmessagetemplate.ui.dto.SynonymPair
+import com.kozhun.commitmessagetemplate.ui.model.SynonymColumnInfo
+import com.kozhun.commitmessagetemplate.ui.model.SynonymPair
 import com.kozhun.commitmessagetemplate.ui.util.bindNullableText
 import com.kozhun.commitmessagetemplate.util.storage
 import java.util.ResourceBundle
@@ -132,7 +132,7 @@ class CMTSettingsPage(
                         }.resizableRow()
                     }.withoutGaps()
                 }.apply {
-                    expanded = !settingsStorage.state.isDefaultTypeFields()
+                    expanded = !settingsStorage.state.isDefaultTypeFields() || settingsStorage.state.typeSynonyms.isNotEmpty()
                 }.withoutGaps()
                 collapsibleGroup(resourceBundle.getString("settings.advanced.scope.title")) {
                     row {

@@ -1,4 +1,4 @@
-package com.kozhun.commitmessagetemplate.ui.dto
+package com.kozhun.commitmessagetemplate.ui.model
 
 import com.intellij.util.ui.ColumnInfo
 

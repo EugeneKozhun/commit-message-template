@@ -2,7 +2,7 @@ import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.ValidationInfo
 import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
-import com.kozhun.commitmessagetemplate.ui.dto.SynonymPair
+import com.kozhun.commitmessagetemplate.ui.model.SynonymPair
 import javax.swing.JComponent
 import javax.swing.JTextField
 
