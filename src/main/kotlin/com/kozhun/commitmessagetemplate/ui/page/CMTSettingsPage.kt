@@ -17,7 +17,6 @@ import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.toMutableProperty
 import com.intellij.ui.table.TableView
-import com.intellij.util.ui.ColumnInfo
 import com.intellij.util.ui.ListTableModel
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TASK_ID_REGEX
@@ -25,23 +24,13 @@ import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_TYPE_REG
 import com.kozhun.commitmessagetemplate.enums.StringCase
 import com.kozhun.commitmessagetemplate.storage.SettingsStorage
 import com.kozhun.commitmessagetemplate.ui.components.PatternEditorBuilder
+import com.kozhun.commitmessagetemplate.ui.dto.SynonymColumnInfo
+import com.kozhun.commitmessagetemplate.ui.dto.SynonymPair
 import com.kozhun.commitmessagetemplate.ui.util.bindNullableText
 import com.kozhun.commitmessagetemplate.util.storage
 import java.util.ResourceBundle
 import javax.swing.JComponent
 import javax.swing.ListSelectionModel
-
-data class SynonymPair(var key: String, var value: String)
-
-class SynonymColumnInfo(
-    name: String,
-    private val getter: (SynonymPair) -> String,
-    private val setter: (SynonymPair, String) -> Unit
-) : ColumnInfo<SynonymPair, String>(name) {
-    override fun valueOf(item: SynonymPair): String = getter(item)
-    override fun isCellEditable(item: SynonymPair): Boolean = true
-    override fun setValue(item: SynonymPair, value: String) = setter(item, value)
-}
 
 @Suppress("TooManyFunctions")
 class CMTSettingsPage(
@@ -64,9 +53,7 @@ class CMTSettingsPage(
                 SynonymColumnInfo("Value", { it.key }, { item, value -> item.key = value }),
                 SynonymColumnInfo("Synonym", { it.value }, { item, value -> item.value = value })
             ),
-            settingsStorage.state.typeSynonyms
-                .map { SynonymPair(it.key, it.value) }
-                .toMutableList()
+            getSynonymsMapFromStorage()
         )
 
         table = TableView(tableModel)
@@ -93,7 +80,7 @@ class CMTSettingsPage(
                 checkBox(resourceBundle.getString("settings.duplicated-whitespaces"))
                     .bindSelected(settingsStorage.state::unnecessaryWhitespaces)
             }
-            group("Variable settings", false) {
+            group(resourceBundle.getString("settings.variables-config"), false) {
                 collapsibleGroup(resourceBundle.getString("settings.advanced.task-id.title")) {
                     row {
                         expandableTextField()
@@ -137,7 +124,7 @@ class CMTSettingsPage(
                             .label(resourceBundle.getString("settings.advanced.common.postprocess"), LabelPosition.TOP)
                             .bindItem(settingsStorage.state::typePostprocessor)
                     }
-                    group("\$TYPE Synonyms", indent = false) {
+                    group(resourceBundle.getString("settings.advanced.type.synonyms"), indent = false) {
                         row {
                             cell(createSynonymTablePanel()).align(AlignX.FILL)
                         }.resizableRow()
@@ -180,23 +167,25 @@ class CMTSettingsPage(
     }
 
     override fun isModified(): Boolean {
-        return panel.isModified() || settingsStorage.state.typeSynonyms != getSynonymsMap()
+        return panel.isModified() || settingsStorage.state.typeSynonyms != getSynonymsMapFromTable()
     }
 
     override fun apply() {
-        settingsStorage.state.typeSynonyms = getSynonymsMap().toMutableMap()
+        settingsStorage.state.typeSynonyms = getSynonymsMapFromTable().toMutableMap()
         panel.apply()
     }
 
     override fun reset() {
-        tableModel.items = settingsStorage.state.typeSynonyms
-            .map { SynonymPair(it.key, it.value) }
-            .toMutableList()
+        tableModel.items = getSynonymsMapFromStorage()
         tableModel.fireTableDataChanged()
         panel.reset()
     }
 
-    private fun getSynonymsMap(): Map<String, String> {
+    private fun getSynonymsMapFromStorage() = settingsStorage.state.typeSynonyms
+        .map { SynonymPair(it.key, it.value) }
+        .toMutableList()
+
+    private fun getSynonymsMapFromTable(): Map<String, String> {
         return tableModel.items
             .filter { it.key.isNotBlank() && it.value.isNotBlank() }
             .associate { it.key to it.value }
