@@ -12,7 +12,7 @@ import com.kozhun.commitmessagetemplate.util.toCase
 import com.kozhun.commitmessagetemplate.util.toNotBlankRegex
 
 @Service(Service.Level.PROJECT)
-class ScopeReplacer(
+class FilePathScopeReplacer(
     private val project: Project
 ) : Replacer {
 
@@ -67,6 +67,6 @@ class ScopeReplacer(
         private const val ANCHOR = "\$SCOPE"
 
         @JvmStatic
-        fun getInstance(project: Project): Replacer = project.service<ScopeReplacer>()
+        fun getInstance(project: Project): Replacer = project.service<FilePathScopeReplacer>()
     }
 }

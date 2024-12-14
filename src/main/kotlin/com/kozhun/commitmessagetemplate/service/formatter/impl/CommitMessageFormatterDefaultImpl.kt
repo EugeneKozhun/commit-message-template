@@ -6,7 +6,7 @@ import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.formatter.CommitMessageFormatter
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTypeReplacer
-import com.kozhun.commitmessagetemplate.service.replacer.impl.ScopeReplacer
+import com.kozhun.commitmessagetemplate.service.replacer.impl.FilePathScopeReplacer
 import com.kozhun.commitmessagetemplate.service.whitespace.impl.WhitespaceServiceDefaultImpl
 import com.kozhun.commitmessagetemplate.util.storage
 
@@ -23,7 +23,7 @@ class CommitMessageFormatterDefaultImpl(
     private val replacers = listOf(
         BranchTypeReplacer.getInstance(project),
         BranchTaskIdReplacer.getInstance(project),
-        ScopeReplacer.getInstance(project)
+        FilePathScopeReplacer.getInstance(project)
     )
 
     private val whitespaceService = WhitespaceServiceDefaultImpl.getInstance(project)

@@ -10,13 +10,13 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class ScopeReplacerTest : BaseReplacerTest() {
-    private lateinit var replacer: ScopeReplacer
+class FilePathScopeReplacerTest : BaseReplacerTest() {
+    private lateinit var replacer: FilePathScopeReplacer
 
     @BeforeEach
     fun setUp() {
         projectMock = mockk()
-        replacer = ScopeReplacer(projectMock)
+        replacer = FilePathScopeReplacer(projectMock)
     }
 
     @Test
