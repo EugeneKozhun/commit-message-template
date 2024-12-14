@@ -53,7 +53,7 @@ Customize the plugin to your needs:
 ### Example Template:
 
 ```
-$TYPE ($SCOPE): #TASK-ID - Description of changes
+$TYPE ($SCOPE): $TASK-ID - Description of changes
 
 Details:
 - What was done?
