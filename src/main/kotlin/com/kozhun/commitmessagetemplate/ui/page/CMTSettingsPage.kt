@@ -208,7 +208,7 @@ class CMTSettingsPage(
 
     companion object {
         private const val DISPLAY_NAME = "Committle"
-        private const val ID = "preferences.CommitMessageTemplateConfigurable"
+        private const val ID = "preferences.CommittleConfigurable"
     }
 
     private fun createSynonymTablePanel(): JComponent {

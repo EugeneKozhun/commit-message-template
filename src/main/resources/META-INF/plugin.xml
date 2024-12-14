@@ -131,7 +131,7 @@
         <projectConfigurable
                 parentId="project.propVCSSupport.Mappings"
                 displayName="Committle"
-                id="preferences.CommitMessageTemplateConfigurable"
+                id="preferences.CommittleConfigurable"
                 instance="com.kozhun.commitmessagetemplate.ui.page.CMTSettingsPage"/>
         <fileType
                 name="Committle"
