@@ -1,7 +1,7 @@
 <h1 align="center">
     <img src="src/main/resources/META-INF/pluginIcon.svg" width="84" height="84" alt="logo"/>
     <br/>
-    Commit Message Template
+    Committle
 </h1>
 
 <p align="center">
@@ -12,16 +12,16 @@
     <a href="https://github.com/EugeneKozhun/commit-message-template/blob/main/LICENSE.md"><img alt="plugin's license" src="https://img.shields.io/github/license/EugeneKozhun/commit-message-template?style=flat-square"/></a>
 </p>
 
-✨ Commit Message Template is a JetBrains IDE plugin that simplifies writing consistent and meaningful commit messages.
+✨ **Committle** is a JetBrains IDE plugin that simplifies writing consistent and meaningful commit messages.
 Forget messy commits—stick to your project’s conventions with ease!
 
 ## 🚀 Key Features
 
 - Default commit message template: Save time by using a predefined structure.
 - Customizable variables: Dynamically set values like:
-    - Task ID
+    - Task id
     - Scope (e.g., feature area)
-    - Commit type (feat, fix, etc.)
+    - Type (feat, fix, etc.)
     - Default values for variables
 - Whitespace and caret formatting: Fine-tune alignment and position.
 - Shortcut for applying the template: Fast and efficient workflow.
@@ -31,7 +31,7 @@ Forget messy commits—stick to your project’s conventions with ease!
 1. Open IDE.
 2. Navigate to `File > Settings > Plugins`.
 3. Select the `Marketplace` tab.
-4. Search for `Commit Message Template` and click `Install`.
+4. Search for `Committle` and click `Install`.
 
 ## 💡 How to Use
 
@@ -45,12 +45,12 @@ Using the plugin is straightforward and beginner-friendly:
 
 Customize the plugin to your needs:
 
-1. Go to `File > Settings > Version Control > Commit Message Template`.
+1. Go to `File > Settings > Version Control > Committle`.
 2. Enter your desired commit message template.
 3. Set whitespace rules.
 4. (Optional) Configure your own rules for the variables.
 
-### Example Template:
+### Template Example:
 
 ```
 $TYPE ($SCOPE): $TASK-ID - Description of changes

@@ -10,11 +10,6 @@ import com.kozhun.commitmessagetemplate.service.replacer.impl.FilePathScopeRepla
 import com.kozhun.commitmessagetemplate.service.whitespace.impl.WhitespaceServiceDefaultImpl
 import com.kozhun.commitmessagetemplate.util.storage
 
-/**
- * This class is responsible for formatting commit messages based on a pattern, using a list of Replacers.
- *
- * @param project The project associated with the formatter.
- */
 @Service(Service.Level.PROJECT)
 class CommitMessageFormatterDefaultImpl(
     private val project: Project
