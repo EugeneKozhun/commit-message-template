@@ -28,7 +28,7 @@ Forget messy commits—stick to your project’s conventions with ease!
 
 ## 🛠️ Installation
 
-1. Open IDE.
+1. Open JetBrains IDE.
 2. Navigate to `File > Settings > Plugins`.
 3. Select the `Marketplace` tab.
 4. Search for `Committle` and click `Install`.
