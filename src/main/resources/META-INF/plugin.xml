@@ -45,6 +45,12 @@
         ]]></description>
 
     <change-notes><![CDATA[
+        <h3>2.0.0</h3>
+        <ul>
+            <li>Renamed the plugin to <strong>Committle</strong> to better reflect its purpose and functionality.</li>
+            <li>Updated internal libraries to the latest stable versions for improved performance, compatibility, and security.</li>
+            <li>Removed deprecated dependencies to ensure a more robust and modern plugin architecture.</li>
+        </ul>
         <h3>1.9.0</h3>
         <ul>
             <li>Added synonyms for the <strong>$TYPE</strong> variable for better flexibility.</li>
