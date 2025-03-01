@@ -19,7 +19,7 @@ Forget messy commits—stick to your project’s conventions with ease!
 
 - Default commit message template: Save time by using a predefined structure.
 - Customizable variables: Dynamically set values like:
-    - Task id
+    - Task id (Jira, Asana, etc.)
     - Scope (e.g., feature area)
     - Type (feat, fix, etc.)
     - Default values for variables
@@ -32,6 +32,8 @@ Forget messy commits—stick to your project’s conventions with ease!
 2. Navigate to `File > Settings > Plugins`.
 3. Select the `Marketplace` tab.
 4. Search for `Committle` and click `Install`.
+
+<iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/23100"></iframe>
 
 ## 💡 How to Use
 
