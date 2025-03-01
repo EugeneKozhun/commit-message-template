@@ -3,6 +3,7 @@ package com.kozhun.commitmessagetemplate.storage
 import com.intellij.openapi.components.BaseState
 import com.kozhun.commitmessagetemplate.constants.DefaultValues.DEFAULT_SCOPE_SEPARATOR
 import com.kozhun.commitmessagetemplate.enums.StringCase
+import com.kozhun.commitmessagetemplate.service.settings.ExportableSettings
 
 /**
  * Represents the state of the settings in the application.
@@ -101,4 +102,27 @@ class SettingsState : BaseState() {
                 (scopeSeparator.isNullOrEmpty() || scopeSeparator == DEFAULT_SCOPE_SEPARATOR) &&
                 (scopePostprocessor == StringCase.NONE.label)
     }
+}
+
+fun SettingsState.toExportableSettings(): ExportableSettings {
+    return ExportableSettings(
+        pattern = pattern.orEmpty(),
+        trimWhitespacesStart = trimWhitespacesStart,
+        trimWhitespacesEnd = trimWhitespacesEnd,
+        unnecessaryWhitespaces = unnecessaryWhitespaces,
+
+        taskIdRegex = taskIdRegex,
+        taskIdDefault = taskIdDefault,
+        taskIdPostProcessor = taskIdPostProcessor,
+
+        typeRegex = typeRegex,
+        typeDefault = typeDefault,
+        typeSynonyms = typeSynonyms,
+        typePostprocessor = typePostprocessor,
+
+        scopeRegex = scopeRegex,
+        scopeDefault = scopeDefault,
+        scopeSeparator = scopeSeparator,
+        scopePostprocessor = scopePostprocessor
+    )
 }

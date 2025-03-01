@@ -28,6 +28,7 @@ import com.kozhun.commitmessagetemplate.ui.components.PatternEditorBuilder
 import com.kozhun.commitmessagetemplate.ui.model.SynonymColumnInfo
 import com.kozhun.commitmessagetemplate.ui.model.SynonymPair
 import com.kozhun.commitmessagetemplate.ui.util.bindNullableText
+import com.kozhun.commitmessagetemplate.util.settingExporter
 import com.kozhun.commitmessagetemplate.util.storage
 import java.util.ResourceBundle
 import javax.swing.JComponent
@@ -64,6 +65,14 @@ class CMTSettingsPage(
         val resourceBundle = ResourceBundle.getBundle("messages")
 
         panel = panel {
+            row {
+                button("Import Settings") {
+                    project.settingExporter().import()
+                }
+                button("Export Settings") {
+                    project.settingExporter().export()
+                }.align(AlignX.RIGHT)
+            }.bottomGap(BottomGap.NONE)
             row {
                 cell(patternEditor.component)
                     .align(AlignX.FILL)

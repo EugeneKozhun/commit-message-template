@@ -152,6 +152,9 @@
                 language="CMT"
                 implementationClass="com.kozhun.commitmessagetemplate.language.highlighter.CMTSyntaxHighlighterFactory"/>
         <postStartupActivity implementation="com.kozhun.commitmessagetemplate.listener.SettingsMigrator"/>
+        <notificationGroup id="Committle Notifications"
+                           displayType="BALLOON"
+                           isLogByDefault="true" />
     </extensions>
 
     <actions>
