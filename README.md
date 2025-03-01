@@ -33,8 +33,6 @@ Forget messy commits—stick to your project’s conventions with ease!
 3. Select the `Marketplace` tab.
 4. Search for `Committle` and click `Install`.
 
-<iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/23100"></iframe>
-
 ## 💡 How to Use
 
 Using the plugin is straightforward and beginner-friendly:
