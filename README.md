@@ -12,7 +12,8 @@
     <a href="https://github.com/EugeneKozhun/commit-message-template/blob/main/LICENSE.md"><img alt="plugin's license" src="https://img.shields.io/github/license/EugeneKozhun/commit-message-template?style=flat-square"/></a>
 </p>
 
-✨ **Committle** is a JetBrains IDE plugin that simplifies writing consistent and meaningful commit messages.
+✨ **Committle** (ex. Commit Message Template)
+is a JetBrains IDE plugin that simplifies writing consistent and meaningful commit messages.
 Forget messy commits—stick to your project’s conventions with ease!
 
 ## 🚀 Key Features
