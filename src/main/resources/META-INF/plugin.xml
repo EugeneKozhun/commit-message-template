@@ -18,6 +18,7 @@
 
         <h3 style="margin-bottom: 0">✨ Key Features</h3>
         <ul>
+            <li>Compatible with Conventional Commits</li>
             <li>Create and use a <strong>default commit message template</strong>.</li>
             <li>Customize <strong>dynamic variables</strong>, such as task ID, scope, and type.</li>
             <li>Set <strong>default values</strong> for your variables.</li>

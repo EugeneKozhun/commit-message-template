@@ -16,6 +16,8 @@
 is a JetBrains IDE plugin that simplifies writing consistent and meaningful commit messages.
 Forget messy commits—stick to your project’s conventions with ease!
 
+_Compatible with [Conventional Commits](https://www.conventionalcommits.org/)_
+
 ## 🚀 Key Features
 
 - Default commit message template: Save time by using a predefined structure.
@@ -54,11 +56,11 @@ Customize the plugin to your needs:
 ### Template Example:
 
 ```
-$TYPE ($SCOPE): $TASK-ID - Description of changes
+$TYPE ($SCOPE): Commit message 
 
-Details:
-- What was done?
-- Why was it done?
+Description of changes
+
+Closes $TASK-ID
 ```
 
 ## 🏆 Benefits
