@@ -37,7 +37,7 @@ class SettingsExporter(
             val json = Json.encodeToString(exportableSettings)
             selectedFile.writeText(json)
             showNotification("Settings exported successfully to ${selectedFile.absolutePath}.", "Export Successful", NotificationType.INFORMATION)
-        } catch (exception: Exception) {
+        } catch (exception: IllegalArgumentException) {
             showNotification("Failed to export settings: ${exception.message}", "Export Failed", NotificationType.ERROR)
         }
     }
@@ -51,7 +51,7 @@ class SettingsExporter(
         val selectedFile = fileDialog.files.firstOrNull() ?: return
         val importableSettings: ExportableSettings = try {
             Json.decodeFromString(selectedFile.readText())
-        } catch (exception: Exception) {
+        } catch (exception: IllegalArgumentException) {
             showNotification("Failed to import settings: ${exception.message}", "Import Failed", NotificationType.ERROR)
             return
         }
