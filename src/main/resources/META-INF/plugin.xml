@@ -137,7 +137,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <projectConfigurable
                 parentId="project.propVCSSupport.Mappings"
-                displayName="Committle"
+                displayName="Commit Template"
                 id="preferences.CommittleConfigurable"
                 instance="com.kozhun.commitmessagetemplate.ui.page.CMTSettingsPage"/>
         <fileType
