@@ -1,6 +1,8 @@
 package com.kozhun.commitmessagetemplate.ui.page
 
 import SynonymDialog
+import com.intellij.notification.NotificationGroupManager
+import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.options.ConfigurableWithId
@@ -72,7 +74,7 @@ class CMTSettingsPage(
                     settingsStorage.loadState(importState)
 
                     reset()
-                    // TODO: notification
+                    showNotification("Commit Template settings imported successfully", NotificationType.INFORMATION)
                 }
                 button("Export Settings") {
                     project.settingExporter().export()
@@ -314,6 +316,13 @@ class CMTSettingsPage(
         if (selectedRow >= 0) {
             tableModel.removeRow(selectedRow)
         }
+    }
+
+    private fun showNotification(content: String, type: NotificationType) {
+        NotificationGroupManager.getInstance()
+            .getNotificationGroup("Committle Notifications")
+            .createNotification(content, type)
+            .notify(project)
     }
 }
 
