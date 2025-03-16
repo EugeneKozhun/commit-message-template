@@ -1,12 +1,12 @@
 package com.kozhun.commitmessagetemplate.service.settings
 
-import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.storage.SettingsState
 import com.kozhun.commitmessagetemplate.storage.toExportableSettings
+import com.kozhun.commitmessagetemplate.ui.util.showCommittleNotification
 import com.kozhun.commitmessagetemplate.util.storage
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -37,9 +37,9 @@ class SettingsExporter(
         try {
             val json = Json.encodeToString(exportableSettings)
             selectedFile.writeText(json)
-            showNotification("Settings exported successfully to ${selectedFile.absolutePath}.", "Export Successful", NotificationType.INFORMATION)
+            project.showCommittleNotification("Settings exported successfully to ${selectedFile.absolutePath}.", NotificationType.INFORMATION)
         } catch (exception: IllegalArgumentException) {
-            showNotification("Failed to export settings: ${exception.message}", "Export Failed", NotificationType.ERROR)
+            project.showCommittleNotification("Failed to export settings: ${exception.message}", NotificationType.ERROR)
         }
     }
 
@@ -53,18 +53,11 @@ class SettingsExporter(
         val importableSettings: ExportableSettings = try {
             Json.decodeFromString(selectedFile.readText())
         } catch (exception: IllegalArgumentException) {
-            showNotification("Failed to import settings: ${exception.message}", "Import Failed", NotificationType.ERROR)
+            project.showCommittleNotification("Failed to import settings: ${exception.message}", NotificationType.ERROR)
             return null
         }
 
         return importableSettings.toSettingsState()
-    }
-
-    private fun showNotification(content: String, title: String, type: NotificationType) {
-        NotificationGroupManager.getInstance()
-            .getNotificationGroup("Committle Notifications")
-            .createNotification(title, content, type)
-            .notify(project)
     }
 
     companion object {

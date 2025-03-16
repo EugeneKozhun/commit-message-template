@@ -1,7 +1,6 @@
 package com.kozhun.commitmessagetemplate.ui.page
 
 import SynonymDialog
-import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
@@ -30,6 +29,7 @@ import com.kozhun.commitmessagetemplate.ui.components.PatternEditorBuilder
 import com.kozhun.commitmessagetemplate.ui.model.SynonymColumnInfo
 import com.kozhun.commitmessagetemplate.ui.model.SynonymPair
 import com.kozhun.commitmessagetemplate.ui.util.bindNullableText
+import com.kozhun.commitmessagetemplate.ui.util.showCommittleNotification
 import com.kozhun.commitmessagetemplate.util.settingExporter
 import com.kozhun.commitmessagetemplate.util.storage
 import java.util.ResourceBundle
@@ -74,7 +74,7 @@ class CMTSettingsPage(
                     settingsStorage.loadState(importState)
 
                     reset()
-                    showNotification("Commit Template settings imported successfully", NotificationType.INFORMATION)
+                    project.showCommittleNotification("Commit Template settings imported successfully", NotificationType.INFORMATION)
                 }
                 button("Export Settings") {
                     project.settingExporter().export()
@@ -316,13 +316,6 @@ class CMTSettingsPage(
         if (selectedRow >= 0) {
             tableModel.removeRow(selectedRow)
         }
-    }
-
-    private fun showNotification(content: String, type: NotificationType) {
-        NotificationGroupManager.getInstance()
-            .getNotificationGroup("Committle Notifications")
-            .createNotification(content, type)
-            .notify(project)
     }
 }
 
