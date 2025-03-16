@@ -5,6 +5,7 @@ import com.intellij.notification.NotificationType
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.kozhun.commitmessagetemplate.storage.SettingsState
 import com.kozhun.commitmessagetemplate.storage.toExportableSettings
 import com.kozhun.commitmessagetemplate.util.storage
 import kotlinx.serialization.decodeFromString
@@ -42,23 +43,21 @@ class SettingsExporter(
         }
     }
 
-    fun import() {
+    fun import(): SettingsState? {
         val fileDialog = FileDialog(null as Frame?, "Select Import File", FileDialog.LOAD).apply {
             filenameFilter = FilenameFilter { _, name -> name.endsWith(".json") }
             isVisible = true
         }
 
-        val selectedFile = fileDialog.files.firstOrNull() ?: return
+        val selectedFile = fileDialog.files.firstOrNull() ?: return null
         val importableSettings: ExportableSettings = try {
             Json.decodeFromString(selectedFile.readText())
         } catch (exception: IllegalArgumentException) {
             showNotification("Failed to import settings: ${exception.message}", "Import Failed", NotificationType.ERROR)
-            return
+            return null
         }
 
-        project.storage().loadState(importableSettings.toSettingsState())
-
-        showNotification("Settings imported successfully from ${selectedFile.absolutePath}.", "Import Successful", NotificationType.INFORMATION)
+        return importableSettings.toSettingsState()
     }
 
     private fun showNotification(content: String, title: String, type: NotificationType) {
