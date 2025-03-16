@@ -49,6 +49,7 @@
         <h3>2.0.0</h3>
         <ul>
             <li>Renamed the plugin to <strong>Committle</strong> to better reflect its purpose and functionality.</li>
+            <li>Added import and export settings.</li>
             <li>Updated internal libraries to the latest stable versions for improved performance, compatibility, and security.</li>
             <li>Removed deprecated dependencies to ensure a more robust and modern plugin architecture.</li>
         </ul>
@@ -105,7 +106,7 @@
             <li>Added a standard shortcut for the template insertion button for faster usage.</li>
             <li>Introduced the <strong>$TYPE</strong> variable to extract the task type from the branch name automatically.</li>
             <li>Added functionality to adjust the case of the <strong>$TYPE</strong> value for different naming conventions.</li>
-            <li>Moved the plugin settings page to the <strong>Version Control</strong> tab for better categorization.</li>
+            <li>Move the plugin settings page to the <strong>Version Control</strong> tab for better categorization.</li>
             <li>Redesigned the plugin settings page for improved user experience and interaction.</li>
         </ul>
 
