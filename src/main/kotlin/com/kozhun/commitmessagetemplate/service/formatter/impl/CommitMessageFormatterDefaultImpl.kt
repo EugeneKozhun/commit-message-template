@@ -6,15 +6,10 @@ import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.formatter.CommitMessageFormatter
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTaskIdReplacer
 import com.kozhun.commitmessagetemplate.service.replacer.impl.BranchTypeReplacer
-import com.kozhun.commitmessagetemplate.service.replacer.impl.ScopeReplacer
+import com.kozhun.commitmessagetemplate.service.replacer.impl.FilePathScopeReplacer
 import com.kozhun.commitmessagetemplate.service.whitespace.impl.WhitespaceServiceDefaultImpl
 import com.kozhun.commitmessagetemplate.util.storage
 
-/**
- * This class is responsible for formatting commit messages based on a pattern, using a list of Replacers.
- *
- * @param project The project associated with the formatter.
- */
 @Service(Service.Level.PROJECT)
 class CommitMessageFormatterDefaultImpl(
     private val project: Project
@@ -23,7 +18,7 @@ class CommitMessageFormatterDefaultImpl(
     private val replacers = listOf(
         BranchTypeReplacer.getInstance(project),
         BranchTaskIdReplacer.getInstance(project),
-        ScopeReplacer.getInstance(project)
+        FilePathScopeReplacer.getInstance(project)
     )
 
     private val whitespaceService = WhitespaceServiceDefaultImpl.getInstance(project)

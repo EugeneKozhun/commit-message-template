@@ -12,17 +12,14 @@ object CMTIcon {
     val ICON = getIcon("icons/format-button.svg", CMTIcon::class.java)
 }
 
-/**
- * Represents the file type for Commit Message Template files.
- */
 object CMTFileType : LanguageFileType(CMTLanguage.INSTANCE) {
 
     override fun getName(): String {
-        return "Commit Message Template"
+        return "Committle"
     }
 
     override fun getDescription(): String {
-        return "Commit message template description"
+        return "Committle description"
     }
 
     override fun getDefaultExtension(): String {

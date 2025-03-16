@@ -1,7 +1,7 @@
 <h1 align="center">
     <img src="src/main/resources/META-INF/pluginIcon.svg" width="84" height="84" alt="logo"/>
     <br/>
-    Commit Message Template
+    Committle
 </h1>
 
 <p align="center">
@@ -12,40 +12,67 @@
     <a href="https://github.com/EugeneKozhun/commit-message-template/blob/main/LICENSE.md"><img alt="plugin's license" src="https://img.shields.io/github/license/EugeneKozhun/commit-message-template?style=flat-square"/></a>
 </p>
 
-This JetBrains IDE's extension simplifies the process of writing commit messages according to the conventions adopted in
-your project.
+✨ **Committle** (ex. Commit Message Template)
+is a JetBrains IDE plugin that simplifies writing consistent and meaningful commit messages.
+Forget messy commits—stick to your project’s conventions with ease!
 
-## Key features
+_Compatible with [Conventional Commits](https://www.conventionalcommits.org/)_
 
-- Default commit message template
-- Configurable keywords to dynamically set values in a message
-  - Task id, scope, type
-  - Default values for variables
-- Caret position in your template
-- Whitespace formatting
-- Shortcut for applying commit template
+## 🚀 Key Features
 
-## Installation
+- Default commit message template: Save time by using a predefined structure.
+- Customizable variables: Dynamically set values like:
+    - Task id (Jira, Asana, etc.)
+    - Scope (e.g., feature area)
+    - Type (feat, fix, etc.)
+    - Default values for variables
+- Whitespace and caret formatting: Fine-tune alignment and position.
+- Shortcut for applying the template: Fast and efficient workflow.
 
-1. Open IDE.
+## 🛠️ Installation
+
+1. Open JetBrains IDE.
 2. Navigate to `File > Settings > Plugins`.
 3. Select the `Marketplace` tab.
-4. Search for `Commit Message Template` and click `Install`.
+4. Search for `Committle` and click `Install`.
 
-## Usage
+## 💡 How to Use
 
-Keep it simple.
-Just the button and the shortcut :D
+Using the plugin is straightforward and beginner-friendly:
 
-## Configuration
+1. When committing changes, press the button or use the shortcut to apply the template.
+2. Edit the generated message with relevant details.
+3. Commit your changes effortlessly.
+
+## ⚙️ Customization
 
 Customize the plugin to your needs:
 
-1. Go to `File > Settings > Version Control > Commit Message Template`.
+1. Go to `File > Settings > Version Control > Committle`.
 2. Enter your desired commit message template.
 3. Set whitespace rules.
 4. (Optional) Configure your own rules for the variables.
 
----
+### Template Example:
 
-© 2024 Eugene Kozhun
+```
+$TYPE ($SCOPE): Commit message 
+
+Description of changes
+
+Closes $TASK-ID
+```
+
+## 🏆 Benefits
+
+- **Consistency**: Your commit messages will always follow the agreed-upon structure.
+- **Time-saving**: No need to manually format messages every time.
+- **Simplicity**: Works out of the box with minimal configuration.
+
+## 🤝 Support
+
+Found a bug? Have an idea for improvement? Feel free to create an issue in the
+repository: [GitHub Issues](https://github.com/EugeneKozhun/commit-message-template/issues).
+
+--- 
+© 2025 Eugene Kozhun

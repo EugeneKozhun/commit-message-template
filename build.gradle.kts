@@ -1,18 +1,20 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-// Versions
 val mockkVersion = "1.13.12"
 val junitVersion = "5.11.0"
+val kotlinxSerializationJson = "1.7.3"
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.0.20"
+    id("org.jetbrains.kotlin.jvm") version "2.1.10"
     id("org.jetbrains.intellij") version "1.17.4"
-    id("io.gitlab.arturbosch.detekt") version "1.23.7"
+    id("io.gitlab.arturbosch.detekt") version "1.23.8"
+
+    kotlin("plugin.serialization") version "2.1.10"
 }
 
 group = "com.kozhun"
-version = "1.9.0"
+version = "2.0.0"
 
 sourceSets["main"].java.srcDirs("src/main/gen")
 
@@ -21,6 +23,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationJson")
+
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
 }
@@ -54,7 +58,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("231")
-        untilBuild.set("243.*")
+        untilBuild.set("251.*")
     }
 
     signPlugin {

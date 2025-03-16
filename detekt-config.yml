@@ -2,3 +2,5 @@ style:
   MaxLineLength:
     active: true
     maxLineLength: 160
+  ReturnCount:
+    max: 3

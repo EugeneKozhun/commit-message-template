@@ -5,7 +5,6 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.kozhun.commitmessagetemplate.service.git.branch.GitBranchService
 import git4idea.GitBranch
-import git4idea.repo.GitRepository
 import git4idea.repo.GitRepositoryManager
 
 @Service(Service.Level.PROJECT)

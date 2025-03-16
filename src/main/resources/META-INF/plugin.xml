@@ -5,7 +5,7 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Commit Message Template</name>
+    <name>Committle</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="kozhun12345@gmail.com">Eugene Kozhun</vendor>
@@ -14,92 +14,116 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <p xmlns="http://www.w3.org/1999/html">This extension simplifies the process of writing commit messages according to the conventions adopted in your project.</p>
+        <p>This plugin makes it easy to write consistent and clear commit messages that align with your project's conventions.</p>
 
-        <h3 style="margin-bottom: 0">Key Features</h3>
+        <h3 style="margin-bottom: 0">✨ Key Features</h3>
         <ul>
-            <li>Default commit message template.</li>
-            <li>Configurable keywords to dynamically set values in a message.</li>
-            <li>Task id, scope, type.</li>
-            <li>Default values for variables.</li>
-            <li>Caret position in your template.</li>
-            <li>Whitespace formatting.</li>
-            <li>Shortcut for applying commit template.</li>
+            <li>Compatible with Conventional Commits</li>
+            <li>Create and use a <strong>default commit message template</strong>.</li>
+            <li>Customize <strong>dynamic variables</strong>, such as task ID, scope, and type.</li>
+            <li>Set <strong>default values</strong> for your variables.</li>
+            <li>Control <strong>caret position</strong> for quick message edits.</li>
+            <li>Maintain consistent formatting with <strong>whitespace rules</strong>.</li>
+            <li>Apply your template instantly with a <strong>shortcut</strong>.</li>
         </ul>
 
-        <h3>Usage</h3>
-        <p>Keep it simple. Just the button and the shortcut :D</p>
+        <h3>🛠️ How to Use</h3>
+        <p>It’s simple and intuitive:</p>
+        <ul>
+            <li>Set up your template in <strong>Settings > Version Control > Committle</strong>.</li>
+            <li>Insert the template when committing using a button or a shortcut.</li>
+            <li>Edit dynamically populated values and commit!</li>
+        </ul>
 
-        <h3>Links</h3>
-        <a href="https://github.com/EugeneKozhun">GitHub</a> | <a
-                href="https://www.linkedin.com/in/eugene-kozhun-6a6016187/">LinkedIn</a>
+        <h3>🌟 Why Choose This Plugin?</h3>
+        <p>Save time and maintain consistency across your team with an easy-to-use, customizable tool.</p>
+
+        <h3>🔗 Links</h3>
+        <p>
+            <a href="https://github.com/EugeneKozhun/commit-message-template">GitHub</a> |
+            <a href="https://www.linkedin.com/in/eugene-kozhun-6a6016187/">LinkedIn</a>
+        </p>
         ]]></description>
 
     <change-notes><![CDATA[
+        <h3>2.0.0</h3>
+        <ul>
+            <li>Renamed the plugin to <strong>Committle</strong> to better reflect its purpose and functionality.</li>
+            <li>Added import and export settings.</li>
+            <li>Updated internal libraries to the latest stable versions for improved performance, compatibility, and security.</li>
+            <li>Removed deprecated dependencies to ensure a more robust and modern plugin architecture.</li>
+        </ul>
         <h3>1.9.0</h3>
         <ul>
-            <li>Added synonyms for <strong>$TYPE</strong> variable</li>
-            <li>Updated internal libs</li>
+            <li>Added synonyms for the <strong>$TYPE</strong> variable for better flexibility.</li>
+            <li>Updated internal libraries for improved stability and performance.</li>
         </ul>
+
         <h3>1.8.1</h3>
         <ul>
-            <li>Improved <strong>$TASK_ID</strong> postprocessor logic. Applied only to the task id value, not to the whole message.</li>
-            <li>Updated internal libs</li>
+            <li>Enhanced <strong>$TASK_ID</strong> postprocessor logic: applied only to the task ID value, not to the entire message.</li>
+            <li>Updated internal libraries to the latest versions.</li>
         </ul>
 
         <h3>1.8.0</h3>
         <ul>
-            <li>Improved <strong>$SCOPE</strong> logic. Don't insert default value if there is at least one from regex.</li>
-            <li>Updated Kotlin to v2.0</li>
+            <li>Improved <strong>$SCOPE</strong> logic: default value is not inserted if at least one match is found using the regex.</li>
+            <li>Upgraded Kotlin to version 2.0 for modern features and compatibility.</li>
         </ul>
 
         <h3>1.7.0</h3>
         <ul>
-            <li>Removed default regex value for <strong>$SCOPE</strong></li>
-            <li>UI improvements in Settings</li>
+            <li>Removed the default regex value for the <strong>$SCOPE</strong> variable to avoid unintended behavior.</li>
+            <li>Made UI improvements in the Settings panel for better usability.</li>
         </ul>
 
         <h3>1.6.1</h3>
         <ul>
-            <li>Fixed scope replacer</li>
+            <li>Fixed the issue with the scope replacer to ensure correct functionality.</li>
         </ul>
 
         <h3>1.6.0</h3>
         <ul>
-            <li>Renamed <strong>$PROJECT_NAME</strong> to <strong>$SCOPE</strong></li>
-            <li>Added default values setting for <strong>$TASK_ID</strong>, <strong>$SCOPE</strong>, <strong>$SCOPE</strong></li>
-            <li>Added whitespace formatting setting</li>
+            <li>Renamed <strong>$PROJECT_NAME</strong> to <strong>$SCOPE</strong> for better clarity and standardization.</li>
+            <li>Added support for default values for variables: <strong>$TASK_ID</strong>, <strong>$SCOPE</strong>, and <strong>$TYPE</strong>.</li>
+            <li>Introduced whitespace formatting settings for consistent commit message styling.</li>
         </ul>
+
         <h3>1.5.0</h3>
         <ul>
-            <li>Added <strong>$PROJECT_NAME</strong> for project/subproject inclusion in a commit message</li>
-            <li>Optimised settings UI and performance</li>
-            <li>Updated libs and refactoring</li>
+            <li>Introduced the <strong>$PROJECT_NAME</strong> variable for including project/subproject names in commit messages.</li>
+            <li>Optimized the Settings UI and improved overall performance.</li>
+            <li>Refactored and updated internal libraries.</li>
         </ul>
+
         <h3>1.4.0</h3>
         <ul>
-            <li>Fixed the reset button in settings on an empty project.</li>
+            <li>Fixed the issue with the Reset button not working in settings for an empty project.</li>
         </ul>
+
         <h3>1.3.0</h3>
         <ul>
-            <li>Added standard shortcut for the template insertion button.</li>
-            <li>New variable <strong>$TYPE</strong> that enables extracting the task type from the branch name.</li>
-            <li>Added a functionality that allows changing the case for the <strong>$TYPE</strong> value to suit different naming conventions.</li>
-            <li>Moved plugin setting page to <strong>Version Control</strong> tab.</li>
-            <li>Reworked the plugin setting page for enhanced user interaction and usability.</li>
+            <li>Added a standard shortcut for the template insertion button for faster usage.</li>
+            <li>Introduced the <strong>$TYPE</strong> variable to extract the task type from the branch name automatically.</li>
+            <li>Added functionality to adjust the case of the <strong>$TYPE</strong> value for different naming conventions.</li>
+            <li>Move the plugin settings page to the <strong>Version Control</strong> tab for better categorization.</li>
+            <li>Redesigned the plugin settings page for improved user experience and interaction.</li>
         </ul>
+
         <h3>1.2.1</h3>
         <ul>
-            <li>Fixed the issue with settings values appearing empty.</li>
+            <li>Fixed an issue where settings values appeared empty after changes.</li>
         </ul>
+
         <h3>1.2.0</h3>
         <ul>
-            <li>Added syntax highlighting in a template pattern for easier comprehension and readability.</li>
-            <li>Revamped the plugin setting page for a more user-friendly and interactive experience.</li>
+            <li>Added syntax highlighting in the template editor for easier comprehension and readability.</li>
+            <li>Revamped the plugin settings page for a more user-friendly experience.</li>
         </ul>
+
         <h3>1.1.0</h3>
         <ul>
-            <li>Added a new variable <strong>$CARET_POSITION</strong> to set the caret's position after template insertion for personalized user experience.</li>
+            <li>Added the <strong>$CARET_POSITION</strong> variable to set the caret's position after template insertion for a customized user experience.</li>
         </ul>
         ]]>
     </change-notes>
@@ -114,11 +138,11 @@
     <extensions defaultExtensionNs="com.intellij">
         <projectConfigurable
                 parentId="project.propVCSSupport.Mappings"
-                displayName="Commit Message Template"
-                id="preferences.CommitMessageTemplateConfigurable"
+                displayName="Commit Template"
+                id="preferences.CommittleConfigurable"
                 instance="com.kozhun.commitmessagetemplate.ui.page.CMTSettingsPage"/>
         <fileType
-                name="Commit Message Template"
+                name="Committle"
                 implementationClass="com.kozhun.commitmessagetemplate.language.CMTFileType"
                 fieldName="INSTANCE"
                 language="CMT"
@@ -130,6 +154,9 @@
                 language="CMT"
                 implementationClass="com.kozhun.commitmessagetemplate.language.highlighter.CMTSyntaxHighlighterFactory"/>
         <postStartupActivity implementation="com.kozhun.commitmessagetemplate.listener.SettingsMigrator"/>
+        <notificationGroup id="Committle Notifications"
+                           displayType="BALLOON"
+                           isLogByDefault="true" />
     </extensions>
 
     <actions>
